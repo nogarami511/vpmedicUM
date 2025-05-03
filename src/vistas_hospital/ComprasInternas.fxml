@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.ComprasInternasController">
+    <children>
+        <BorderPane layoutX="240.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="162.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane layoutX="240.0" layoutY="-38.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
+                            <children>
+                                <GridPane layoutX="188.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                            <children>
+                                                <TextField fx:id="txfBuscarRazonSocial" layoutX="3.0" layoutY="22.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="150.0" />
+                                                <Button fx:id="btnBuscarRazonSocial" layoutX="193.0" layoutY="20.0" mnemonicParsing="false" onAction="#accionBuscarRazonSocial" prefHeight="25.0" prefWidth="101.0" text="BUSCAR" AnchorPane.rightAnchor="25.0">
+                                                    <graphic>
+                                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../img/icons/icons8-búsqueda-50.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+                                                <Line endX="90.0" endY="50.0" layoutX="198.0" layoutY="25.0" startX="90.0" stroke="#bcbcbc" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Label layoutX="7.0" layoutY="5.0" text="RAZON SOCIAL" AnchorPane.leftAnchor="5.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                            <cursor>
+                                                <Cursor fx:constant="CLOSED_HAND" />
+                                            </cursor>
+                                            <children>
+                                                <ComboBox fx:id="cmbFomraPago" layoutX="2.0" layoutY="25.0" onAction="#accionSeleccionarDato" prefWidth="150.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="205.0" />
+                                                <Line endX="90.0" endY="50.0" layoutX="169.0" startX="90.0" stroke="#bcbcbc" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Label layoutY="6.0" text="FORMA PAGO" AnchorPane.leftAnchor="5.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label layoutX="134.0" layoutY="6.0" text="TOTAL SOLICITADO" textFill="#2c9e3b" AnchorPane.rightAnchor="50.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="lblTotalSolicitado" layoutX="106.0" layoutY="26.0" text="\$0.00" textFill="#2c9e3b" AnchorPane.rightAnchor="50.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                            <children>
+                                                <Button fx:id="btnSolicitudPagoCxP" layoutX="-9.0" layoutY="14.0" mnemonicParsing="false" onAction="#accionSolicitudPagoCxP" text="SOLICITUD PAGO CxP" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                                                    <graphic>
+                                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../img/icons/icons8-factura-50.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                    <font>
+                                                        <Font size="11.0" />
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                  <JFXButton layoutX="3.0" layoutY="30.0" prefHeight="51.0" prefWidth="679.0" text="CXP INTERNAS" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+                    </children>
+                </AnchorPane>
+            </top>
+            <bottom>
+                <AnchorPane prefHeight="61.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="btnSolicitar" layoutX="554.0" layoutY="17.0" mnemonicParsing="false" onAction="#accionSolicitar" prefHeight="33.0" prefWidth="120.0" text="SOLICITAR PAGOS" AnchorPane.rightAnchor="15.0" />
+                        <Button fx:id="btnGenerarCompra" layoutX="413.0" layoutY="17.0" mnemonicParsing="false" onAction="#accionGenerarCompra" prefHeight="33.0" prefWidth="120.0" text="GENERAR COMPRA" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="146.0" />
+                    </children>
+                </AnchorPane>
+            </bottom>
+            <center>
+                <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="colNumero" maxWidth="1000.0" prefWidth="75.0" text="#" />
+                        <TableColumn fx:id="colRubro" maxWidth="10000.0" prefWidth="75.0" text="RUBRO" />
+                        <TableColumn fx:id="colFolio" prefWidth="75.0" text="FOLIO" />
+                        <TableColumn fx:id="colRazonSocial" maxWidth="15000.0" prefWidth="75.0" text="RAZON SOCIAL" />
+                        <TableColumn fx:id="colFecha" maxWidth="3000.0" prefWidth="75.0" text="FECHA" />
+                        <TableColumn fx:id="colMonto" prefWidth="75.0" text="MONTO" />
+                        <TableColumn fx:id="colMontoPagado" prefWidth="75.0" text=" MONTO&#10;PAGADO" />
+                        <TableColumn fx:id="colSaldoSAldado" prefWidth="75.0" text="  SALDO&#10;SALDADO" />
+                        <TableColumn fx:id="colMontoSolicitado" prefWidth="75.0" text="   MONTO&#10;SOLICITADO" />
+                        <TableColumn fx:id="colMontoAutorizado" prefWidth="75.0" text="    MONTO&#10;AUTORIZADO" />
+                        <TableColumn fx:id="colSolicitar" maxWidth="2500.0" prefWidth="75.0" text="SOLICITAR" />
+                        <TableColumn fx:id="colImprimir" maxWidth="2500.0" prefWidth="75.0" text="IMPRIMIR" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

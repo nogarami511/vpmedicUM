@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="feae3b6c-49bd-4775-a14d-902dd72208ee">
+	<property name="ireport.zoom" value="1.2396694214876032"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="205"/>
+	<queryString>
+		<![CDATA[select * from pacientes where id = 1]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreContacto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numeroContacto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="observaciones" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_usuarioModificacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaModificacion" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lugarDeOrigen" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="edad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="genero" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ocupacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="religion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alergia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoDeSangre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="peso" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="talla" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="curp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaNacimiento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="donadorDeOrganos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="196" y="17" width="183" height="41" uuid="2c7dfef6-8e95-4c96-92dd-c3170d7f9bd2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HOSPITAL PRIVADO
+VP MÉDICA PLAZA S.A. DE C.V.
+TUXTLA GUTIÉRREZ, CHIAPAS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="11" width="90" height="70" uuid="5f123e67-b93c-4a5e-8928-e755f2db85a1"/>
+				<imageExpression><![CDATA["src\\img\\vp_oficial_mosss.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="460" y="19" width="80" height="62" uuid="251ed145-fa03-448d-b650-a35115dd9c92"/>
+				<imageExpression><![CDATA["src\\img\\vp_hospital.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35" uuid="40e65cfd-d106-45f7-8ea8-0603c88c88a3"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONSENTIMIENTO INFORMADO PARA LA REALIZACION DE LA PRUEBA RÁPIDA DE LA DETECCIÓN DE ANTICUERPOS CONTRA EL VISRUS DE INMUNODEFICIENCIA HUMANA (VIH)]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="147" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="46" uuid="70f6232f-c2e1-40f6-98ac-08284349a3ad"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[CON FUNDAMENTOS EN EL REGLAMENTO DE LA LEY GENERAL DE SALUD EN LA MATERIA DE PRESTACIONES DE SERVICIOS DE ATENCIÓN MÉDICA, ARTÍCULOS 80, 81, 82 Y 83, NORMA OFICIAL MEXICANA NOM-004-SSA3-2012, DEL EXPEDIENTE CLÍNICO, NUMERAL 10.1.1.1 AL 10.1.1.4; NORMA OFICIAL MEXICANA NOM-010-SSA2-2010 PARA LA PREVENCIÓN T EL CONTROL DE LA INFECCIÓN POR VIRUS DE LA INMUNODEFICIENCIA HUMANA, NUMERALES 5.6.4 Y 5.6.5.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="46" width="41" height="20" uuid="a67f31d1-ef5b-4210-bf64-69602ecf44ea"/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="66" width="325" height="20" uuid="868f3dd1-3245-47ad-bcfd-ce61e717f8ec"/>
+				<text><![CDATA[UNIDAD MÉDICA DE ATENCIÓN: VP TORRE MÉDICA Y HOSPITAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="86" width="41" height="20" uuid="96002b3e-588e-4dfe-8d2e-155b06a09a5b"/>
+				<text><![CDATA[EDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="86" width="241" height="20" uuid="ce7a8335-c620-4ba0-b83c-09003839e2ae"/>
+				<text><![CDATA[FECHA DE NACIMIENTO: 29/06/1997]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="86" width="37" height="20" uuid="95d1f073-9912-413d-bfe3-961166ed03f3"/>
+				<text><![CDATA[SEXO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="106" width="41" height="20" uuid="bd30912e-c757-4589-b60a-d0408e9b39a7"/>
+				<text><![CDATA[CURP:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="58" y="46" width="144" height="20" uuid="1286b679-10b6-46b1-9cef-309285a59280"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="86" width="82" height="20" uuid="66ffb382-761e-4377-9d33-d6d326642beb"/>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="86" width="100" height="20" uuid="fc722f0f-3ab4-4d50-8910-0e0379240536"/>
+				<textFieldExpression><![CDATA[$F{genero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="106" width="220" height="20" uuid="9ef402a4-9434-4881-aaf9-fa0c5f0460f5"/>
+				<textFieldExpression><![CDATA[$F{curp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="247" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="38" uuid="e46d2380-bf38-4091-b064-16a985edaf92"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[A TRAVÉS DEL PRESENTE ESCRITO MANIFIESTO QUE ACUDÍ POR MI PROPIA VOLUNTAD Y BAJO MI RESPONSABILIDAD AL HOSPITAL MÉDICO PRIVADO AL SERVICIO DE SALUD PARA QUE CON MI CONSENTIMIENTO SE ME REALICE LA PRUEBA RÁPIDA DE LA DETECCIÓN DE ANTICUERPOS CONTRA EL VIRUS DE INMUNODEFICIENCIA HUMANA (VIH). ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="555" height="78" uuid="e20a19f8-e95d-4b46-8123-39bc1e894675"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[PERSONAL DE DICHA UNIDAD MÉDICA ME INFORMÓ Y ASESORÓ ACERCA DE LA INFECCIÓN POR EL VIH Y EL SÍNDROME DE INMUNODEFICIENCIA ADQUIRIDA (SIDA), LA IMPORTANCIA DE REALIZARME LA PRUEBA Y LAS CONSECUENCIAS QUE PUEDE TENER MI SALUD Y LAS DE MIS SERES MÁS ALLEGADOS DE SER PORTADOR (A) DE ESTE VIRUS, ASÍ MISMO SE ME PERMITE HACER LAS PREGUNTAS QUE SEAN NECESARIAS DE LAS CUALES SON RESPONDIDAS A MI ENTERA SATISFACCIÓN, COMO PROCEDIMIENTOS Y REQUERIMIENTOS EN CASO DE ESTUDIO SEA DE FORMA DISCRECIONAL LOS RESULTADOS DE TAL MANERA SEA MI DECISIÓN EL ACTUAR CONTRA ELLOS DE FORMA CONFIDENCIAL Y/O ANÓNIMA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="555" height="86" uuid="fda73d22-37d4-4161-8ff5-ddf864a4a005"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[DEL CUAL ESTOY CONSIENTE QUE EN CASO DE REQUERIR MI ATENCIÓN ESTARÉ DE ACUERDO EN ACUDIR A LA UNIDAD MÉDICA QUE SE ME INDIQUE PARA LA TOMA DE LA 2DA MUESTRA PARA CONFIRMAR ESTOS RESULTADOS.
+ACORDE CON LO ANTERIOR, HAGO LIBRE MI DECISIÓN, CONSIENTE E INFORMADO (A) DE ACEPTAR EL PROCEDIMIENTO PARA LA DETECCIÓN DE PRUEBA RÁPIDA DE HIH Y PROCEDIMIENTO COMPLEMENTARIO A JUICIO MÉDICO (A) CON EL FIN DE LLEVAR ACCIONES PREVENTIVAS.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="231" width="119" height="15" uuid="7fc1eea7-dfc3-4913-a1a1-0525b19fefd9"/>
+				<text><![CDATA[FIRMA DEL PACIENTE C.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="230" width="315" height="16" uuid="02b9e4fe-e85b-4e3b-ac6c-a89efc60ffe6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db6f28bd-bb76-41fa-b45b-5c3ebf11612f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="0" y="10" width="100" height="20" uuid="3a1e8aaa-a84d-4ec3-8f55-ece5b7a61f5c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="10" width="80" height="20" uuid="2a455f0d-62b0-4ff6-aa51-1c1fb31d4dfc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="10" width="40" height="20" uuid="e9e616e0-750c-496d-a7d4-384b616b1ae8"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

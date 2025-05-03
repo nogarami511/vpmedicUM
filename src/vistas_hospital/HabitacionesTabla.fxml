@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.HabitacionesTablaController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="112.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXButton layoutX="202.0" layoutY="15.0" text="HABITACIONES" textFill="WHITE" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="201.0">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </JFXButton>
+                    </children>
+                </AnchorPane>
+            </top>
+            <center>
+
+                <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/Style.css" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="tipoHabitacion" maxWidth="3000.0" prefWidth="75.0" text="TIPO" />
+                        <TableColumn fx:id="numeroHabitacion" maxWidth="1000.0" prefWidth="75.0" text="NUMERO" />
+                        <TableColumn fx:id="pasienteHabitacion" prefWidth="75.0" text="PACIENTE" />
+                        <TableColumn fx:id="pisoHabitacion" maxWidth="1000.0" prefWidth="86.0" text="PISO" />
+                  <TableColumn fx:id="exit" maxWidth="200.0" minWidth="48.0" prefWidth="68.0" text="SALIR" />
+                        <TableColumn fx:id="colVer" maxWidth="1000.0" prefWidth="77.0" text="CAMBIAR" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </center>
+            <bottom>
+                <AnchorPane prefHeight="60.0" style="-fx-border-color: #0c569f;" BorderPane.alignment="CENTER" />
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

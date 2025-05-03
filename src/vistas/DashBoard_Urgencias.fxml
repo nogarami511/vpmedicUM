@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.DashBoard_UrgenciasController">
+    <left>
+        <AnchorPane prefHeight="616.0" prefWidth="279.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="112.0" fitWidth="184.0" layoutX="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                    <image>
+                        <Image url="@../img/vp_hospital.png" />
+                    </image>
+                </ImageView>
+                <AnchorPane layoutY="112.0" prefHeight="611.0" prefWidth="279.0" style="-fx-background-color: #0c569f; -fx-background-radius: 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
+                    <children>
+
+                        <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <Accordion>
+                                <panes>
+                                    <TitledPane text="CATÁLOGOS">
+                                        <content>
+                                            <VBox>
+                                                <JFXButton onAction="#irPacientes" prefHeight="25.0" prefWidth="260.0" text="PACIENTES">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#irProcedimientos" prefHeight="25.0" prefWidth="260.0" text="PROCEDIMIENTOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                                    <TitledPane text="PROCESOS">
+                                        <content>
+                                            <VBox>
+                                                <JFXButton onAction="#irVerFolio" prefHeight="25.0" prefWidth="260.0" text="AGREGAR CONSUMO A PACIENTE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#actionVerUrgencias" prefHeight="25.0" prefWidth="260.0" text="URGENCIAS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                    <JFXButton onAction="#irVerCuentaPaciente" prefHeight="25.0" prefWidth="260.0" text="CONSUMOS DE PACIENTE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irEstudiosMedicos" prefHeight="25.0" prefWidth="296.0" text="ESTUDIOS MEDICOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                                </panes>
+                            </Accordion>
+                        </VBox>
+                   
+                    </children>
+                </AnchorPane>
+            <Button fx:id="btnSalir" layoutX="72.0" layoutY="660.0" minWidth="126.0" mnemonicParsing="false" onAction="#accionCerrarSesion" prefHeight="27.0" prefWidth="126.0" styleClass="btnSalir" stylesheets="@../css/DasboardCSS.css" text="CERRAR SESION" />
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <AnchorPane fx:id="anchorPanel" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </center>
+    <bottom>
+        <AnchorPane prefHeight="28.0" prefWidth="976.0" style="-fx-background-color: #222016;" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="WHITE" layoutX="14.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISTEMA DE CONTROL VP MÉDICA PLAZA SA DE CV ver-1.0">
+                    <font>
+                        <Font name="High Tower Text Italic" size="14.0" />
+                    </font>
+                </Text>
+                <Text fill="WHITE" layoutX="790.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISTEMAS EXT.         811" AnchorPane.rightAnchor="37.2431640625">
+                    <font>
+                        <Font name="High Tower Text Italic" size="14.0" />
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+    </bottom>
+</BorderPane>

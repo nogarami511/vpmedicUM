@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="429.0" prefWidth="775.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="controladores_hospital.ActividadUsuariosController">
+   <children>
+      <BorderPane fx:id="bpPagos" prefHeight="487.0" prefWidth="782.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="92.0" prefWidth="838.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton layoutX="207.0" layoutY="25.0" prefHeight="53.0" prefWidth="361.0" text="ESTADO DE LOS USUARIOS" textFill="WHITE" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="207.0">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <TableView fx:id="tabla" prefHeight="354.0" prefWidth="838.0" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn fx:id="colUsuario" maxWidth="3500.0" prefWidth="114.0" text="USUARIO" />
+                  <TableColumn fx:id="colEstado" maxWidth="2000.0" prefWidth="168.0" text="ESTADO" />
+                  <TableColumn fx:id="colFecha" maxWidth="1000.0" prefWidth="482.0" text="FECHA" />
+                  <TableColumn fx:id="colHora" maxWidth="1000.0" prefWidth="75.0" text="HORA" />
+                  <TableColumn fx:id="colHorasAcumuladas" maxWidth="2000.0" prefWidth="75.0" text="HORAS ACUMULADAS" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="62.0" prefWidth="679.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

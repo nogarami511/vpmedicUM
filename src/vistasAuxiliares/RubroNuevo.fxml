@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares.RubroNuevoController">
+   <left>
+      <AnchorPane prefHeight="331.0" prefWidth="148.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnIngresar" layoutX="25.0" layoutY="67.0" mnemonicParsing="false" onAction="#ingresar" prefHeight="40.0" prefWidth="100.0" text="INGRESAR" />
+            <Button fx:id="btnSalir" layoutX="25.0" layoutY="192.0" mnemonicParsing="false" onAction="#salir" prefHeight="40.0" prefWidth="100.0" text="CANCELAR" />
+            <Button fx:id="btnEditar" layoutX="50.0" layoutY="107.0" mnemonicParsing="false" onAction="#accionEditar" prefHeight="40.0" prefWidth="100.0" text="EDITAR" visible="false" />
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane prefHeight="36.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="114.0" prefWidth="718.0" style="-fx-background-color: #0c569f;">
+               <children>
+                  <AnchorPane prefHeight="114.0" prefWidth="150.0" style="-fx-background-color: #E5E8E8;">
+                     <children>
+                        <ImageView fitHeight="110.0" fitWidth="140.0" layoutX="5.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <JFXButton disable="true" layoutX="253.0" layoutY="24.0" opacity="0.99" prefHeight="69.0" prefWidth="441.0" text="REINGRESO" textFill="#fffdfd" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="155.0">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane layoutX="127.0" layoutY="44.0" prefHeight="225.0" prefWidth="315.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="122.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="193.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NOMBRE" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MONTO" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="OBSERVACIONES" GridPane.rowIndex="2" />
+                  <TextField fx:id="nombreIngresado" GridPane.columnIndex="1" />
+                  <TextField fx:id="montoIngresado" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="observacionesIngresado" prefHeight="200.0" prefWidth="158.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MINISTRACIÓN" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="ministracionIngresado" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

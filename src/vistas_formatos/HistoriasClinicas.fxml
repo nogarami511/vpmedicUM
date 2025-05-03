@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="679.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="controladores_formatos.HistoriasClinicasController">
+   <children>
+      <BorderPane layoutX="240.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="162.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton layoutY="22.0" text="HISTORIA CLÍNICA" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </JFXButton>
+                  <AnchorPane layoutX="249.0" layoutY="112.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #E5E8E8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="17.0" text="PACIENTE" />
+                        <TextField layoutX="77.0" layoutY="9.0" prefHeight="33.0" prefWidth="406.0" />
+                        <Button layoutX="497.0" layoutY="9.0" mnemonicParsing="false" prefHeight="33.0" text="BUSCAR">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/icons8-búsqueda-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab fx:id="tabAHF" text="ANTECEDENTES HEREDOFAMILIARES">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="679.0">
+                           <children>
+                              <TableView fx:id="tabla" layoutX="240.0" layoutY="143.0" prefHeight="104.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="200.0">
+                                <columns>
+                                    <TableColumn fx:id="colParentesco" prefWidth="75.0" text="PARENTESCO" />
+                                  <TableColumn fx:id="colConVida" maxWidth="1000.0" prefWidth="75.0" text="CON VIDA" />
+                                  <TableColumn fx:id="colPulmonares" prefWidth="75.0" text="PULMONARES" />
+                                    <TableColumn fx:id="colDigestivo" prefWidth="75.0" text="DIGESTIVOS " />
+                                    <TableColumn fx:id="colMetabolico" prefWidth="75.0" text="METABOLICOS " />
+                                    <TableColumn fx:id="colMalFormacion" prefWidth="75.0" text="MALFORMACIONES " />
+                                    <TableColumn fx:id="colOtro" prefWidth="75.0" text="OTROS" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <Label layoutX="15.0" layoutY="14.0" text="PARENTESCO" />
+                              <TextField fx:id="txfParentesco" layoutX="94.0" layoutY="10.0" prefWidth="100.0" />
+                              <RadioButton fx:id="rdbConVSi" layoutX="266.0" layoutY="14.0" mnemonicParsing="false" text="SI" />
+                              <Label layoutX="200.0" layoutY="14.0" text="CON VIDA:" />
+                              <RadioButton fx:id="rdbConVNo" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" text="NO" />
+                              <Label layoutX="359.0" layoutY="14.0" text="CAUSA DE MUERTE" />
+                              <TextField fx:id="txfCausaMuerte" layoutX="471.0" layoutY="10.0" prefHeight="25.0" prefWidth="196.0" AnchorPane.leftAnchor="468.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="15.0" layoutY="59.0" text="ENFERMEDADES QUE PADECE" />
+                              <GridPane layoutX="14.0" layoutY="86.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="20.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="30.0" prefWidth="10.0" />
+                                    <AnchorPane prefHeight="30.0" prefWidth="5.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label layoutX="54.0" layoutY="6.0" text="METABOLICOS " AnchorPane.leftAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="30.0" prefWidth="5.0">
+                                       <children>
+                                          <Label layoutX="20.0" layoutY="5.0" text="PULMONARES" AnchorPane.leftAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefWidth="30.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <TextField fx:id="txfPulmonares" layoutX="28.0" layoutY="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <TextField fx:id="txfMetabolico" layoutX="14.0" layoutY="2.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="20.0" prefWidth="30.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label layoutX="49.0" layoutY="6.0" text="DIGESTIVOS " AnchorPane.leftAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="20.0" prefWidth="30.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="6.0" text="MALFORMACIONES " AnchorPane.leftAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefWidth="30.0" GridPane.columnIndex="3">
+                                       <children>
+                                          <TextField fx:id="txfDigestivo" layoutX="41.0" layoutY="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefWidth="30.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                       <children>
+                                          <TextField fx:id="txfMalFormaciones" layoutX="28.0" layoutY="2.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                              <Label layoutX="15.0" layoutY="164.0" text="OTRA ENFERMEDAD" AnchorPane.leftAnchor="15.0" />
+                              <RadioButton fx:id="rdbOtrEnSi" layoutX="133.0" layoutY="164.0" mnemonicParsing="false" text="SI" />
+                              <RadioButton fx:id="rdbOtrEnNo" layoutX="179.0" layoutY="164.0" mnemonicParsing="false" text="NO" />
+                              <TextField fx:id="txfOtraEnf" layoutX="231.0" layoutY="160.0" prefHeight="25.0" prefWidth="298.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="150.0" />
+                              <Separator layoutX="15.0" layoutY="195.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                              <Button fx:id="btnAgregarTablaAHF" layoutX="540.0" layoutY="160.0" mnemonicParsing="false" text="AGREGAR TABLA" AnchorPane.rightAnchor="15.0">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/icons/icons8-insertar-mesa-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="tabAPNP" text="ANTECEDENTES PERSONALES NO PATOLÓGICOS">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="679.0">
+                           <children>
+                              <GridPane layoutX="170.0" layoutY="14.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="150.0">
+                                       <children>
+                                          <Label layoutX="50.0" layoutY="12.0" text="INMUNIZACIONES" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="150.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label layoutX="44.0" layoutY="13.0" text="ALIMENTACION" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="150.0" GridPane.rowIndex="2">
+                                       <children>
+                                          <Label layoutX="54.0" layoutY="13.0" text="ALERGIAS" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="150.0" GridPane.rowIndex="3">
+                                       <children>
+                                          <Label layoutX="33.0" layoutY="9.0" text="VIVIENDA " AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="150.0" GridPane.rowIndex="4">
+                                       <children>
+                                          <Label layoutX="40.0" layoutY="11.0" text="HIGIENE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <TextArea fx:id="txfInmunizacionesAPNP" layoutX="28.0" layoutY="-4.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <TextArea fx:id="txfAlimentacionAPNP" layoutX="76.0" layoutY="-3.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <TextArea fx:id="txfViviendaAPNP" layoutX="123.0" layoutY="-2.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <TextArea fx:id="txfAlergiasAPNP" layoutX="125.0" layoutY="7.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <children>
+                                          <TextArea fx:id="txfHigieneAPNP" layoutX="144.0" layoutY="-10.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="tabAPP" text="ANTECEDENTES PERSONALES PATOLÓGIOS">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="21.0" text="CARDIO VASCULARES" AnchorPane.rightAnchor="548.0" />
+                              <TextField layoutX="142.0" layoutY="17.0" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="15.0" />
+                              <Label layoutX="24.0" layoutY="57.0" text="PULMONARES" AnchorPane.rightAnchor="548.0" />
+                              <TextField layoutX="152.0" layoutY="53.0" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="15.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabAGO" text="ANTECEDENTES GINECOOBSTETRICOS">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabPA" text="PADECIMIENTO ACTUAL">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabSV" text="SIGNOS VITALES">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabEF" text="EXPLORACIÓN FISICA">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabLDI" text="LABORATORIOS/ESTUDIOS DE IMAGEN ">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabDIAGNOSTICO" text="DIAGNÓSTICO">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabPRONOSTICO" text="PRONOSTICO">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="30.0" prefWidth="679.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="557.0" layoutY="2.0" mnemonicParsing="false" text="CREAR HISTORIA" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0" />
+                  <Button layoutX="507.0" layoutY="5.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="5.0">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icons/dash.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="461.0" layoutY="5.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="187.0" AnchorPane.topAnchor="5.0">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icons/icons8-flecha-izquierda-larga-30.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

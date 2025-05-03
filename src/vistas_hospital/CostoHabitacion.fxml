@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="826.0" style="-fx-background-color: WHITE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.CostoHabitacionController">
+    <children>
+        <BorderPane layoutX="192.0" layoutY="126.0" prefHeight="200.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="112.0" prefWidth="855.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXButton fx:id="txtTitulo" disable="true" layoutX="302.0" layoutY="20.0" opacity="0.99" text="AGREGAR CCOSTO" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </JFXButton>
+                        <AnchorPane layoutY="1.0" prefHeight="111.0" prefWidth="150.0" style="-fx-background-color: white;">
+                            <children>
+                                <ImageView fitHeight="98.0" fitWidth="140.0" layoutX="5.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../img/vp_hospital.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            </top>
+            <center>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Text layoutX="20.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIPO DE HABITACION" AnchorPane.leftAnchor="20.0" />
+                        <Text layoutX="21.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOMBRE DEL COSTO" AnchorPane.leftAnchor="21.0" />
+                        <Text layoutX="20.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COSTO" AnchorPane.leftAnchor="20.0" />
+                        <Text layoutX="63.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORAS" AnchorPane.leftAnchor="63.0" />
+                        <TextField fx:id="txfNombreCosto" layoutX="160.0" layoutY="128.0" AnchorPane.leftAnchor="161.0" />
+                        <TextField fx:id="txfCosto" layoutX="161.0" layoutY="90.0" AnchorPane.leftAnchor="161.0" />
+                        <Text layoutX="198.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MINUTOS" AnchorPane.leftAnchor="198.0" />
+                        <Text layoutX="63.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORAS" />
+                        <Text layoutX="196.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MINUTOS" />
+                        <AnchorPane layoutX="20.0" layoutY="269.0" prefHeight="22.0" prefWidth="292.0" style="-fx-background-color: #0C569F;" AnchorPane.leftAnchor="20.0">
+                            <children>
+                                <Text fill="WHITE" layoutX="85.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORAS DE TOLERANCIA">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="21.0" layoutY="177.0" prefHeight="22.0" prefWidth="292.0" style="-fx-background-color: #0C569F;" AnchorPane.leftAnchor="20.0">
+                            <children>
+                                <Text fill="WHITE" layoutX="77.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORAS QUE INCLUYE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="19.0" layoutY="16.0" prefHeight="22.0" prefWidth="292.0" style="-fx-background-color: #0C569F;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                            <children>
+                                <Text fill="WHITE" layoutX="78.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COSTO DE HABITACION">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </AnchorPane>
+                        <ChoiceBox fx:id="cbxHabitacion" layoutX="160.0" layoutY="57.0" prefWidth="150.0" AnchorPane.leftAnchor="160.0" />
+                        <TableView fx:id="tabla" layoutX="322.0" layoutY="19.0" prefHeight="359.0" prefWidth="290.0" style="-fx-border-color: #0c569f;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                            <columns>
+                                <TableColumn fx:id="clmTipo" prefWidth="75.0" text="HABITACION" />
+                                <TableColumn fx:id="clmTipoCosto" minWidth="0.0" prefWidth="0.0" text="TIPO DE COSTO" />
+                                <TableColumn fx:id="clmCosto" prefWidth="76.0" text="COSTO" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                        <Button fx:id="btnEnviarATabla" layoutX="21.0" layoutY="351.0" mnemonicParsing="false" onAction="#actionBtnEnviarATabla" prefHeight="27.0" prefWidth="292.0" style="-fx-border-color: #0C569F;" text="ENVIAR A LA TABLA" AnchorPane.leftAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <TextField fx:id="txfHoras" layoutX="57.0" layoutY="234.0" prefHeight="25.0" prefWidth="50.0" />
+                        <TextField fx:id="txfMinutos" layoutX="197.0" layoutY="234.0" prefHeight="25.0" prefWidth="50.0" />
+                        <TextField fx:id="txfHorasTolerancia" layoutX="57.0" layoutY="317.0" prefHeight="25.0" prefWidth="50.0" />
+                        <TextField fx:id="txfMinutosTolerancia" layoutX="197.0" layoutY="317.0" prefHeight="25.0" prefWidth="50.0" />
+                    </children>
+                </AnchorPane>
+            </center>
+            <left>
+                <AnchorPane prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="btnAgregar" layoutX="27.0" layoutY="90.0" mnemonicParsing="false" onAction="#actionBtnAgregar" prefHeight="33.0" prefWidth="97.0" text="AGREGAR" />
+                        <Button fx:id="btnCancelar" layoutX="27.0" layoutY="184.0" mnemonicParsing="false" onAction="#actionBtnSalir" prefHeight="33.0" prefWidth="97.0" text="CANCELAR" />
+                    </children>
+                </AnchorPane>
+            </left>
+        </BorderPane>
+    </children>
+    <effect>
+        <DropShadow />
+    </effect>
+</AnchorPane>

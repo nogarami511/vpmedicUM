@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="java" pageWidth="297" pageHeight="842" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c16965d-71a4-4755-8579-5d50689b7e0c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="142"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM(
+-- Encabezado fijo
+SELECT 1 AS id, 'CIERRE DE AGOSTO 2023' AS nombre_paciente, 1 AS id_tipo_pago, 'EFECTIVO' AS tipo,  102247.38 AS total_pago, '2023-08-31 11:59:59' AS fecha_pago, 'CIERREAGOSTO' AS folio
+UNION ALL
+SELECT 2 AS id, 'PRESTAMO' AS nombre_paciente, 1 AS id_tipo_pago, 'EFECTIVO' AS tipo,  48000 AS total_pago, '2023-09-15 11:59:59' AS fecha_pago, 'PRESTAMO' AS folio
+UNION ALL
+SELECT 3 AS id, 'CAMBIO A CUENTA EFECTIVO' AS nombre_paciente, 1 AS id_tipo_pago, 'EFECTIVO' AS tipo,  30000 AS total_pago, '2023-09-22 11:59:59' AS fecha_pago, 'CAMBIO A CUENTA EFECTIVO' AS folio
+UNION ALL
+
+
+-- Datos de pagos entre el 31 de agosto y el 7 de septiembre de 2023
+SELECT 
+  p.id,
+  CASE 
+      WHEN p.id = 84 THEN 'MOISES ANIBAL GARCIA GUTIERREZ'
+      WHEN p.id = 152 THEN 'DR ESTRADA'
+      WHEN p.id = 67 THEN 'MOISES GARCIA DOMINGUEZ'
+      ELSE p1.nombre_paciente
+  END AS nombre_paciente, 
+  fp.id AS id_tipo_pago, 
+  fp.tipo, p.total_pago, 
+  p.fecha_pago, 
+  f.folio
+FROM pagos p 
+INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+INNER JOIN forma_pagos fp ON fp.id = p.id_tipo_pago
+INNER JOIN folios f ON p.id_folio = f.id
+WHERE p.fecha_pago >= '2023-08-31'
+) consulta
+  ORDER BY id_tipo_pago, fecha_pago ASC]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_paciente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_tipo_pago" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_pago" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="total_pago_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pago}]]></variableExpression>
+	</variable>
+	<variable name="total_pago_2" class="java.lang.Double" resetType="Group" resetGroup="Tipo_pago_id" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pago}]]></variableExpression>
+	</variable>
+	<variable name="total_pago_3" class="java.lang.Double" resetType="Group" resetGroup="Tipo_pago_id" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pago}]]></variableExpression>
+	</variable>
+	<variable name="total_pago_4" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pago}]]></variableExpression>
+	</variable>
+	<group name="Tipo_pago_id">
+		<groupExpression><![CDATA[$F{id_tipo_pago}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="133" y="0" width="124" height="15" uuid="66eb0671-83b8-4a65-a317-975ef86dbae4"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total_pago_3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="133" height="15" uuid="acbffb60-7100-43c9-a29e-b352498cab74"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL " + $F{tipo} + " "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="133" y="0" width="124" height="15" uuid="85bd4d39-0a76-43e7-90e2-c8337c0ffe0b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_pago_4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="133" height="15" uuid="a6b9dead-fd38-4ef5-a24d-5a349a5353ae"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL GENERAL INGRESOS "]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2ec74eb5-650e-43db-9a33-e01915a51273">
+	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT n.pago_neto,n.fecha_inicio,n.fecha_fin,n.cantidad_hora_extra,n.pago_hora_extra,n.faltas,n.importe_por_faltas, c.nombre, c.puesto
+FROM nominasinternas n 
+INNER JOIN ghregioc_vpmedica.colaboradores c ON n.id_colaborador = c.id
+WHERE n.clave_nomina = "28042023"]]>
+	</queryString>
+	<field name="pago_neto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_inicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_fin" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad_hora_extra" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pago_hora_extra" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="faltas" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe_por_faltas" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="puesto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="variable1" class="java.lang.Number">
+		<variableExpression><![CDATA[7 - $F{pago_neto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="202" y="30" width="147" height="20" uuid="41538fc4-9d5f-46d3-8ac0-8070d123a0ef"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO DE PAGO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="22" y="5" width="97" height="74" uuid="21deeb63-1437-4994-9c8b-bab344d43cff"/>
+				<imageExpression><![CDATA["C:\\Users\\Gerardo\\Desktop\\Nueva carpeta (3)\\vpmedica\\src\\reportes\\vp_oficial_mosss.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="452" y="10" width="83" height="64" uuid="27407cb7-d062-44c0-9ef9-67a855293998"/>
+				<imageExpression><![CDATA["C:\\Users\\Gerardo\\Desktop\\Nueva carpeta (3)\\vpmedica\\src\\reportes\\vp_hospital.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="132" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="19" width="59" height="20" uuid="933c36ab-d09c-45cf-b76a-d14534cac5ba"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[PERIODO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="19" width="71" height="20" uuid="83ff9dac-60c8-4156-a251-b52b75ee47c4"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="150" y="19" width="24" height="20" uuid="adf8093c-5336-4d76-8db4-a8193ac360b6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[AL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="174" y="19" width="85" height="20" uuid="98675a9e-ab39-4690-a63b-5c40e4061b8b"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_fin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="39" width="85" height="20" uuid="8d8d6667-611d-4219-9a51-4624cbb1f86e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CLAVE DE NÓMINA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="39" width="53" height="20" uuid="1c7efa52-afc6-4709-b856-9b1aee2c237e"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[28042023]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="79" width="103" height="12" uuid="4c9bedcd-a0a0-42e0-9ec0-51fab970f26e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[MONTO HORAS EXTRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="58" width="103" height="20" uuid="ebcd3968-a552-4bfd-b97e-081ecb3f60c3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[# HORAS EXTRA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="121" y="59" width="29" height="19" uuid="d341020e-24c7-476c-b82a-af7658fe1cb3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad_hora_extra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="119" y="78" width="53" height="13" uuid="fca82e3c-538a-48cf-8971-f78b28678887"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago_hora_extra}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="156" y="58" width="103" height="20" uuid="0f13d7ca-7545-4564-a42a-f8da05d21dc4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[MONTO POR FALTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="39" width="105" height="19" uuid="64ff0b60-907b-4a76-9493-33562702401a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD DE FALTAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="277" y="39" width="26" height="20" uuid="bd6720fb-54ee-4450-b268-32e881c6e10e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{faltas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="259" y="58" width="57" height="20" uuid="d74043b0-b0e3-4621-9d1f-e56e0ce5a9bf"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importe_por_faltas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="115" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

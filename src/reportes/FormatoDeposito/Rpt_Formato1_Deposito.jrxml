@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="24" uuid="41acfef7-5848-4c5c-94c1-63fc5aa7fadc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="46"/>
+	<parameter name="id_folio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT f.id,p.nombre,p.costo FROM folios f
+    INNER JOIN paquetesmedicos p ON f.id_paquete=p.id
+    INNER JOIN habitacion h ON f.id_habitacion=h.id_habitacion 
+    WHERE f.id= $P{id_folio}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="costo" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="147" splitType="Stretch">
+			<image>
+				<reportElement x="5" y="4" width="525" height="126" uuid="00cb1016-ebdf-46bb-8bbc-2c77d9de5edd"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="379" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="2" width="539" height="75" uuid="b89de86a-508b-400d-a9cd-11fefd41c5e7"/>
+				<textElement textAlignment="Justified">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[YO:_____________________________________________________________ RECONOZCO Y ME COMPROMETO A TENER LIQUIDADO EL DEPOSITO POR EL IMPORTE DE ]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="94" y="33" width="138" height="20" uuid="53422d55-20fd-492a-8664-aee48877a97c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="57" width="174" height="20" uuid="a3248431-6e16-4214-bb4b-cc081a647cef"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[CORRESPONDIENTE A :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="157" y="56" width="343" height="20" uuid="4ec1e9ed-dd5d-44ca-a1cc-c9d42b1939a5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="77" width="536" height="92" uuid="b401109f-9d65-41a0-a147-b3174d1595a7"/>
+				<textElement textAlignment="Justified">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[MISMO QUE DEBO Y ME OBLIGO A PAGAR A VP MÉDICA PLAZA S.A. DE C.V. ANTES DE INICIAR  CUALQUIER PROCEDIMIENTO Y/O CUALQUIER ATENCION POR PARTE DEL HOSPITAL AL PACIENTE:  ________________________________________________________________________      EN EL ENTENDIDO CLARO DE LAS SIGUIENTES OPCIONES DE PAGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="168" width="538" height="107" uuid="f3914c23-6491-4f88-a6c6-f2bd52424124"/>
+				<textElement textAlignment="Justified">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[EFECTIVO, TARJETA DE DÉBITO, TARJETA DE CRÉDITO,                                          *TRANSFERENCIA BANCARIA (*SALVO CONFIRMACION EN CUENTA DE LA TRANSACCION):  VP MÉDICA PLAZA  S.A. DE C.V.                                                   Numero de Cuenta 65-50978449-0  Banco SANTANDER  O   *TRANSFERENCIA INTERBANCARIA    (*SALVO CONFIRMACION EN CUENTA DE LA TRANSACCION): VP MÉDICA PLAZA  S.A. DE C.V.  Clabe 014100655097844905  BANCO SANTANDER.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="271" width="538" height="101" uuid="cd469c37-6b54-45b5-bdec-25d76da0afdd"/>
+				<textElement textAlignment="Justified">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[RECONOCIENDO QUE LA CUENTA PUEDE AUMENTAR EN LA MEDIDA QUE SE REQUIERAN SERVICIOS, EQUIPOS, MEDICAMENTOS, MATERIAL DE CURACION, ESTUDIOS Y CUALQUIER OTRO ADICIONAL PARA DESEMPEÑAR DE LA MANERA NECESARIA LOS PROCEDIMIENTOS. DICHO IMPORTE ADICIONAL QUE ME OBLIGO A PAGAR EN CUALQUIERA DE LAS OPCIONES MENCIONADAS CON ANTERIORIDAD, ANTES DEL ALTA DEL PACIENTE :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="135" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="2" width="536" height="64" uuid="84605e0b-8f57-480e-8634-30479913c8a3"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[_______________________________________________________________________ TODO LO ANTERIOR EN LA CIUDAD DE TUXTLA GUTIÉRREZ, CHIAPAS A ________ DE ________________________ DEL 20________. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="93" width="253" height="20" uuid="69cbf478-101f-4872-a1a0-e4952e764c3d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y FIRMA DEL FAMILIAR O]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="110" width="253" height="20" uuid="73fc7f9f-d39a-4618-adf0-a8859395b850"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPONSABLE DEL PACIENTE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="128" y="83" width="292" height="1" uuid="b18548a9-65be-4180-99fb-2bb4db0fc153"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="5" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="124" splitType="Stretch">
+			<staticText>
+				<reportElement x="72" y="36" width="100" height="20" forecolor="#FFFFFF" uuid="72518b48-9bc3-489e-8f2b-f540fe1ee7de"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[961 617 4830]]></text>
+			</staticText>
+			<image>
+				<reportElement x="19" y="0" width="536" height="121" uuid="aa6cf01b-94e5-417a-a8b6-df79c4a1ead4"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\PiePagina_MembreteV2.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="46" splitType="Stretch"/>
+	</summary>
+</jasperReport>

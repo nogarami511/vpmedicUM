@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_precorte_firmas" pageWidth="555" pageHeight="200" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3fdced61-9252-4a25-b0ff-67c4088f8d55">
+	<property name="ireport.zoom" value="2.143588810000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_user" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[call TRAER_COBRADORES_DIA($P{id_user});]]>
+	</queryString>
+	<field name="colaborador" class="java.lang.String"/>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="27" y="42" width="211" height="20" uuid="0d13873e-617d-455c-860f-2836539738f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{colaborador}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="27" y="62" width="211" height="1" uuid="cec407ca-6afb-4ea7-b598-f1285d370e7b"/>
+			</line>
+			<staticText>
+				<reportElement x="27" y="63" width="211" height="20" uuid="9f48e16b-32d8-4276-8682-1317c57b61a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ FIRMA ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="333" y="63" width="211" height="1" uuid="495cd516-7566-4944-9c22-f42dc8dd4f25"/>
+			</line>
+			<staticText>
+				<reportElement x="333" y="64" width="211" height="20" uuid="40d385ff-a5ac-46d9-9d48-3af9271e714b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NOMBRE Y FIRMA ]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

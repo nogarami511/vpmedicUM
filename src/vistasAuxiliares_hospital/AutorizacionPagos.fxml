@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="421.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.AutorizacionPagosController">
+   <children>
+      <BorderPane prefHeight="421.0" prefWidth="701.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="54.0" prefWidth="701.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER" />
+         </top>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <TableView fx:id="tablaPrincipalAutorizacion" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="solicitudAutorizacion" prefWidth="75.0" text="SOLICITUD" />
+                      <TableColumn fx:id="fechaAutorizacion" prefWidth="75.0" text="FECHA" />
+                        <TableColumn fx:id="montoTotalAutorizacion" prefWidth="75.0" text="MONTO TOTAL" />
+                        <TableColumn fx:id="formaPagoAutorizacion" prefWidth="75.0" text="FORMA DE PAGO" />
+                        <TableColumn fx:id="solicitanteAutorizacion" prefWidth="75.0" text="SOLICITANTE" />
+                        <TableColumn fx:id="estatusAutorizacion" prefWidth="75.0" text="ESTATUS" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </top>
+               <bottom>
+                  <TableView fx:id="tablaVisualizarSolicitudes" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </bottom>
+            </BorderPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="69.0" prefWidth="701.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

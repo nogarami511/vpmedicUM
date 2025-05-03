@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91eb90d0-88aa-4282-aba5-9bb647a5fcab">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_movimiento_padre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mvd.id, mvd.id_insumo, i.nombre, origen.almacen AS nombre_almacen, destino.almacen AS nombre_destino, mvd.movimiento FROM movimientos_inventario_detalle mvd INNER JOIN movimientos_inventariop mip ON mvd.movimientos_inventariop = mip.id INNER JOIN insumos i ON mvd.id_insumo = i.id INNER JOIN almacen origen ON mip.id_origen = origen.id_almacen INNER JOIN almacen destino ON mip.id_destino = destino.id_almacen WHERE mvd.movimientos_inventariop = $P{id_movimiento_padre}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_insumo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_almacen" class="java.lang.String"/>
+	<field name="nombre_destino" class="java.lang.String"/>
+	<field name="movimiento" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="1" width="555" height="91" uuid="5a30ae4c-1cfd-4558-b4e4-f508d0537941"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="52" width="342" height="20" forecolor="#666666" uuid="0813ba35-1026-44a2-b1c5-ae292bf92bae"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REABASTO DE MEICAMENTO O MATERIAL DE CURACION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="51" height="20" uuid="c0af5341-2c0a-4672-8c48-212c2868afdf"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="0" width="234" height="20" uuid="1dfe9e3a-c2eb-4d37-9249-37d7db5879cb"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSUMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="0" width="100" height="20" uuid="33227b5f-d5e6-49ee-b02d-47ee0912d2fc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORIGEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="0" width="100" height="20" uuid="c27d3439-39e2-426d-854e-3a8542801c90"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESTIONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="0" width="69" height="20" uuid="26b10870-bb52-4d66-b71c-9239f2de24ae"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOVIMIENTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="51" height="20" uuid="283d8069-1120-4fda-8525-d6f83c8bd194"/>
+				<box leftPadding="2">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_insumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="0" width="234" height="20" uuid="f475270a-cf7e-4f9a-b4da-93bfe8d275d4"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="0" width="100" height="20" uuid="93e20e83-15c4-48b9-8195-a7df40840227"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_almacen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="0" width="100" height="20" uuid="dfe6c842-d8cb-4254-8237-84b8568b92c8"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_destino}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="69" height="20" uuid="ef8f608e-850a-45f2-84bf-f8e1be28af1d"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movimiento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="83" splitType="Stretch">
+			<image>
+				<reportElement x="1" y="0" width="555" height="82" uuid="b453b638-2f6f-4b6d-ac28-eadee944cd37"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\PiePagina_MembreteV2.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="189" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="169" width="240" height="1" uuid="0e8e763f-6bcc-4348-8ca8-e0a014faabf8"/>
+			</line>
+			<staticText>
+				<reportElement x="68" y="170" width="100" height="14" uuid="68c7a055-4bb4-4782-9ac7-eb84bea473ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FARMACIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="169" width="100" height="14" uuid="21af9f7f-7584-4d71-9e2e-9597ed37f4a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[RECIBE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="312" y="168" width="240" height="1" uuid="02fccae3-b596-423a-a86f-b5f0df090652"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

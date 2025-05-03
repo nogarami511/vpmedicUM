@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="60" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="deebbc4c-e285-479d-ac9d-c57d53f2e635">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_compras_internas" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[CALL RPT_COMPRA_INTERNA_CACBECERA($P{id_compras_internas});]]>
+	</queryString>
+	<field name="id_compras_internasp" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_pedido" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folioPedido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreComercial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rfc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="115" height="15" uuid="6bb51a9d-aca9-43a2-a8b1-781db6e19cdc"/>
+				<box leftPadding="5"/>
+				<text><![CDATA[RAZON SOCIAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="0" width="235" height="15" uuid="8964c8c5-ef67-4dbf-a466-cd0d276fbc50"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="15" width="115" height="15" uuid="e1c2844a-e967-40cd-b46c-abfe991db180"/>
+				<box leftPadding="5"/>
+				<text><![CDATA[NOMBRE COMERCIAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="15" width="235" height="15" uuid="f94695ac-a0b7-4b1a-9d5d-28bd0e44451b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreComercial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="115" height="15" uuid="0e7243ba-cc41-44ef-9414-751f46b80b25"/>
+				<box leftPadding="5"/>
+				<text><![CDATA[RFC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="30" width="235" height="15" uuid="f6aa7c9b-77fb-4898-8bda-84689dc8f944"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rfc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="45" width="115" height="15" uuid="a6332a36-2370-4474-8a2f-572226fe1de1"/>
+				<box leftPadding="5"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="45" width="235" height="15" uuid="31133f73-b81f-41b2-b2af-26cd3c2686a0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="0" width="100" height="15" uuid="7c4a7be3-dfc6-49cf-a7cd-558673e0c80e"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[SOLICITUD No:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="15" uuid="ce231c36-d92f-4e0a-81fd-4344bb692f07"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_compras_internasp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="15" width="100" height="15" uuid="809b4cec-cbd5-45b4-a71c-bb01bcf3c43a"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[FECHA SOLICITUD]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="15" width="100" height="15" uuid="039bef79-aa75-4a0c-8935-9bab400469d0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_pedido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="30" width="100" height="15" uuid="b9957989-5fc9-48d2-bef7-7a44bb7c5836"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[FOLIO SOLICITUD]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="30" width="100" height="15" uuid="89911006-8522-4999-a6ef-ff1953164782"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{folioPedido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

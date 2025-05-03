@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14/12/2023, 11:30:21 AM
+    Author     : alfar
+*/
+/*clase principal, cambia el fondo del botón a color transparente.*/
+
+.btnSalir {
+     -fx-background-color:white;
+     -fx-border-color: white;
+}
+
+/*la clase Button de JavaFX posee 4 posibles estados, focused, hover, pressed, disable. Cambiamos el color de fondo en cada estado.*/
+
+.btnSalir:focused{
+     -fx-background-color:#f4f4f4;
+     -fx-border-color: grey;
+}
+
+.btnSalir:hover{
+     -fx-background-color:#f4f4f4;
+     -fx-border-color: grey;
+}
+
+.btnSalir:pressed{
+     -fx-background-color:#f4f4f4;
+     -fx-font-color:white;
+     -fx-font-weight: bold;
+     -fx-border-color: #FFFFFF;
+}
+
+/*aquí cambiamos el color del texto a gris*/
+
+.btnSalir:disabled{
+     -fx-text-fill:gray;
+}

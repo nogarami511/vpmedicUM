@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="498.0" prefWidth="890.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.AgregarCitaaQuirofanoController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="107.0" prefWidth="888.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="120.0" prefWidth="143.0" style="-fx-background-color: f4f4f4;" AnchorPane.leftAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="104.0" fitWidth="141.0" layoutX="1.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Label alignment="CENTER" layoutX="129.0" layoutY="35.0" prefHeight="50.0" prefWidth="759.0" text="AGENDA DE QUIROFANO" textFill="WHITE" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="444.0" prefWidth="141.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnAgregar" layoutX="28.0" layoutY="98.0" mnemonicParsing="false" onAction="#accionagregar" prefHeight="39.0" prefWidth="85.0" text="AGREGAR" />
+                  <Button fx:id="btnCanelar" layoutX="28.0" layoutY="243.0" mnemonicParsing="false" onAction="#accionCancelar" prefHeight="39.0" prefWidth="85.0" text="CANCELAR" />
+                  <Button fx:id="btnEditar" layoutX="28.0" layoutY="166.0" mnemonicParsing="false" onAction="#accioneditar" prefHeight="39.0" prefWidth="85.0" text="EDITAR" />
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="txfPaciente" layoutX="200.0" layoutY="146.0" prefHeight="25.0" prefWidth="500.0" AnchorPane.leftAnchor="200.0" />
+                  <Label layoutX="50.0" layoutY="50.0" text="QUIROFANO" AnchorPane.leftAnchor="50.0" />
+                  <Label layoutX="50.0" layoutY="100.0" text="NOMBRE DEL MEDICO" AnchorPane.leftAnchor="50.0" />
+                  <Label layoutX="50.0" layoutY="150.0" text="NOMBRE DEL PACIENTE" AnchorPane.leftAnchor="50.0" />
+                  <Label layoutX="50.0" layoutY="200.0" text="OBSERVACIÓN" AnchorPane.leftAnchor="50.0" />
+                  <Label layoutX="50.0" layoutY="250.0" prefHeight="17.0" prefWidth="65.0" text="FECHA" AnchorPane.leftAnchor="50.0" />
+                  <Label layoutX="50.0" layoutY="300.0" text="HORA" AnchorPane.leftAnchor="50.0" />
+                  <ComboBox fx:id="cmbQuirofano" layoutX="200.0" layoutY="46.0" prefWidth="250.0" AnchorPane.leftAnchor="200.0" />
+                  <ComboBox fx:id="cmbMedico" layoutX="200.0" layoutY="96.0" prefWidth="250.0" AnchorPane.leftAnchor="200.0" />
+                  <TextField fx:id="txtObservacion" layoutX="200.0" layoutY="196.0" prefHeight="25.0" prefWidth="500.0" AnchorPane.leftAnchor="200.0" />
+                  <DatePicker fx:id="dtpFecha" layoutX="200.0" layoutY="246.0" prefHeight="25.0" prefWidth="250.0" AnchorPane.leftAnchor="200.0" />
+                  <TextField fx:id="txfhora" layoutX="200.0" layoutY="296.0" prefHeight="25.0" prefWidth="100.0" AnchorPane.leftAnchor="200.0" />
+                  <TextField fx:id="txfMin" layoutX="600.0" layoutY="296.0" prefHeight="25.0" prefWidth="100.0" />
+                  <Label layoutX="450.0" layoutY="300.0" text="MINUTOS" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReporteSolicitudMedicamentos" pageWidth="555" pageHeight="100" columnWidth="515" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="20" uuid="309bbd4e-091b-41d1-869b-df01f03f037d">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_folio_param" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_indicasp_param" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT p.nombre_paciente, p.edad, f.numero_habitacion, i.fecha_creacion FROM pacientes p INNER JOIN folios f ON p.id_folio = f.id INNER JOIN indicasp i ON p.id_folio = i.id_folio WHERE p.id_folio = $P{id_folio_param} AND i.id_indicasp = $P{id_indicasp_param}]]>
+	</queryString>
+	<field name="nombre_paciente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="edad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero_habitacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_creacion" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="33" width="105" height="20" uuid="feab10e1-1e2d-4c5c-b0db-529478ef860c"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE PACIENTE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="33" width="283" height="20" uuid="1653f542-4a60-45dd-96cd-a0b1a55e9544"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre_paciente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="0" width="41" height="20" uuid="fa56e50e-8731-47e8-8bec-88195192b90f"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="0" width="85" height="20" uuid="b7e50858-5eaf-4ca6-8acf-0b4041f6ea94"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="209" y="0" width="118" height="20" uuid="67bd73ac-d3f0-485c-9db0-e023332e6e1d"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO HABITACION:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="327" y="0" width="63" height="20" uuid="efd51437-30bc-429e-b03b-74b727c33f6f"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numero_habitacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="33" width="50" height="20" uuid="610dc476-6f35-4179-8ea1-fbeb0d1913e9"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="33" width="85" height="20" uuid="d2295375-517f-48fd-b1bd-b1d5dfa4ecc6"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha_creacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="13" width="114" height="13" uuid="8a6d80d5-a080-4eee-957b-8a91b655531a"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id_indicasp_param}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="13" width="43" height="13" uuid="83e9584f-fbe7-4a19-aea5-fedec72d00df"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="157" height="13" uuid="6e20bacf-844c-4252-9706-83cf92f00a4a"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HOJA DE CONSUMO]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

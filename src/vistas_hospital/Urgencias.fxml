@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="452.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.UrgenciasController">
+    <top>
+        <AnchorPane prefHeight="112.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+            <children>
+                <JFXButton disable="true" layoutX="229.0" layoutY="22.0" opacity="0.99" text="URGENCIAS" textFill="WHITE" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="228.0">
+                    <font>
+                        <Font name="System Bold" size="32.0" />
+                    </font>
+                </JFXButton>
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="60.0" prefWidth="200.0" style="-fx-border-color: #0c569f;" BorderPane.alignment="CENTER" />
+    </bottom>
+    <center>
+        <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="nombreDePacienteUrgencia" maxWidth="8000.0" prefWidth="75.0" text="PACIENTE" />
+                <TableColumn fx:id="motivoDeIngresoUrgencia" maxWidth="8000.0" prefWidth="75.0" text="MEDICO" />
+                <TableColumn fx:id="colConsulta" maxWidth="1500.0" prefWidth="75.0" text="CONSULTA" visible="false" />
+                <TableColumn fx:id="colHUrgencias" maxWidth="1500.0" prefWidth="75.0" text="H. URGENCIAS" />
+                <TableColumn fx:id="colAlta" maxWidth="1500.0" prefWidth="75.0" text="ALTA URGENCIAS" />
+                <TableColumn fx:id="colHospitalizar" maxWidth="1500.0" prefWidth="75.0" text="HOSPITALIZAR" />
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

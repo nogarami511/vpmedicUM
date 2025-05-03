@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="433.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vpmedicaplaza.FXMLDocumentController">
+   <children>
+      <AnchorPane prefHeight="452.0" prefWidth="302.0" style="-fx-background-color: #0c569f;" AnchorPane.bottomAnchor="-17.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="102.0" fitWidth="135.0" layoutX="83.0" layoutY="32.0">
+               <image>
+                  <Image url="@../img/vp_oficial_blanco.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="64.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VP MÉDICA PLAZA">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="176.0" fitWidth="194.0" layoutX="54.0" layoutY="243.0">
+               <image>
+                  <Image url="@../img/vpmedica_hospital.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Text layoutX="558.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="542.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRASEÑA">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="usuarioIngresado" layoutX="485.0" layoutY="128.0" prefHeight="31.0" prefWidth="208.0" />
+      <PasswordField fx:id="contraIngresada" layoutX="485.0" layoutY="233.0" prefHeight="31.0" prefWidth="208.0" />
+      <Button fx:id="btnIngresar" defaultButton="true" layoutX="526.0" layoutY="302.0" mnemonicParsing="false" onAction="#ingresar" prefHeight="41.0" prefWidth="126.0" text="INGRESAR" />
+      <Text layoutX="637.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SOPORTE TÉCNICO EXT. 811" wrappingWidth="199.99999999999994" AnchorPane.rightAnchor="2.000000000000057">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Label layoutX="778.0" layoutY="415.0" text="ver 1.0">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

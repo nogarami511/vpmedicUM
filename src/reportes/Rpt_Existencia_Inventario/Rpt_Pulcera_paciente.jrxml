@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="70" pageHeight="637" columnWidth="54" leftMargin="8" rightMargin="8" topMargin="20" bottomMargin="20" uuid="884a1495-b74b-4176-a3c6-57b7a632f5f0">
+	<property name="ireport.zoom" value="5.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1326"/>
+	<parameter name="id_paciente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT pac.nombre_paciente, pac.edad, pac.fecha_nacimiento_paciente, ts.tipo_sangre, med.nombre AS medico, hab.numero_habitacion FROM pacientes pac 
+INNER JOIN folios fol ON pac.id_folio = fol.id
+INNER JOIN habitacion hab ON fol.numero_habitacion = hab.numero_habitacion
+INNER JOIN tipo_sangre ts ON pac.id_tipo_sangre = ts.id_tipo_sangre
+INNER JOIN medicos med ON pac.id_medico = med.id_medico
+WHERE pac.id_paciente = $P{id_paciente}]]>
+	</queryString>
+	<field name="nombre_paciente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="edad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_nacimiento_paciente" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_sangre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="medico" class="java.lang.String"/>
+	<field name="numero_habitacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="535" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="70" width="8" height="109" uuid="775743ad-f8ec-45e6-824d-44d4fe18410c"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_paciente}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="7" y="20" width="33" height="50" uuid="9a79daf8-c068-43a0-9aff-525009c9cfa1"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\vp_hospital_girada.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="25" y="211" width="8" height="26" uuid="b3152305-7b54-4618-929f-c4f72ce44fb8"/>
+				<textElement verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[AÑOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="25" y="196" width="8" height="16" uuid="f8536e13-e51c-4c20-86d4-3b8b2339d0bd"/>
+				<textElement verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="249" width="8" height="67" uuid="4f3b1f7f-47d9-4aeb-be9e-4fa4d5c7ab49"/>
+				<textElement verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[FECHA NACIMIENTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="25" y="316" width="8" height="29" uuid="f36fcf3a-0057-47b7-81df-97629bc0bb9d"/>
+				<textElement verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_nacimiento_paciente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="355" width="8" height="59" uuid="a6091e00-0a46-4519-96fa-e1e47629ed9f"/>
+				<textElement verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[TIPO DE SANGRE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="25" y="414" width="8" height="20" uuid="0efbbd7c-7163-4af1-9cf4-9a3b4a4f6bf7"/>
+				<textElement verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_sangre}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="7" y="459" width="33" height="50" uuid="8f486ccd-f869-4212-b375-af4df4e62581"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\vp_hospital_girada.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="38" y="179" width="8" height="56" uuid="379449c0-1234-456a-ad32-9aa1ba146477"/>
+				<textElement verticalAlignment="Middle" rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[TORRE MEDICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="279" width="8" height="16" uuid="6b58d7fa-f07e-4c4d-9544-fbb103402f19"/>
+				<textElement rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[HAB.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="299" width="8" height="16" uuid="8ac4ce94-cd4e-449b-9a1c-7927793b7e5b"/>
+				<textElement rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_habitacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="279" width="8" height="31" uuid="ce062b6a-34cf-43a9-baa0-beb837e90cfe"/>
+				<textElement rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[MEDICO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="7" y="312" width="8" height="78" uuid="265ccdf7-1403-4aae-b233-737879d4095d"/>
+				<textElement rotation="Right">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="11" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch"/>
+	</summary>
+</jasperReport>

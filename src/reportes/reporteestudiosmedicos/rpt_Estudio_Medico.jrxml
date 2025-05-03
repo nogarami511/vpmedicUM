@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="47afe84d-1740-4090-b041-e8c8244b3f42">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_compras_internas" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalenleta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+    e.*, 
+    l.*, 
+    p.nombre_paciente,
+    f.folio 
+    FROM estudiosmedicos e 
+      INNER JOIN laboratorios l 
+        ON e.id_laboratorio = l.id_laboratorio
+      INNER JOIN pacientes p 
+        ON e.id_pasiente = p.id_paciente
+      INNER JOIN folios f 
+        ON e.id_folio = f.id
+  WHERE e.id = $P{id_compras_internas}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_insumo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_estudios_laboratorios" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_estudio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_folio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_pasiente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usuario_pedido" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_pedio" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_estudio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_pago_estudio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usuario_pago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_pago" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usuario_modificacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_modificacion" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_laboratorio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_sin_iva" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="iva" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_con_iva" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_solicitud" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saldo_saldar" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto_abonado" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="solicitar" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_comercial_laboratorio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razon_social_laboratorio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion_laboratorio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rfc_laboratorio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_paciente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="155" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="1" width="555" height="154" uuid="b450f00b-8162-4a9e-89db-cee2315dc8d1"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="401" y="79" width="143" height="15" forecolor="#999999" uuid="2243b91d-fe64-44eb-8b8c-48095810e121"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTUDIO DE LABORATORIO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="301" y="0" width="100" height="15" uuid="9fd88ef3-7029-494f-a9d5-d17941517ce5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[SOLICITUD No: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="15" width="100" height="15" uuid="5dca2e7f-6f37-424b-bf5b-5b8954de6562"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[FECHA SOLICITUD: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="30" width="100" height="15" uuid="2fb0f6b8-51cd-4485-a02a-a91540e2bca1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[FOLIO SOLICITUD: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="15" uuid="31cf3988-98de-443d-9220-924270b106b8"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[LABORATORIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="110" height="15" uuid="2ac88ff2-6b2e-4bb7-bc0d-4e208f200e45"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[RFC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="110" height="15" uuid="7761f37c-688f-4665-94e3-0dc106bb3d0c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[PACIENTE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="111" y="0" width="155" height="15" uuid="56df5eff-e693-49bd-b3a4-03bc416ac628"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_comercial_laboratorio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="15" width="155" height="15" uuid="594b4208-1a9c-4d98-b3f4-f6d1c9ae60ab"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rfc_laboratorio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="0" width="141" height="15" uuid="7fadf422-fbed-4638-87b5-1fd296588cbe"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="15" width="141" height="15" uuid="08bba88f-3fa2-4822-9fe0-9410ab30f51f"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_pedio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="30" width="141" height="15" uuid="d332409d-566d-4c3e-a71c-e66ed4e3dd87"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{folio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="30" width="155" height="15" uuid="d92d7544-2791-44f6-b9d8-844525ffc8e7"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_paciente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="1" width="108" height="20" uuid="2e607710-ad67-48f3-813d-c73a3e55c63a"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="1" width="93" height="20" uuid="ed7531bc-c718-4385-b996-600f5baefdb6"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[SUB TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="200" height="20" uuid="a7af76f1-c2ec-459a-9df5-66a9f4de0019"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ESTUDIO MEDICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="1" width="61" height="20" uuid="649bbcb8-c8a0-41b8-b916-a05908fd40e2"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="462" y="1" width="93" height="20" uuid="7346d28c-a055-43a5-832a-bed265680add"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="164" splitType="Stretch">
+			<line>
+				<reportElement x="29" y="111" width="183" height="1" uuid="d4a31467-f983-4741-a336-9f1eab5e735e"/>
+			</line>
+			<line>
+				<reportElement x="333" y="112" width="183" height="1" uuid="ac8eec05-5b8f-4e45-a4c7-bb49bc8cdbeb"/>
+			</line>
+			<staticText>
+				<reportElement x="63" y="113" width="100" height="20" uuid="287ee729-d094-42e3-b8ac-0da493f8d01e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[SOLICITANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="112" width="100" height="20" uuid="939090be-89b2-4f31-b9b0-bad3ce22c185"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Vo. Bo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="72" width="90" height="15" uuid="3e4e3a9a-5ee6-414b-ade3-4f5bcd0a03d1"/>
+				<text><![CDATA[TOTAL EN LETRA: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="72" width="445" height="15" uuid="34067681-5021-4210-b143-7c267829e6df"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{totalenleta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="308" height="20" uuid="8bb11ff3-c28b-4706-a049-51a7d9efbabc"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_estudio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="308" y="0" width="93" height="20" uuid="3e70461c-be39-4027-b8b8-77169b15a71a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio_sin_iva}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="401" y="0" width="61" height="20" uuid="8600bc71-2214-4560-a154-1f39d21f1520"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="462" y="0" width="93" height="20" uuid="24cd61af-d589-4ee0-8c1c-dfbb0703fcf5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio_con_iva}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="93" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="93" uuid="4a3f575e-855a-4e6f-865b-89ab9d73bf2f"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\PiePagina_MembreteMod.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

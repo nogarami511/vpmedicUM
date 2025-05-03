@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b100493c-1d48-4e7e-ba21-be79e0d13be7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="ireport.zoom" value="2.0490403660952117"/>
+	<property name="ireport.x" value="217"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Background" mode="Transparent" backcolor="#FF0000" fill="Solid">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{nombre_inusmo}.isBold()]]></conditionExpression>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<parameter name="id_paquete" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="_utilidad" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[CALL RPT_COSTOS_PAQUETES($P{id_paquete},$P{_utilidad});]]>
+	</queryString>
+	<field name="nombre_inusmo" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.String"/>
+	<field name="cosot_unitario" class="java.lang.String"/>
+	<field name="sub_total" class="java.lang.String"/>
+	<field name="totalFormula" class="java.lang.String"/>
+	<field name="nombre_paquete" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<textField>
+				<reportElement x="142" y="49" width="285" height="20" uuid="e9fe6a7f-2096-4b1e-8f81-9997ab3c939a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre_paquete}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="475" y="0" width="80" height="79" uuid="76a94db1-10c3-402e-8dbf-8471e66616f1"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\vp_hospital.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="228" y="10" width="137" height="20" uuid="16a16652-ab49-4593-8112-f9421739cbbf"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VP MEDICA HOSPITAL PRIVADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="29" width="157" height="20" uuid="b057a4bd-ce94-42f9-bd54-3e07dbadb2a5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE DEL PAQUETE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="80" height="79" uuid="0d985f44-dcd0-493e-85a9-8f62ae40b4f2"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\vp_oficial_mosss.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="275" y="69" width="100" height="20" uuid="af00d711-cdef-4fe0-9d84-2ee45550ca99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id_paquete}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="204" y="69" width="71" height="20" uuid="85f1a41b-3460-4acf-837b-f89bf7f7b2e4"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[PAQUETE N°]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="0" width="268" height="20" uuid="9566da67-4d6d-43fb-adc7-c103dcba61ea"/>
+				<box leftPadding="5" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[nombre_inusmo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="0" width="58" height="20" uuid="ded8bc4a-68c4-4a40-90d6-ab5bf9ae9871"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[cosot_unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="0" width="58" height="20" uuid="caea4473-1815-4169-a8c2-db8b58415364"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[sub_total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="0" width="58" height="20" uuid="5057fe20-0a82-4900-8c29-7e171da77e57"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[totalFormula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="0" width="58" height="20" uuid="81b04e66-183c-40a6-8adc-c5d7e3551259"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="29" y="0" width="268" height="10" uuid="6fa0bb5f-8ec8-46d1-ab5a-2002e32e3a61">
+					<printWhenExpression><![CDATA[$F{nombre_inusmo} != null && !$F{nombre_inusmo}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_inusmo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="413" y="0" width="58" height="10" uuid="c78f91db-e151-4a75-bf1c-968b5e33badc">
+					<printWhenExpression><![CDATA[$F{nombre_inusmo} != null && !$F{nombre_inusmo}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sub_total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="471" y="0" width="58" height="10" uuid="30f1c50c-d2df-4e6f-9d34-754620b5a6aa">
+					<printWhenExpression><![CDATA[$F{nombre_inusmo} != null && !$F{nombre_inusmo}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalFormula}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="297" y="0" width="58" height="10" uuid="efa6798e-1591-478a-bf95-faefc620d448">
+					<printWhenExpression><![CDATA[$F{nombre_inusmo} != null && !$F{nombre_inusmo}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cosot_unitario}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="355" y="0" width="58" height="10" uuid="40dcfcb2-e985-4d2f-8aa0-080c78185f87">
+					<printWhenExpression><![CDATA[$F{nombre_inusmo} != null && !$F{nombre_inusmo}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="34" width="100" height="20" uuid="21e1b814-ea70-4917-a99f-77ae1e3211e6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="70e7870c-214c-4772-b8f0-c7ed81f44bb6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="1659a5dc-29b6-47ab-af50-0205e4f343c3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

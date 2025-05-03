@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.ServicioAdicionalNuevoController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane prefHeight="272.0" prefWidth="150.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnInsertar" layoutX="27.0" layoutY="78.0" mnemonicParsing="false" onAction="#insertar" prefHeight="33.0" prefWidth="97.0" text="AGREGAR" />
+                  <Button fx:id="btnSalir" layoutX="27.0" layoutY="204.0" mnemonicParsing="false" onAction="#salir" prefHeight="33.0" prefWidth="97.0" text="SALIR" />
+               </children>
+            </AnchorPane>
+         </left>
+         <top>
+            <AnchorPane prefHeight="112.0" prefWidth="679.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="114.0" prefWidth="150.0" style="-fx-background-color: #E5E8E8;">
+                     <children>
+                        <ImageView fitHeight="110.0" fitWidth="140.0" layoutX="5.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
+                  <JFXButton layoutX="152.0" layoutY="31.0" prefHeight="69.0" prefWidth="386.0" text="Servicio Adicional" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </JFXButton>
+               </children></AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="20.0" layoutY="71.0" text="NOMBRE" AnchorPane.leftAnchor="20.0" />
+                  <TextField fx:id="nombreSA" layoutX="109.0" layoutY="67.0" prefHeight="25.0" prefWidth="240.0" />
+                  <Label layoutX="354.0" layoutY="71.0" text="COSTO" />
+                  <Label layoutX="20.0" layoutY="36.0" text="PROPIETARIO" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="36.0" />
+                  <Label layoutX="24.0" layoutY="105.0" text="MARCA" AnchorPane.leftAnchor="20.0" />
+                  <Label layoutX="354.0" layoutY="105.0" text="MODELO" />
+                  <Label layoutX="19.0" layoutY="180.0" text="DESCRIPCIÓN" AnchorPane.leftAnchor="20.0" />
+                  <TextField fx:id="costoSA" layoutX="419.0" layoutY="67.0" prefHeight="25.0" prefWidth="90.0" AnchorPane.rightAnchor="20.0" />
+                  <TextField fx:id="propietarioSA" layoutX="109.0" layoutY="32.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="32.0" />
+                  <TextField fx:id="marcaSA" layoutX="109.0" layoutY="101.0" prefWidth="240.0" />
+                  <TextField fx:id="modeloSA" layoutX="419.0" layoutY="101.0" prefHeight="25.0" prefWidth="90.0" AnchorPane.rightAnchor="20.0" />
+                  <TextField fx:id="descripcionSA" alignment="TOP_LEFT" layoutX="109.0" layoutY="197.0" prefHeight="100.0" prefWidth="400.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
+                  <Label layoutX="24.0" layoutY="148.0" text="TIPO" AnchorPane.leftAnchor="24.0" />
+                  <TextField fx:id="tipoServicioAdicional" layoutX="109.0" layoutY="144.0" prefWidth="240.0" />
+                  <TextField fx:id="existenciaServicioAdicional" layoutX="419.0" layoutY="144.0" prefWidth="90.0" AnchorPane.rightAnchor="20.0" />
+                  <Label layoutX="354.0" layoutY="148.0" text="EXISTENCIA" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

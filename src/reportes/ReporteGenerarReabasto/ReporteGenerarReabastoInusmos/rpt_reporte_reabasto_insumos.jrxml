@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64ba0d21-cee5-4de7-ab81-aaacc1508d4c">
+	<property name="ireport.zoom" value="2.0526324729228267"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="_id_reabasto_padre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call RPT_REABASTO_INSUMOS($P{_id_reabasto_padre})]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="clave" class="java.lang.String"/>
+	<field name="total_unidades_faltantes" class="java.lang.String"/>
+	<field name="Numeracion" class="java.lang.String"/>
+	<variable name="total_unidades_faltantes_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{total_unidades_faltantes}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="91" uuid="f2703a74-5af1-48e9-8592-145fed3b3258"/>
+				<imageExpression><![CDATA["D:\\Documentos\\Trabajo\\Proyectos\\VPMedicaGit\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="36" y="0" width="100" height="20" uuid="3492a06a-80e8-4a90-b8c2-56e1997cf768"/>
+				<box leftPadding="5">
+					<topPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="0" width="219" height="20" uuid="0dbb4609-800f-45cb-8e5b-d513c12eb13f"/>
+				<box leftPadding="5">
+					<topPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="0" width="100" height="20" uuid="bb84efda-08dc-449b-9f1a-e03b23df398a"/>
+				<box leftPadding="5">
+					<topPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLAVE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="ec084222-809f-40e4-a53a-50eb3b73ec04"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UDS. FALTANTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="36" height="20" uuid="59714591-bb0a-45bb-bf75-75d4c69ca5bc"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="36" height="11" uuid="55104705-a59c-4300-8c44-7ee067de8563"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Numeracion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="0" width="100" height="11" uuid="a003914a-6ba1-4762-8daa-74d9d38fe149"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="0" width="219" height="11" uuid="2286b099-9ce5-413c-980a-d6c5842189e9"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="0" width="100" height="11" uuid="26d70a78-d94e-46c8-a568-eabcbb86c542"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="11" uuid="75073fa8-0b60-43b8-a250-7f20ce7f53d6"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_unidades_faltantes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="93" splitType="Stretch">
+			<image>
+				<reportElement x="-10" y="0" width="565" height="93" uuid="2f27a75c-e96a-4610-bf09-a6725c9392e9"/>
+				<imageExpression><![CDATA["D:\\Documentos\\Trabajo\\Proyectos\\VPMedicaGit\\vpmedica\\src\\img\\PiePagina_MembreteMod.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="13" width="555" height="1" uuid="2f8784c3-6ac3-4914-83b9-0f444d492f2f"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="13" uuid="75257f70-5a5f-46b0-9807-1b769cc0cc15"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="13" uuid="8161902a-a510-463e-9dbf-4bc88c8fe4ce"/>
+			</line>
+			<textField>
+				<reportElement x="455" y="0" width="99" height="13" uuid="dca42525-83b0-4619-8f7e-7dc7977db2be"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_unidades_faltantes_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="236" y="0" width="219" height="13" uuid="8614b812-3056-4095-9d00-31e8f77f490b"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL INSUMOS FALTANTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="0" width="237" height="13" uuid="f85d6d04-2525-4e22-b23e-f89875aeeadd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

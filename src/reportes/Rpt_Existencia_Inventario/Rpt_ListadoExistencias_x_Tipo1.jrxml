@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="498bf95f-636d-4e78-953a-2c473ff3769f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT Ins.id,clave,Ins.nombre AS NombreInsumo,formula,Inve.total_existencia ,marca,id_presentacion,presentacion,tipo_insumo,
+  TIns.nombre AS nomnreTipoIns,id_estatus_insumo,EIns.nombre 
+FROM insumos Ins
+INNER JOIN inventarios Inve ON
+  Ins.Id=Inve.Id
+INNER JOIN presentaciones_insumos PresIns ON
+  Ins.id_presentacion = PresIns.Id
+INNER JOIN tipoinsumos TIns ON
+  Ins.tipo_insumo=TIns.Id 
+INNER JOIN estatus_insumos EIns ON
+  Ins.id_estatus_insumo = EIns.id
+  WHERE Ins.tipo_insumo=1]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clave" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreInsumo" class="java.lang.String"/>
+	<field name="formula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_existencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="marca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_presentacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="presentacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_insumo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomnreTipoIns" class="java.lang.String"/>
+	<field name="id_estatus_insumo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="movimiento_1" class="java.lang.Integer" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="movimiento_2" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="178" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="7" width="163" height="124" uuid="ad1718a6-1ee3-48d8-af30-d3af44a1468d"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\vp_hospital.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="283" y="20" width="246" height="38" uuid="30fef8e9-f267-4cf8-8540-dd16c324dbdc"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VP MEDICA PLAZA S.A. DE C.V. GHR151204GV6 ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="174" y="72" width="355" height="1" uuid="4ee64618-610d-4ac0-9e26-4f72edc00f47"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="375" y="86" width="154" height="20" uuid="edaa358e-d1c2-4695-b8b7-970e20eb6842"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="139" y="135" width="254" height="20" uuid="4af1e33a-de6f-4af6-92d4-096692fcd92b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Existencias por Tipo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="183" y="158" width="171" height="20" uuid="859e5e9c-b7cd-48f6-ba9a-e3c690261b41"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomnreTipoIns}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="14" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="48" splitType="Stretch">
+			<rectangle>
+				<reportElement x="307" y="4" width="66" height="35" uuid="5d34e8f9-c584-4324-8b8b-6d8d19ec588b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="75" y="4" width="152" height="35" uuid="51be10a0-73a7-4022-b1b9-dbe8d54f0ee4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="4" width="66" height="35" uuid="70a42674-6a3c-4483-9e7b-79873e1a7c1e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="227" y="4" width="80" height="35" uuid="c45a0354-f00b-48a1-b195-78ea0d8b093c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="373" y="4" width="80" height="35" uuid="1ce10eff-94f8-4a0b-a2b4-226b87d7804e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="242" y="11" width="49" height="20" uuid="21b94596-66a7-4309-bc76-310363e715d2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Formula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="11" width="56" height="20" uuid="55af6131-c8a6-467f-a5af-ab6736c07747"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="11" width="56" height="20" uuid="6f1b1f50-bb94-4ad4-9869-d119b0dda28f"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="12" width="51" height="20" uuid="36e5ff4e-2b04-4a41-8b8a-17388d0bcad8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="11" width="65" height="20" uuid="8851a786-a3d0-4d4d-ac1c-6bd08f51dd12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Presentación]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="453" y="4" width="94" height="35" uuid="42bc34f8-da1d-41c3-8ca9-057adf6e9775"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="468" y="12" width="76" height="20" uuid="8cf62468-cd09-47cb-a3a2-24cf1bf7796c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Existencias]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<line>
+				<reportElement x="10" y="33" width="531" height="1" uuid="8459e170-d063-4914-b4e3-baa7eee60743"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="12" y="6" width="61" height="23" uuid="51d9cdbe-df70-4922-97cf-00e40f17d454"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="7" width="150" height="22" uuid="4b3931d6-8e89-41e6-8184-e077bdab4e50"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NombreInsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="6" width="82" height="23" uuid="e818003a-8d6b-4557-beb1-02e9c9065b03"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{formula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="6" width="57" height="20" uuid="2dfd0294-091a-4894-beec-9ed1e61c933e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_existencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="313" y="6" width="59" height="23" uuid="15a4e348-2892-4d51-85da-8a352a8740d2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="6" width="77" height="23" uuid="14f8d42d-6d45-471b-bec3-976fa2f7928e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presentacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="99" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="11" y="27" width="539" height="61" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="d939d0c5-c5e9-4e6e-8275-bfd574b46ba9"/>
+			</rectangle>
+			<image>
+				<reportElement x="26" y="42" width="47" height="40" uuid="0264adc0-cee7-4364-ac96-ef3d0d534336"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\logoTel.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="79" y="49" width="100" height="20" forecolor="#FFFFFF" uuid="70c091de-c3f9-43a1-bced-dc4bc763635b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[961 617 4830]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="34" width="224" height="20" forecolor="#FFFFFF" uuid="d1807f9a-2593-4d10-af51-a66c32290cbf"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Blvd. Belisario Dominguez No.2116]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="49" width="258" height="20" forecolor="#FFFFFF" uuid="a629f0d8-6c6d-4dcb-a0c3-95489aa48137"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Col. Las Arboledas, C.P. 29030, Via Park]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="67" width="217" height="20" forecolor="#FFFFFF" uuid="c8048b2d-36e1-4065-8460-87b6c696b4e9"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Plaza, Tuxtla Gutierrez, Chiapas.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="77" splitType="Stretch"/>
+	</summary>
+</jasperReport>

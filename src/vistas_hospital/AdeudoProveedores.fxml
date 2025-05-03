@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.AdeudoProveedoresController">
+   <children>
+      <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="466.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="162.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="260.0" layoutY="-19.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="17.0" text="TIPO ADEUDO" AnchorPane.leftAnchor="14.0" />
+                        <ComboBox fx:id="cmbAdeudo" layoutX="111.0" layoutY="13.0" prefHeight="25.0" prefWidth="256.0" />
+                        <Button fx:id="btnImprimir" layoutX="637.0" layoutY="13.0" mnemonicParsing="false" onAction="#accionImprimir" text="IMPRIMIR" AnchorPane.rightAnchor="14.0">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/icons8-imprimir-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </AnchorPane>
+                  <Label alignment="CENTER" layoutX="173.0" layoutY="28.0" text="ADEUDO" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="75.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER_RIGHT" layoutX="499.0" layoutY="49.0" maxHeight="25.0" maxWidth="65.0" minHeight="25.0" minWidth="75.0" prefHeight="25.0" prefWidth="65.0" text="TOTAL ITP" AnchorPane.rightAnchor="146.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="499.0" layoutY="1.0" maxHeight="25.0" maxWidth="65.0" minHeight="25.0" minWidth="75.0" prefHeight="25.0" prefWidth="65.0" text="TOTAL IP" AnchorPane.rightAnchor="146.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="499.0" layoutY="25.0" maxHeight="25.0" maxWidth="65.0" minHeight="25.0" minWidth="75.0" prefHeight="25.0" prefWidth="65.0" text="TOTAL IA" AnchorPane.rightAnchor="146.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalITP" alignment="CENTER_RIGHT" layoutX="576.0" layoutY="49.0" maxHeight="25.0" maxWidth="130.0" minHeight="25.0" minWidth="130.0" prefHeight="25.0" prefWidth="130.0" style="-fx-border-color: BLACK;" text="\$00.00" AnchorPane.rightAnchor="14.0" />
+                  <Label fx:id="lblTotalIP" alignment="CENTER_RIGHT" layoutX="576.0" layoutY="1.0" maxHeight="25.0" maxWidth="65.0" minHeight="25.0" minWidth="130.0" prefHeight="25.0" prefWidth="65.0" style="-fx-border-color: BLACK;" text="\$00.00" AnchorPane.rightAnchor="14.0" />
+                  <Label fx:id="lblTotalIA" alignment="CENTER_RIGHT" layoutX="576.0" layoutY="25.0" maxHeight="25.0" maxWidth="130.0" minHeight="25.0" minWidth="130.0" prefHeight="25.0" prefWidth="130.0" style="-fx-border-color: BLACK;" text="\$00.00" AnchorPane.rightAnchor="14.0" />
+               </children>
+            </AnchorPane>
+         </bottom>
+         <center>
+            <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="colNombreComercial" prefWidth="75.0" text=" NOMBRE&#10;COMERCIAL" />
+                <TableColumn fx:id="colITP" maxWidth="2500.0" prefWidth="75.0" text="IMPORTE TOTAL &#10;     A PAGAR" />
+                  <TableColumn fx:id="colIP" maxWidth="2500.0" prefWidth="75.0" text="IMPORTE &#10;PAGADO" />
+                  <TableColumn fx:id="colIA" maxWidth="2500.0" prefWidth="75.0" text="IMPORTE &#10;ADEUDO" />
+                  <TableColumn fx:id="colEDOCTA" maxWidth="1000.0" prefWidth="75.0" text="EDO CTA" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

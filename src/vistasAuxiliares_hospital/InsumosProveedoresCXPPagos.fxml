@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.InsumosProveedoresCXPPagosController">
+   <children>
+      <BorderPane layoutX="450.0" layoutY="300.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="272.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutY="-2.0" prefHeight="112.0" prefWidth="112.0" style="-fx-border-color: black; -fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="112.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="337.0" layoutY="22.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4; -fx-border-color: #A6A6A6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
+                     <children>
+                        <Label layoutX="26.0" layoutY="24.0" text="FOLIO COMPRA:" />
+                        <Label layoutX="26.0" layoutY="47.0" text="FOLIO PEDIDO:" />
+                        <Label layoutX="26.0" layoutY="71.0" text="RAZON SOCIAL:" />
+                        <Label layoutX="26.0" layoutY="97.0" text="RFC:" />
+                        <Label fx:id="lblFolioCompra" layoutX="179.0" layoutY="24.0" prefWidth="300.0" style="-fx-border-color: black;">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblFolioPedido" layoutX="179.0" layoutY="47.0" prefWidth="300.0" style="-fx-border-color: black;">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblRazonSocial" layoutX="179.0" layoutY="71.0" prefWidth="300.0" style="-fx-border-color: black;">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblRfc" layoutX="179.0" layoutY="97.0" prefWidth="300.0" style="-fx-border-color: black;">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="788.0" layoutY="-10.0" prefHeight="200.0" prefWidth="329.0" style="-fx-border-color: #A6A6A6;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <DatePicker fx:id="dtpFechaCompra" disable="true" layoutX="131.0" layoutY="12.0" prefWidth="150.0" AnchorPane.leftAnchor="130.0" />
+                              <Label layoutX="14.0" layoutY="22.0" text="FECHA COMPRA" />
+                              <Label layoutX="14.0" layoutY="77.0" text="TOTAL ABONO" />
+                              <Label layoutX="14.0" layoutY="101.0" text="SALDO" />
+                              <Label layoutX="14.0" layoutY="49.0" text="MONTO .COMPRA" />
+                              <Label fx:id="lblMontoCompra" layoutX="137.0" layoutY="49.0" prefWidth="150.0" style="-fx-border-color: BLACK;" text="\$0.00" AnchorPane.leftAnchor="130.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblTotalAbono" layoutX="137.0" layoutY="77.0" prefWidth="150.0" style="-fx-border-color: BLACK;" text="\$0.00" AnchorPane.leftAnchor="130.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblSaldo" layoutX="137.0" layoutY="101.0" prefWidth="150.0" style="-fx-border-color: BLACK;" text="\$0.00" AnchorPane.leftAnchor="130.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="112.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnSalir" layoutX="7.0" layoutY="110.0" mnemonicParsing="false" onAction="#accionSalir" prefHeight="33.0" prefWidth="99.0" text="SALIR" />
+               </children></AnchorPane>
+         </left>
+         <right>
+            <AnchorPane prefHeight="498.0" prefWidth="330.0" style="-fx-border-color: #A6A6A6;" BorderPane.alignment="CENTER">
+               <children>
+                  <DatePicker fx:id="dtpFechaPago" layoutX="132.0" layoutY="35.0" prefHeight="25.0" prefWidth="170.0" />
+                  <Label layoutX="20.0" layoutY="39.0" text="FECHA PAGO" />
+                  <Label layoutX="20.0" layoutY="83.0" text="FORMA PAGO" />
+                  <Label fx:id="lblFormaPAgo" layoutX="132.0" layoutY="83.0" prefWidth="170.0" style="-fx-border-color: BLACK;" text="TEXT" />
+                  <Label layoutX="20.0" layoutY="124.0" text="MONTO PAGO" />
+                  <TextField fx:id="txfMontoPago" layoutX="132.0" layoutY="120.0" prefHeight="25.0" prefWidth="170.0" />
+                  <Label layoutX="20.0" layoutY="194.0" text="OBESERVACIONES" />
+                  <TextArea fx:id="txaObservaciones" layoutX="132.0" layoutY="165.0" prefHeight="73.0" prefWidth="170.0" />
+                  <Button fx:id="btnRealizarPagos" layoutX="199.0" layoutY="265.0" mnemonicParsing="false" onAction="#accionRealizarPago" prefHeight="33.0" text="REALIZAR PAGO" />
+               </children>
+            </AnchorPane>
+         </right>
+         <center>
+            <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="colImprimir" maxWidth="3500.0" prefWidth="75.0" text="IMPRIMIR" />
+                <TableColumn fx:id="colActualziar" maxWidth="3500.0" prefWidth="75.0" text="ACTUALIZAR" />
+                  <TableColumn fx:id="colCancelar" maxWidth="3500.0" prefWidth="75.0" text="CANCELAR" />
+                  <TableColumn fx:id="colNumPago" maxWidth="2000.0" prefWidth="75.0" text="# PAGO" />
+                  <TableColumn fx:id="colFechaPago" prefWidth="75.0" text="FECHA PAGO" />
+                  <TableColumn fx:id="colFormaPago" prefWidth="75.0" text="FORMA PAGO" />
+                  <TableColumn fx:id="colImportePago" prefWidth="75.0" text="IMPORTE PAGO" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

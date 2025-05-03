@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1200.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.ConfirmacionDeAutorizacionCuentasxPagarController">
+   <children>
+      <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="162.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutY="-2.0" maxHeight="115.0" prefHeight="115.0" prefWidth="115.0" style="-fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="8.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="8.0">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="115.0" layoutY="-42.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0">
+                     <children>
+                        <RadioButton fx:id="rdbSolicitudes" disable="true" layoutX="542.0" layoutY="15.0" mnemonicParsing="false" onAction="#accionSolicitudes" text="SOLICITUDES" />
+                        <DatePicker fx:id="dtpFechaInicio" layoutX="89.0" layoutY="11.0" onAction="#accionFechaInicio" />
+                        <RadioButton fx:id="rdbAutorizadas" disable="true" layoutX="651.0" layoutY="15.0" mnemonicParsing="false" onAction="#accionAutorizadas" text="AUTORIZADAS" />
+                        <Label layoutX="14.0" layoutY="15.0" text="FECHA INICO" />
+                        <Label layoutX="274.0" layoutY="15.0" text="FECHA FIN" />
+                        <DatePicker fx:id="dtpFechaFin" disable="true" layoutX="347.0" layoutY="11.0" onAction="#accionFechaFin" />
+                     </children>
+                  </AnchorPane>
+                  <Label alignment="CENTER" layoutX="115.0" layoutY="38.0" text="CONFIRMACION DE AUTORIZACIÓN CUENTAS X PAGAR" textFill="WHITE" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <SplitPane dividerPositions="0.5" layoutX="370.0" layoutY="94.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="tablaConfirmacion" layoutX="349.0" layoutY="-5.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                <columns>
+                                  <TableColumn fx:id="colConfirmacionNum" maxWidth="1500.0" prefWidth="75.0" text="#" />
+                                  <TableColumn fx:id="colConfirmacionFecha" prefWidth="75.0" text="FECHA" />
+                                    <TableColumn fx:id="colConfirmacionMontoTotal" prefWidth="75.0" text="MONTO&#10; TOTAL" />
+                                    <TableColumn fx:id="colConfirmacionFormaPago" prefWidth="75.0" text="FORMA&#10; PAGO" />
+                                    <TableColumn fx:id="colConfirmacionSolicitante" maxWidth="10000.0" prefWidth="75.0" text="SOLICITANTE" />
+                                    <TableColumn fx:id="colConfirmacionEstatus" prefWidth="75.0" text="ESTATUS" />
+                                    <TableColumn fx:id="colConfirmacionVer" maxWidth="2000.0" prefWidth="75.0" text="VER" />
+                                    <TableColumn fx:id="colConfirmacionImprimir" maxWidth="4500.0" prefWidth="75.0" text="IMPRIMIR" />
+                                    <TableColumn fx:id="colConfirmacionAutorizar" maxWidth="4500.0" prefWidth="75.0" text="AUTORIZAR" />
+                                    <TableColumn fx:id="colConfirmacionCancelar" maxWidth="4500.0" prefWidth="75.0" text="CANCELAR" />
+                                    <TableColumn fx:id="colConfirmacionImpAuto" maxWidth="4500.0" prefWidth="75.0" text="IMP AUTO" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="talbaSolicitud" layoutX="337.0" layoutY="-5.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                <columns>
+                                  <TableColumn fx:id="colSolicitudNumOrden" maxWidth="2500.0" prefWidth="75.0" text="# ORDEN" />
+                                    <TableColumn fx:id="colSolicitudRubro" prefWidth="75.0" text="RUBRO" />
+                                    <TableColumn fx:id="colSolicitudFolio" prefWidth="75.0" text="FOLIO" />
+                                    <TableColumn fx:id="colSolicitudRazonSocial" maxWidth="10000.0" prefWidth="75.0" text="RAZON SOCIAL" />
+                                    <TableColumn fx:id="colSolicitudFecha" prefWidth="75.0" text="FECHA" />
+                                    <TableColumn fx:id="colSolicitudMonto" maxWidth="4000.0" prefWidth="75.0" text="MONTO" />
+                                    <TableColumn fx:id="colSolicitudMontopagado" maxWidth="4000.0" prefWidth="75.0" text="MONTO&#10;PAGADO" />
+                                    <TableColumn fx:id="colSolicitudSaldo" maxWidth="4000.0" prefWidth="75.0" text="SALDO SALDO" />
+                                    <TableColumn fx:id="colSolicitudAutorizado" prefWidth="75.0" text="    MONTO&#10;AUTORIZADO" />
+                                    <TableColumn fx:id="colSolicitudGuardar" maxWidth="3000.0" prefWidth="75.0" text="GUARDAR" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </center>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="115.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnSalir" layoutX="8.0" layoutY="202.0" mnemonicParsing="false" onAction="#accionSalir" prefHeight="33.0" prefWidth="99.0" text="SALIR" />
+               </children>
+            </AnchorPane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

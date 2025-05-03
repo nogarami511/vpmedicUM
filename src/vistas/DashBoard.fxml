@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="932.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.DashBoardController">
+    <left>
+        <AnchorPane prefHeight="5.0" prefWidth="279.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="116.0" fitWidth="174.0" layoutX="53.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="574.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="10.0">
+                    <image>
+                        <Image url="@../img/vp_hospital.png" />
+                    </image>
+                </ImageView>
+                <AnchorPane layoutY="126.0" prefHeight="473.0" prefWidth="279.0" style="-fx-background-color: #0c569f; -fx-background-radius: 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="126.0">
+                    <children>
+
+                        <VBox prefHeight="561.0" prefWidth="279.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <Accordion>
+                                <panes>
+                                    <TitledPane text="CATÁLOGOS">
+                                        <content>
+                                            <VBox>
+                                                <JFXButton onAction="#irColaboradores" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: null;" text="COLABORADORES">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#irPuestos" prefHeight="25.0" prefWidth="260.0" text="PUESTOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                    <JFXButton onAction="#irProveedores" prefHeight="25.0" prefWidth="290.0" text="PROVEEDORES">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                                <JFXButton onAction="#irPacientes" prefHeight="25.0" prefWidth="260.0" text="PACIENTES">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#irMedicos" prefHeight="25.0" prefWidth="260.0" text="MÉDICOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#irHabitaciones" prefHeight="25.0" prefWidth="260.0" text="HABITACIONES">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#irQuirofanos" prefHeight="25.0" prefWidth="260.0" text="QUIRÓFANOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#irInsumo" prefHeight="25.0" prefWidth="260.0" text="INSUMOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                                <JFXButton onAction="#irProcedimientos" prefHeight="25.0" prefWidth="260.0" text="PROCEDIMIENTOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                    <JFXButton onAction="#irRubro" prefHeight="25.0" prefWidth="260.0" text="RUBROS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irLaboratorios" prefHeight="25.0" prefWidth="274.0" text="LABORATORIOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irUsuarios" prefHeight="25.0" prefWidth="274.0" text="USUARIOS SISTEMA">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irAseguradora" prefHeight="25.0" prefWidth="269.0" text="ASEGURADORAS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irTabuladores" prefHeight="25.0" prefWidth="269.0" text="TABULADORES">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                           <TitledPane animated="false" prefHeight="54.0" prefWidth="279.0" text="INVENTARIO">
+                              <content>
+                                 <VBox prefHeight="83.0" prefWidth="277.0">
+                                    <children>
+                                       <JFXButton onAction="#irFamilias" prefHeight="25.0" prefWidth="309.0" text="FAMILIAS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irInventario" prefHeight="25.0" prefWidth="260.0" text="INVENTARIO">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irAutorizarReabastos" prefHeight="25.0" prefWidth="260.0" text="REABASTO INSUMOS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irConsumoDia" prefHeight="25.0" prefWidth="260.0" text="CONSUMO POR DIA">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irComprasInsumosProveedor" prefHeight="25.0" prefWidth="260.0" text="COMPRAS PROVEEDOR">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCXPInsumos" prefHeight="25.0" prefWidth="260.0" text="CXP INSUMOS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </TitledPane>
+                                    <TitledPane text="PROCESOS">
+                                        <content>
+                                            <VBox prefHeight="247.0" prefWidth="277.0">
+                                                <JFXButton onAction="#irCitasQuirofanos" prefHeight="25.0" prefWidth="260.0" text="AGENDA QUIRÓFANO">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></JFXButton>
+                                    <JFXButton onAction="#irVerCuentaPaciente" prefHeight="25.0" prefWidth="260.0" text="CUENTA DE PACIENTE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irEstudiosMedicos" prefHeight="25.0" prefWidth="296.0" text="ESTUDIOS MÉDICOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irAlmacenes" prefHeight="25.0" prefWidth="296.0" text="ALMACENES">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irIndicas" prefHeight="25.0" prefWidth="296.0" text="AGREGAR CONSUMO PACIENTE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irConsumoPaciente" prefHeight="25.0" prefWidth="296.0" text="CONSUMO PACIENTE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irAgregarConsumoPaciente2" prefHeight="25.0" prefWidth="296.0" text="COCINA">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                           <TitledPane text="CAJA">
+                              <content>
+                                 <VBox prefHeight="0.0" prefWidth="277.0">
+                                    <children>
+                                       <JFXButton onAction="#irCaja" prefHeight="25.0" prefWidth="269.0" text="COBROS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irHemodinamia" prefHeight="25.0" prefWidth="269.0" text="HEMODINAMIA">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irFacturacion" prefHeight="25.0" prefWidth="269.0" text="CAMBIO DE EFECTIVO-BANCO">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irDepositoEfectivo" prefHeight="25.0" prefWidth="269.0" text="DEPOSITO EFECTIVO">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCorteParcial" prefHeight="25.0" prefWidth="269.0" text="CORTE PARCIAL">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irGenerarDevolucion" prefHeight="25.0" prefWidth="269.0" text="GENERAR DEVOLUCIÓN" visible="false">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </TitledPane>
+                           <TitledPane text="COMANDAS">
+                              <content>
+                                 <VBox prefHeight="0.0" prefWidth="277.0">
+                                    <children>
+                                       <JFXButton onAction="#irComandas" prefHeight="25.0" prefWidth="269.0" text="COMANDAS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </TitledPane>
+                                    <TitledPane text="PAQUETES">
+                                        <content>
+                                            <VBox>
+                                    <JFXButton onAction="#irPaquetesMedicos" prefHeight="25.0" prefWidth="260.0" text="PAQUETES MEDICOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton onAction="#irPaquetesAlimenticios" prefHeight="25.0" prefWidth="260.0" text="PAQUETES ALIMENTOS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                           <TitledPane text="HABITACIONES">
+                              <content>
+                                 <VBox>
+                                    <children>
+                                       <JFXButton onAction="#irHabitaciones" prefHeight="25.0" prefWidth="260.0" text="HABITACIONES">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCostoHabitacion" prefHeight="25.0" prefWidth="260.0" text="COSTO HABITACIÓN">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irAsiganacionHabitaciones" prefHeight="25.0" prefWidth="260.0" text="HABITACIONES">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irAgendaHabitaciones" prefHeight="25.0" prefWidth="260.0" text="AGENDA HABITACIONES">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irOtrosIngresos" prefHeight="25.0" prefWidth="260.0" text="OTROS INGRESOS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </TitledPane>
+                           <TitledPane animated="false" prefHeight="69.0" prefWidth="279.0" text="ACTIVIDAD EN SISTEMA">
+                              <content>
+                                 <VBox prefHeight="69.0" prefWidth="277.0">
+                                    <children>
+                                       <JFXButton onAction="#irActividadUsuarios" prefHeight="25.0" prefWidth="309.0" text="ESTADO DE LOS USUARIOS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </TitledPane>
+                           <TitledPane fx:id="tpContaduria" prefHeight="428.0" prefWidth="279.0" text="ADMINISTRACIÓN">
+                              <content>
+                                 <VBox prefHeight="0.0" prefWidth="100.0">
+                                    <children>
+                                       <JFXButton fx:id="S" onAction="#irdeudasdelmes" prefHeight="25.0" prefWidth="324.0" text="ADEUDO PROVEEDOR">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irAdeudo" prefHeight="25.0" prefWidth="306.0" text="ADEUDO PACIENTE">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irAutorizaryPagarNomina" prefHeight="25.0" prefWidth="306.0" text="AUTORIZAR Y PAGAR NOMINA">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCenso" prefHeight="25.0" prefWidth="324.0" text="CENSOS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irComisionesPorPagos" prefHeight="25.0" prefWidth="306.0" text="COMISIONES POR PAGOS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irconcentradoIE" prefHeight="25.0" prefWidth="324.0" text="CONCENTRADO INGRESOS Y EGRESOS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCuemtaPaciente" prefHeight="25.0" prefWidth="306.0" text="CUENTAS PACIENTES">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCuentasPorPAgarExternas" prefHeight="25.0" prefWidth="306.0" text="CXP COMPRAS PROVEEDORES">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCXPComprasInternas" prefHeight="25.0" prefWidth="324.0" text="CXP COMPRAS INTERNAS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irOrdenesEstudios" prefHeight="25.0" prefWidth="293.0" text="CXP ESTUDIOS MEDICOS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCuentasPorPAgarEstudiosMedicos" prefHeight="25.0" prefWidth="306.0" text="CXP ESTUDIOS LABORATORIOS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCuentasxPagarExternas" prefHeight="25.0" prefWidth="325.0" text="CXP EXTERNAS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irCuentasxPagar" prefHeight="25.0" prefWidth="325.0" text="CXP INTERNAS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irEstadodecuenta" prefHeight="25.0" prefWidth="306.0" text="ESTADO DE CUENTA INGRESO">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irEstadodecuentaEgreso" prefHeight="25.0" prefWidth="306.0" text="ESTADO DE CUENTA EGRESO">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irFondoBanco" prefHeight="25.0" prefWidth="325.0" text="FONDO BANCO">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irFondoEfectivo" prefHeight="25.0" prefWidth="325.0" text="FONDO EFECTIVO">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irNominaInterna" prefHeight="25.0" prefWidth="324.0" text="NOMINA INTERNA">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irSeguros" prefHeight="25.0" prefWidth="324.0" text="SEGUROS">
+                                          <font>
+                                             <Font name="System Bold" size="13.0" />
+                                          </font>
+                                       </JFXButton>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </TitledPane>
+                           <TitledPane prefHeight="0.0" prefWidth="279.0" text="SISTEMAS">
+                              <content>
+                                 <VBox prefHeight="86.0" prefWidth="277.0">
+                                    <children>
+                                       <JFXButton onAction="#irSuministroPacienteSistema" prefHeight="25.0" prefWidth="269.0" text="SUMINISTRO PACIENTE SISTEMAS">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irAgendadeQuirofano" prefHeight="25.0" prefWidth="269.0" text="AGENDA DE QUIROFANO">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                        <JFXButton onAction="#irIndicaPorHabitacion" prefHeight="25.0" prefWidth="269.0" text="HOJAS DE CONSUMO">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                       <JFXButton onAction="#irVPHU" prefHeight="25.0" prefWidth="269.0" text="REPORTE VPHU">
+                                          <font>
+                                             <Font name="System Bold" size="14.0" />
+                                          </font>
+                                       </JFXButton>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </TitledPane>
+                                </panes>
+                            </Accordion>
+                        </VBox>
+                  <Button fx:id="btnSalir" layoutX="14.0" layoutY="567.0" minWidth="126.0" mnemonicParsing="false" onAction="#accionCerrarSesion" prefHeight="27.0" prefWidth="126.0" styleClass="btnSalir" stylesheets="@../css/DasboardCSS.css" text="CERRAR SESION" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnMinimizar" layoutX="153.0" layoutY="567.0" minWidth="126.0" mnemonicParsing="false" onAction="#accionMinimizarVentana" prefHeight="27.0" prefWidth="126.0" styleClass="btnSalir" stylesheets="@../css/DasboardCSS.css" text="MINIMIZAR" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="anchorPanel" prefHeight="644.0" prefWidth="697.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <AnchorPane prefHeight="28.0" prefWidth="976.0" style="-fx-background-color: #222016;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISTEMA DE CONTROL VP MÉDICA PLAZA SA DE CV ver-1.0">
+               <font>
+                  <Font name="High Tower Text Italic" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="790.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISTEMAS EXT.         811" AnchorPane.rightAnchor="37.2431640625">
+               <font>
+                  <Font name="High Tower Text Italic" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

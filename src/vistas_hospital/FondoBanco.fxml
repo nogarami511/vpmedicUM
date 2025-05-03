@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="457.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.FondoBancoController">
+    <top>
+        <AnchorPane prefHeight="172.0" prefWidth="600.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+            <children>
+                <JFXButton layoutY="29.0" prefHeight="48.0" prefWidth="683.0" text="FONDO BANCO" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </JFXButton>
+            <AnchorPane layoutX="255.0" layoutY="-10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
+               <children>
+                      <ChoiceBox fx:id="mesSeleccion" layoutX="20.0" layoutY="29.0" prefWidth="150.0" />
+                      <Button layoutX="200.0" layoutY="29.0" mnemonicParsing="false" onAction="#seleccionMes" text="SELECCIONAR" />
+                      <TextField fx:id="totalFondoEfectivo" alignment="CENTER" layoutX="479.0" layoutY="27.0" onKeyReleased="#actualizarfondobancofijo" prefHeight="25.0" prefWidth="193.0" AnchorPane.rightAnchor="11.0">
+                          <font>
+                              <Font name="System Bold" size="13.0" />
+                          </font>
+                      </TextField>
+                      <Text layoutX="46.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECCIONE MES">
+                          <font>
+                              <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Text>
+                      <Text layoutX="494.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL EN FONDO BANCO" AnchorPane.rightAnchor="28.259765625">
+                          <font>
+                              <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Text>
+               </children>
+            </AnchorPane>
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="47.0" prefWidth="683.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="btnRetiroEfectivo" alignment="CENTER" layoutX="552.0" layoutY="6.0" mnemonicParsing="false" onAction="#quitarDeFondoEfectivo" prefHeight="35.0" prefWidth="117.0" text="RETIRO EFECTIVO &#10;POR FACT." textAlignment="CENTER" AnchorPane.rightAnchor="14.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Button>
+            <Button fx:id="btnRetiroEfectivo" layoutX="292.0" layoutY="6.0" mnemonicParsing="false" onAction="#accionRetiroEfectivo" prefHeight="35.0" prefWidth="117.0" text="RETIRO EFECTIVO" AnchorPane.rightAnchor="274.0" />
+            <Button fx:id="btnIngresoEfectivo" layoutX="422.0" layoutY="6.0" mnemonicParsing="false" onAction="#accionIngresoEfectivo" prefHeight="35.0" prefWidth="117.0" text="INGRESO EFECTIVO" AnchorPane.rightAnchor="144.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+    </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+              <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <columns>
+                      <TableColumn fx:id="fechaFondoEfectivo" prefWidth="75.0" text="FECHA" />
+                      <TableColumn fx:id="tipoOperacionFondoEfectivo" prefWidth="75.0" text="TIPO OPERACIÓN" />
+                      <TableColumn fx:id="conceptoFondoEfectivo" prefWidth="75.0" text="CONCEPTO" />
+                      <TableColumn fx:id="importeFondoEfectivo" prefWidth="75.0" text="IMPORTE" />
+                      <TableColumn fx:id="saldoFondoEfectivo" prefWidth="75.0" text="SALDO" />
+                  </columns>
+                  <columnResizePolicy>
+                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  </columnResizePolicy>
+              </TableView>
+            <AnchorPane fx:id="pane_IngreseContraseña" layoutX="184.0" layoutY="46.0" prefHeight="147.0" prefWidth="315.0" style="-fx-background-color: #f4f4f4;" visible="false">
+               <children>
+                  <AnchorPane layoutX="1.0" prefHeight="54.0" prefWidth="315.0" style="-fx-background-color: #0c569f;" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <JFXButton layoutY="4.0" prefHeight="48.0" prefWidth="315.0" text="INGRESE CONTRASEÑA" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <TextField fx:id="txtcontraseña" layoutX="93.0" layoutY="74.0" prefHeight="25.0" prefWidth="200.0" />
+                  <Label layoutY="78.0" text="CONTRASEÑA: " />
+                  <Button fx:id="btnAceptarcontra" layoutX="147.0" layoutY="114.0" mnemonicParsing="false" onAction="#Aceptarcontra" text="ACEPTAR" />
+                  <Button fx:id="btncancelarcontra" layoutX="226.0" layoutY="114.0" mnemonicParsing="false" onAction="#cancelarcontra" text="CANCELAR" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="b4cbf0ba-dc31-46c0-89e4-07e08d5ec4cf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="inicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[-- INGRESOS EFECTIVO
+SELECT CONCAT('<b>', CONCAT('$ ', FORMAT(SUM(consulta.total_pago),2)), '</b>') AS suma, CONCAT('<b> TOTAL ', consulta.tipo,'</b>') AS tipo FROM(
+-- Encabezado fijo
+SELECT c.id_cierresmesefectivo AS id, CONCAT('CIERRE DE ', c.mes_cierremes) AS nombre_paciente, 1 AS id_tipo_pago, 'EFECTIVO' AS tipo, c.monto_efectivo_cierremes AS total_pago, CONCAT('01-', DATE_FORMAT(NOW(), '%m-%Y')) AS fecha_pago, CONCAT('CIERRE',c.mes_cierremes) AS folio
+FROM cierresmesefectivo c 
+WHERE c.fehca_cerremes >= $P{inicio} AND c.fehca_cerremes <= $P{fin}
+UNION ALL
+ 
+ SELECT i.id_ingresoefectivo AS id, i.concepto_ingresoefectivo AS nombre_paciente, 1 AS id_tipo_pago, 'EFECTIVO' AS tipo, i.importe_ingresoefectivo AS total_pago, i.fecha_ingresoefectivo AS fecha_pago, i.folio_ingresoefectivo AS folio 
+ FROM ingresosefectivo i 
+ WHERE i.fecha_ingresoefectivo >= $P{inicio} AND  i.fecha_ingresoefectivo <= $P{fin}
+
+ UNION ALL
+SELECT 
+  p.id,
+  p1.nombre_paciente AS nombre_paciente, 
+  fp.id AS id_tipo_pago,
+  CONCAT('TOTAL ', fp.tipo) AS tipo, 
+  ROUND(p.total_pago,2) AS total_pago, 
+  p.fecha_pago, 
+  f.folio
+FROM pagos p 
+INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+INNER JOIN forma_pagos fp ON fp.id = p.id_tipo_pago
+INNER JOIN folios f ON p.id_folio = f.id
+WHERE p.fecha_pago >= $P{inicio} AND p.fecha_pago <= $P{fin}
+-- WHERE p.fecha_pago >=  LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 1 MONTH)) 
+AND p.id_tipo_pago = 1
+  UNION ALL
+  SELECT f.id_fondoEfectivo AS id,
+    f.concepto AS nombre_paciente,
+    1 AS id_tipo_pago,
+    'EFECTIVO' AS tipo,
+    f.saldo AS total_pago
+    , f.fecha AS fecha_pago, 
+    f.concepto  AS folio 
+    FROM fondoefectivo f WHERE f.tipoOperacion = 'ENTRADA FONDO EFECTIVO' AND  f.fecha > $P{inicio} AND f.fecha < $P{fin} 
+
+) consulta
+GROUP BY consulta.id_tipo_pago
+
+UNION ALL
+
+SELECT NULL, NULL
+
+UNION ALL
+
+-- INGRESOS VARIOS
+SELECT CONCAT('$ ', FORMAT(SUM(consulta.total_pago),2)) AS suma, consulta.tipo FROM(
+SELECT 
+  p.id,
+  p1.nombre_paciente AS nombre_paciente, 
+  fp.id AS id_tipo_pago,
+  CASE
+    WHEN fp.tipo = 'TRANSFERENCIA' THEN 'TRANSFERENCIAS'
+    ELSE fp.tipo
+  END AS tipo, 
+  ROUND(p.total_pago,2) AS total_pago, 
+  p.fecha_pago, 
+  f.folio
+FROM pagos p 
+INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+INNER JOIN forma_pagos fp ON fp.id = p.id_tipo_pago
+INNER JOIN folios f ON p.id_folio = f.id
+WHERE p.fecha_pago >= $P{inicio} AND p.fecha_pago <= $P{fin}
+-- WHERE p.fecha_pago >=  LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 1 MONTH)) 
+AND p.id_tipo_pago NOT IN (1,6,12,13)
+
+UNION ALL
+
+  SELECT de.id_dep_efe AS id, p1.nombre_paciente, 5 AS id_tipo_pago, 'DEPOSITO EFECTIVO' AS tipo, de.cantidad_depositada AS total_pago, de.fecha_modificacion AS fecha_pago, CONCAT('B- ', p.id) AS folio 
+  FROM deposito_efectivo de 
+  INNER JOIN pagos p ON de.id_pago = p.id
+  INNER JOIN pacientes p1 ON p.id_paciente = p1.id_paciente
+  WHERE de.fecha_modificacion >= $P{inicio} AND de.fecha_modificacion <= $P{fin} 
+) consulta
+GROUP BY consulta.id_tipo_pago
+
+UNION ALL
+
+SELECT CONCAT('<b>',CONCAT('$ ', FORMAT(SUM(consulta.total_pago),2)), '</b>') AS suma, CONCAT('<b>', 'TOTAL INGRESO A CUENTA' '</b>') FROM(
+SELECT 
+  p.id,
+  p1.nombre_paciente AS nombre_paciente, 
+  fp.id AS id_tipo_pago,
+  CASE
+    WHEN fp.tipo = 'TRANSFERENCIA' THEN 'TRANSFERENCIAS'
+    ELSE fp.tipo
+  END AS tipo, 
+  ROUND(p.total_pago,2) AS total_pago, 
+  p.fecha_pago, 
+  f.folio
+FROM pagos p 
+INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+INNER JOIN forma_pagos fp ON fp.id = p.id_tipo_pago
+INNER JOIN folios f ON p.id_folio = f.id
+WHERE p.fecha_pago >= $P{inicio} AND p.fecha_pago <= $P{fin}
+-- WHERE p.fecha_pago >=  LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 1 MONTH)) 
+AND p.id_tipo_pago NOT IN (1,6,12,13)
+UNION ALL
+
+  SELECT de.id_dep_efe AS id, p1.nombre_paciente, 5 AS id_tipo_pago, 'DEPOSITO EFECTIVO' AS tipo, de.cantidad_depositada AS total_pago, de.fecha_modificacion AS fecha_pago, CONCAT('B- ', p.id) AS folio 
+  FROM deposito_efectivo de 
+  INNER JOIN pagos p ON de.id_pago = p.id
+  INNER JOIN pacientes p1 ON p.id_paciente = p1.id_paciente
+  WHERE de.fecha_modificacion >= $P{inicio} AND de.fecha_modificacion <= $P{fin} 
+) consulta
+
+UNION ALL
+
+SELECT NULL, NULL
+
+UNION ALL
+
+SELECT CONCAT('$ ', FORMAT(SUM(consulta.total_pago),2)) AS suma, consulta.tipo FROM(
+SELECT 
+  p.id,
+  p1.nombre_paciente AS nombre_paciente, 
+  fp.id AS id_tipo_pago,
+  'TOTAL TRANSITO' AS tipo, 
+  ROUND(p.total_pago,2) AS total_pago, 
+  p.fecha_pago, 
+  f.folio
+FROM pagos p 
+INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+INNER JOIN forma_pagos fp ON fp.id = p.id_tipo_pago
+INNER JOIN folios f ON p.id_folio = f.id
+WHERE p.fecha_pago > $P{inicio} AND p.fecha_pago <= $P{fin}
+-- WHERE p.fecha_pago >=  LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 1 MONTH)) 
+AND p.id_tipo_pago IN(6,12,13)
+) consulta
+GROUP BY consulta.id_tipo_pago
+
+UNION ALL
+
+SELECT NULL, NULL
+
+UNION ALL
+SELECT CONCAT('<b>', CONCAT('$ ', FORMAT(SUM(consulta.total_pago),2)) ,'</b>') AS suma, CONCAT('<b>', 'TOTAL INGRESOS GENERALES', '</b>') FROM(
+SELECT c.monto_efectivo_cierremes AS total_pago
+FROM cierresmesefectivo c 
+WHERE c.fehca_cerremes >= $P{inicio} AND c.fehca_cerremes <= $P{fin}
+UNION ALL
+SELECT i.importe_ingresoefectivo AS total_pago
+FROM ingresosefectivo i 
+WHERE i.fecha_ingresoefectivo >= $P{inicio} AND i.fecha_ingresoefectivo <= $P{fin}
+
+ UNION ALL
+SELECT 
+  ROUND(p.total_pago,2) AS total_pago
+FROM pagos p 
+INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+INNER JOIN forma_pagos fp ON fp.id = p.id_tipo_pago
+INNER JOIN folios f ON p.id_folio = f.id
+WHERE p.fecha_pago >= $P{inicio} AND p.fecha_pago <= $P{fin}
+-- WHERE p.fecha_pago >=  LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 1 MONTH)) 
+
+  UNION ALL
+
+  SELECT de.cantidad_depositada AS total_pago
+  FROM deposito_efectivo de 
+  INNER JOIN pagos p ON de.id_pago = p.id
+  INNER JOIN pacientes p1 ON p.id_paciente = p1.id_paciente
+  WHERE de.fecha_modificacion >= $P{inicio} AND de.fecha_modificacion <= $P{fin} 
+
+  UNION ALL
+  SELECT 
+    f.saldo AS total_pago
+    FROM fondoefectivo f WHERE f.tipoOperacion = 'ENTRADA FONDO EFECTIVO' AND  f.fecha > $P{inicio} AND f.fecha < $P{fin} 
+
+) consulta]]>
+	</queryString>
+	<field name="suma" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="suma_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{suma}]]></variableExpression>
+	</variable>
+	<variable name="suma_2" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{suma}]]></variableExpression>
+	</variable>
+	<variable name="suma_3" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{suma}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="36">
+			<staticText>
+				<reportElement x="83" y="0" width="394" height="20" uuid="d27d3405-a8c2-4f60-8477-eceffa6a00f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN MOVIMIENTO DE INGRESOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="197" height="20" uuid="73a64a6a-9e52-402b-b8bb-46c3f4bfa419">
+					<printWhenExpression><![CDATA[$F{tipo} != null && !$F{tipo}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{suma}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="0" width="197" height="20" uuid="59e0ba4d-204a-41a4-9673-f3f6e7acfc03">
+					<printWhenExpression><![CDATA[$F{tipo} != null && !$F{tipo}.trim().isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

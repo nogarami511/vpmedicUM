@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles_um.IngresarTabuladorController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <left>
+            <AnchorPane prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="16.0" layoutY="138.0" mnemonicParsing="false" onAction="#ingresarTabulacion" prefHeight="42.0" prefWidth="119.0" text="INGRESAR" />
+                  <Button layoutX="42.0" layoutY="316.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="26.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre: " />
+                  <Text layoutX="26.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID: " />
+                  <Text layoutX="27.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nota:" />
+                  <TextField fx:id="txtNombre" layoutX="76.0" layoutY="72.0" prefHeight="25.0" prefWidth="308.0" />
+                  <TextArea fx:id="txtAreaNota" layoutX="56.0" layoutY="170.0" prefHeight="195.0" prefWidth="377.0" />
+                  <TextField fx:id="txtID" disable="true" layoutX="43.0" layoutY="41.0" prefHeight="25.0" prefWidth="44.0" />
+                  <Text layoutX="27.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo: " />
+                  <ComboBox fx:id="cmbTipo" layoutX="56.0" layoutY="112.0" prefHeight="25.0" prefWidth="184.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

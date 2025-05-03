@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ac1d1469-f0cb-45d4-b41c-d66c04fc1814">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="37"/>
+	<parameter name="id_folio" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[CALL ACTUALIZARFOLIO2($P{id_folio});]]>
+	</queryString>
+	<group name="grupo1">
+		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		<groupHeader>
+			<band height="36">
+				<staticText>
+					<reportElement x="100" y="0" width="311" height="20" uuid="174f945b-2fe3-4663-b4bb-88cdfbddc0d2"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CONCEPTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="57" y="0" width="42" height="20" uuid="bb005aff-a4dd-453b-8cf7-15fd05a013b3"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CODIGO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="411" y="0" width="58" height="20" uuid="db442a34-95f7-4f9a-adea-96e3d9cc4352"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PRECIO U.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="469" y="0" width="86" height="20" uuid="ae064d85-f9c0-4339-bda1-0093460ebf9b"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SUB TOTAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="57" height="20" uuid="c803210d-4bbc-47c2-bd94-e2aa04588166"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CANTIDAD]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="121" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="91" uuid="e1ea5cf6-2df3-48b1-a2ee-174484452007"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="336" y="49" width="219" height="20" forecolor="#666666" uuid="f07a1ffa-cdee-4e1e-9212-913b63dd251b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETALLADO DE CUENTA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="39"/>
+	</columnHeader>
+	<detail>
+		<band height="48" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="387" y="0" width="80" height="20" uuid="f947fcda-8292-4dd0-99e7-cc9b2d52a5c3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="467" y="0" width="40" height="20" uuid="788b7960-e12f-4731-864c-65bb488c5230"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="0" y="0" width="100" height="20" uuid="a4fc2e58-6906-4530-b7fc-94288ae9cdb2"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="169" splitType="Stretch">
+			<staticText>
+				<reportElement x="379" y="2" width="69" height="20" uuid="24064e12-f569-48f0-927a-723cf8965033"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[SUB TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="95" width="137" height="20" uuid="92a23a73-2ba1-4fb7-bd4f-20da09b1fe94"/>
+				<textElement textAlignment="Center">
+					<font size="8" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[V P  MEDICA CAJA DE COBRO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="224" y="93" width="159" height="1" uuid="f215fe57-6eee-484a-a212-2798c36ae415"/>
+			</line>
+			<staticText>
+				<reportElement x="18" y="7" width="74" height="12" uuid="50febc65-7b92-492a-b8b0-244ebe799091"/>
+				<textElement>
+					<font size="7" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE EN LETRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="42" width="69" height="20" uuid="7084d5d8-5694-4fb2-9538-c869fe22eb7d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="95" width="137" height="20" uuid="9215d69b-da72-4995-b393-7219dd551140"/>
+				<textElement textAlignment="Center">
+					<font size="8" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y FIRMA RESPONSABLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="146" width="449" height="22" uuid="e5bae15d-6d8e-4feb-9e3b-92b561ca50ed"/>
+				<textElement>
+					<font size="7" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[-  LAS CANCELACIONES DEBERAN SER CON ANTICIPACION MINIMA DE 48 HORAS PREVIAS AL PROCEDIMIENTO PARA SER REEMBOLSADOS SIN LA PENALIZACION  DE $2,000.00(DOS MIL PESOSO 00/100 M.N)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="9" y="94" width="159" height="1" uuid="7b30d5bd-e9d1-4a0a-8a18-dc2403d1e879"/>
+			</line>
+			<staticText>
+				<reportElement x="18" y="41" width="351" height="20" uuid="13fb7305-44c0-48a5-93ff-5809a618cc0a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[ESTA CUENTA PUEDE VARIAR Y SOLO ES UN CORTE PARCIAL, YA QUE EL PACIENTE SE ENCUENTRA DENTRO DE LAS INSTALACIONES. YA QUE SE LE PUEDE ESTAR SUMINISTRANDO ALGUN OTRO INSUMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="124" width="191" height="12" uuid="59c98fd6-e320-4807-95d3-4e490c4e56ef"/>
+				<textElement>
+					<font size="7" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[- TODOS NUESTROS PAQUETES INCLUYEN I.V.A.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="135" width="297" height="12" uuid="58be46b8-97ef-4e80-a973-a41a7945deab"/>
+				<textElement>
+					<font size="7" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[- CUALQUIER CAMBIO DE FECHA ESTARA SUJETO A DISPONIBILIDAD.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="22" width="69" height="20" uuid="0a046da5-e81f-4e9f-870d-1454bf72bfab"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<text><![CDATA[IVA:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

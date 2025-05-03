@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.GeneararIndica2Controller">
+   <children>
+      <BorderPane layoutX="260.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="172.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="260.0" layoutY="-19.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
+                     <children>
+                        <TextField fx:id="txfInsumo" disable="true" layoutX="385.0" layoutY="13.0" prefHeight="25.0" prefWidth="289.0" />
+                        <Label layoutX="327.0" layoutY="17.0" text="INSUMO" />
+                        <TextField fx:id="txfCantidad" disable="true" layoutX="947.0" layoutY="13.0" onKeyReleased="#accionLimitarPaquete" prefHeight="25.0" prefWidth="87.0" />
+                        <Label layoutX="877.0" layoutY="17.0" text="CANTIDAD" />
+                        <AnchorPane layoutY="20.0" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: #0c569f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="btnAgregarTabla" disable="true" layoutX="1042.0" layoutY="12.0" mnemonicParsing="false" onAction="#accionAgregarTabla">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/icons8-insertar-mesa-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <ComboBox fx:id="cmbArea" layoutX="123.0" layoutY="13.0" onAction="#accionArea" prefHeight="25.0" prefWidth="174.0" promptText="SELECCIONAR" />
+                        <Separator layoutX="308.0" layoutY="-75.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                        <Label fx:id="lblDisponiblePaquete" layoutX="870.0" layoutY="40.0" text="DISPONIBLE PAQUETE" visible="false" />
+                        <Label fx:id="lblDisponible" alignment="CENTER" layoutX="1004.0" layoutY="40.0" prefHeight="17.0" prefWidth="84.0" text="0 DE 0" visible="false">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cmbLote" layoutX="738.0" layoutY="13.0" onAction="#accionSeleccionarLote" prefHeight="25.0" prefWidth="130.0" />
+                        <Label layoutX="683.0" layoutY="17.0" text="LOTE" />
+                        <Label layoutX="726.0" layoutY="38.0" text="CANTIDAD POR LOTE" />
+                        <Label fx:id="lblLote" layoutX="848.0" layoutY="38.0" text="0" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="lblNombrePaciente" alignment="CENTER" layoutX="115.0" layoutY="21.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane prefHeight="112.0" prefWidth="115.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="110.0" fitWidth="115.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.333335876464844" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="lblPquete" alignment="CENTER" layoutX="589.0" layoutY="56.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="rdbPaquete" disable="true" layoutX="1000.0" layoutY="14.0" mnemonicParsing="false" onAction="#accionPaquete" text="PAQUETE" />
+               </children>
+            </AnchorPane>
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="62.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="-7.0" layoutY="-69.0" prefHeight="62.0" prefWidth="115.0" style="-fx-background-color: #0c569f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </bottom>
+         <center>
+            <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="colCantidad" maxWidth="500.0" prefWidth="75.0" text="CANTIDAD" />
+                <TableColumn fx:id="colInsumo" prefWidth="75.0" text="INUSMO" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="115.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnGenerar" layoutX="8.0" layoutY="61.0" mnemonicParsing="false" onAction="#accionGenerar" prefHeight="40.0" prefWidth="100.0" text="GENERAR" AnchorPane.leftAnchor="8.0" />
+                  <Button fx:id="btnCancelar" layoutX="8.0" layoutY="155.0" mnemonicParsing="false" onAction="#accionCancelar" prefHeight="40.0" prefWidth="100.0" text="CANCELAR" AnchorPane.leftAnchor="8.0" />
+               </children>
+            </AnchorPane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

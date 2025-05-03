@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="77ce85b4-a0ad-4800-b6a3-26bc27fe86c7">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="624"/>
+	<parameter name="paciente" class="java.lang.String"/>
+	<parameter name="doctor" class="java.lang.String"/>
+	<parameter name="cuenta" class="java.lang.String"/>
+	<parameter name="saldoACubrir" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="deposito" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="descripcion" class="java.lang.String"/>
+	<parameter name="folio" class="java.lang.String"/>
+	<parameter name="fecha" class="java.lang.String"/>
+	<parameter name="hora" class="java.lang.String"/>
+	<parameter name="idFolio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="importeTotal" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idPaquete" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroLetra" class="java.lang.String"/>
+	<parameter name="id_quirodano" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_tipo_habitacion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numero_habitacion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT pqm.id AS id_insumo, pqm.nombre AS tipo_insumo, 1 AS cantidad_entregada,
+       1 AS consumido, IFNULL(1, 0) AS incluido_en_paquete, 0 AS excedente, 0 AS devolucion,
+       (costo/1.16) AS precio_venta_unitaria_sin_iva,
+       IFNULL((costo/1.16) * 1, 0) AS subtotal_sin_iva, 1 AS tipo, 'INSUMOS MEDICOS' AS nombre_tipo
+FROM paquetesmedicos pqm
+WHERE pqm.id = $P{idPaquete}
+
+UNION ALL  
+  
+  SELECT c.id_producto_venta AS id_insumo, c.tipo AS tipo_insumo, SUM(c.cantidad) AS cantidad_entregada,
+    SUM(c.cantidad) AS consumido, 0 AS incluido_en_paquete, 0 AS excedente, 0 AS devolucion,
+    ROUND(c.monto_unitario,2) AS precio_venta_sin_iva, ROUND(((c.monto_unitario)*SUM(c.cantidad)),2) AS sub_total, 
+    1 AS tipo, 'INSUMOS MEDICOS' AS nombre_tipo
+    FROM consumos c
+    INNER JOIN insumos i ON c.id_producto_venta = i.id
+  WHERE c.id_folio =  $P{idFolio} AND c.id_tipo_de_consumo NOT IN (5,6,7) AND c.id_estatus_consumo = 1 AND c.paquete = 0  AND i.clave NOT LIKE '%VP-EST-%' GROUP BY c.id_producto_venta
+UNION ALL
+    SELECT
+    resultado_final,
+    i.nombre,
+    GREATEST(ROUND(horas / 24), 1) AS cantidad_entregada,
+    GREATEST(ROUND(horas / 24), 1) AS consumido,
+    IFNULL( (CASE WHEN $P{idPaquete} = 1 THEN 0 ELSE 1 END),0) AS incluido_en_paquete,
+    GREATEST(ROUND(horas / 24), 1) - IFNULL( (CASE WHEN $P{idPaquete} = 1 THEN 0 ELSE 1 END),0) AS excedente,
+    0 AS devolucion,
+    c.precio_venta_unitaria,
+    c.precio_venta_unitaria * (GREATEST(ROUND(horas / 24), 1) - IFNULL( (CASE WHEN $P{idPaquete} = 1 THEN 0 ELSE 1 END),0)) AS subtotal, 
+    6 AS tipo, 'ENFERMERIA Y SERVICIO MEDICO' AS nombre_tipo
+    FROM
+    (SELECT
+        CASE
+        WHEN servMedXDIA = 0 THEN servMedXhoras
+        ELSE servMedXDIA
+        END AS resultado_final,
+        horas
+    FROM
+        (SELECT
+        CASE
+            WHEN TIMESTAMPDIFF(DAY, f.fecha_ingreso, NOW()) >= 1 THEN 617
+            ELSE 0
+        END AS servMedXDIA,
+        CASE
+            WHEN TIMESTAMPDIFF(DAY, f.fecha_ingreso, NOW()) = 0 THEN
+            CASE
+                WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) > 8 THEN 617
+                WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) <= 8 THEN 623
+            END
+            ELSE 0
+        END AS servMedXhoras,
+        CASE
+                WHEN f.fecha_ingreso < f.fecha_salida THEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, f.fecha_salida)
+                ELSE TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW())
+            END AS horas
+        FROM
+        folios f WHERE f.id = $P{idFolio}) AS subconsulta
+    ) AS subconsulta_con_alias
+    INNER JOIN insumos i ON i.id = subconsulta_con_alias.resultado_final
+    INNER JOIN costos c ON c.id_insumo = i.id
+UNION ALL
+    SELECT
+        resultado_final,
+        i.nombre,
+        GREATEST(ROUND(horas / 24), 1) AS cantidad_entregada,
+        GREATEST(ROUND(horas / 24), 1) AS consumido,
+        IFNULL( (CASE WHEN $P{idPaquete} = 1 THEN 0 ELSE 1 END),0) AS incluido_en_paquete,
+        GREATEST(ROUND(horas / 24), 1) - IFNULL( (CASE WHEN $P{idPaquete} = 1 THEN 0 ELSE 1 END),0) AS excedente,
+        0 AS devolucion,
+        c.precio_venta_unitaria,
+        c.precio_venta_unitaria * (GREATEST(ROUND(horas / 24), 1) - IFNULL( (CASE WHEN $P{idPaquete} = 1 THEN 0 ELSE 1 END),0)) AS subtotal, 
+        6 AS tipo, 'ENFERMERIA Y SERVICIO MEDICO' AS nombre_tipo
+        FROM
+        (SELECT
+            CASE
+            WHEN servMedXDIA = 0 THEN servMedXhoras
+            ELSE servMedXDIA
+            END AS resultado_final,
+            horas
+        FROM
+            (SELECT
+            CASE
+                WHEN TIMESTAMPDIFF(DAY, f.fecha_ingreso, NOW()) >= 1 THEN 616
+                ELSE 0
+            END AS servMedXDIA,
+            CASE
+                WHEN TIMESTAMPDIFF(DAY, f.fecha_ingreso, NOW()) = 0 THEN
+                CASE
+                    WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) > 8 THEN 616
+                    WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) <= 8 THEN 622
+                END
+                ELSE 0
+            END AS servMedXhoras,
+            CASE
+                WHEN f.fecha_ingreso < f.fecha_salida THEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, f.fecha_salida)
+                ELSE TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW())
+            END AS horas
+            FROM
+            folios f WHERE f.id = $P{idFolio}) AS subconsulta
+        ) AS subconsulta_con_alias
+        INNER JOIN insumos i ON i.id = subconsulta_con_alias.resultado_final
+        INNER JOIN costos c ON c.id_insumo = i.id
+        WHERE $P{id_tipo_habitacion} <> 4
+UNION ALL
+SELECT 
+    p.id AS id_paquete,
+    p.nombre AS tipo_insumo,
+    c.cantidad AS cantidad_entregada,
+    c.cantidad AS consumido,
+    p.precio AS precio,
+    0 AS excedente,
+    0 AS devolucion,
+    (p.precio/1.16) AS precio_venta_unitaria_sin_iva,
+    (p.precio/1.16)*c.cantidad AS subtotal_sin_iva, 2 AS tipo, 'ALIMENTOS' AS nombre_tipo
+FROM consumos c 
+INNER JOIN paquetesalimentos p ON p.nombre = c.tipo
+WHERE 
+    c.id_folio = $P{idFolio}  
+    AND (
+        ($P{idPaquete} = 1 AND (id_tipo_de_consumo = 6 OR c.id_tipo_de_consumo = 5))
+        OR ($P{idPaquete} <> 1 AND c.id_tipo_de_consumo <> 6)
+    )
+UNION 
+SELECT q.id AS id_insumo, q.nombre AS tipo_insumo, 1 AS cantidad_entregada,
+       1 AS consumido, 0 AS incluido_en_paquete, 0 AS excedente, 0 AS devolucion,
+       (costo/1.16) AS precio_venta_unitaria_sin_iva,
+    CASE WHEN $P{idPaquete} = 1 THEN (costo / 1.16) ELSE 0 END AS subtotal_sin_iva, 3 AS tipo, 'QUIROFANO' AS nombre_tipo
+FROM quirofanos q 
+LEFT JOIN citasquirofano c ON c.id_quirofano = q.id
+LEFT JOIN folios f ON f.id = c.id_folios
+WHERE q.id = $P{id_quirodano} AND c.id_folios = $P{idFolio} AND c.id_folios IS NOT NULL
+UNION ALL 
+SELECT 
+    IFNULL(h.id_habitacion, 0) AS id_insumo, 
+    IFNULL(CONCAT(h1.tipo, ' ', h.numero_habitacion), ' ') AS tipo_insumo, 
+    IFNULL(CASE 
+        WHEN DATEDIFF(CURDATE(), f.fecha_ingreso) = 0 THEN 1 
+        ELSE DATEDIFF(CURDATE(), f.fecha_ingreso) 
+    END, 0) AS cantidad_entregada, 
+    IFNULL(
+      CASE
+        WHEN f.fecha_ingreso < f.fecha_salida THEN DATEDIFF(f.fecha_salida, f.fecha_ingreso)
+        ELSE DATEDIFF(CURDATE(), f.fecha_ingreso)
+      END , 0) AS consumido, 
+    IFNULL(
+        CASE 
+            WHEN $P{idPaquete} = 1 THEN 0 
+            ELSE 1 
+        END, 0) AS incluido_en_paquete, 
+    IFNULL(CASE 
+        WHEN DATEDIFF(CURDATE(), f.fecha_ingreso) = 0 THEN 1 
+        WHEN f.fecha_ingreso < f.fecha_salida THEN DATEDIFF(f.fecha_salida, f.fecha_ingreso)
+        ELSE DATEDIFF(CURDATE(), f.fecha_ingreso) 
+    END - CASE 
+        WHEN $P{idPaquete} = 1 THEN 0
+        ELSE 1 
+    END, 0) AS excedente,
+    0 AS devolucion, 
+    IFNULL(h2.precio,0) AS precio_venta_unitaria_sin_iva, 
+    IFNULL ((CASE 
+        WHEN DATEDIFF(CURDATE(), f.fecha_ingreso) = 0 THEN 1 
+        WHEN f.fecha_ingreso < f.fecha_salida THEN DATEDIFF(f.fecha_salida, f.fecha_ingreso)
+        ELSE DATEDIFF(CURDATE(), f.fecha_ingreso) 
+    END  - CASE 
+        WHEN $P{idPaquete} = 1 THEN 0 
+        ELSE 1 
+    END) * h2.precio, 0) AS subtotal_sin_iva , 4 AS tipo, 'HABITACION' AS nombre_tipo
+FROM
+    habitacion h
+    INNER JOIN tipoHabitacion h1 ON h1.id_tipo = h.id_tipo
+    INNER JOIN costohabitacion h2 ON h2.id_habitacion = h.id_tipo
+    INNER JOIN folios f ON f.numero_habitacion = h.numero_habitacion
+WHERE 
+    h.id_tipo = $P{id_tipo_habitacion}
+    AND h.numero_habitacion = $P{numero_habitacion} 
+    AND f.id = $P{idFolio}
+ UNION ALL
+    SELECT 
+      IFNULL(ch.id_habitacion, 0) AS id_insumo, 
+      IFNULL(CONCAT(h1.tipo,' ', h.numero_habitacion), '') AS tipo_insumo,
+      IFNULL(ch.cantidad, 0) cantidad_entregada,
+      IFNULL(ch.cantidad, 0) AS consumido,
+      0 AS incluido_en_paquete,
+      0 AS excedente,
+      0 AS devolucion,
+      IFNULL(h2.precio, 0) AS precio_venta_unitaria_sin_iva,
+      IFNULL(ch.monto_al_momento, 0) AS subtotal_sin_iva,
+      4 AS tipo, 
+      'HABITACION' AS nombre_tipo
+    FROM consumos_habitacion ch
+      INNER JOIN habitacion h ON ch.id_habitacion = h.id_habitacion
+      INNER JOIN tipoHabitacion h1 ON h.id_tipo = h1.id_tipo
+      INNER JOIN costohabitacion h2 ON h.id_tipo = h2.id_habitacion
+    WHERE ch.id_folio = $P{idFolio}
+UNION ALL 
+  SELECT 
+  IFNULL(id_insumo, 0) AS id_insumo,
+  IFNULL(tipo_insumo, '') AS tipo_insumo,
+  IFNULL(consumido, 0) AS consumido,
+  IFNULL(cantidad_entregada, 0) AS cantidad_entregada,
+  IFNULL(incluido_en_paquete, 0) AS incluido_en_paquete,
+  IFNULL(excedente, 0) AS excedente, 
+  IFNULL(devolucion, 0) AS devolucion,
+  IFNULL(precio_venta_unitaria_sin_iva, 0) AS precio_venta_unitaria_sin_iva,
+  IFNULL(subtotal_sin_iva, 0) AS subtotal_sin_iva , 5 AS tipo, 'URGENCIAS' AS nombre_tipo
+FROM (
+    SELECT 
+      1 AS id_insumo, 
+      'HOSPITALIZACION' AS tipo_insumo,  
+      CASE 
+    WHEN DATEDIFF(CURDATE(), f.fecha_ingreso) = 0 THEN 1 
+    ELSE DATEDIFF(CURDATE(), f.fecha_ingreso) 
+  END AS cantidad_entregada,
+  CASE 
+    WHEN DATEDIFF(CURDATE(), f.fecha_ingreso) = 0 THEN 1 
+    ELSE DATEDIFF(CURDATE(), f.fecha_ingreso) 
+  END AS consumido,
+      0 AS incluido_en_paquete,
+      0 AS excedente,
+      0 AS devolucion,
+      CASE 
+        WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) <= 3 THEN 387.93 
+        WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) <= 8 THEN 775.86
+        ELSE 1551.72
+      END AS precio_venta_unitaria_sin_iva,
+      CASE 
+        WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) <= 3 THEN 387.93 
+        WHEN TIMESTAMPDIFF(HOUR, f.fecha_ingreso, NOW()) <= 8 THEN 775.86
+        ELSE CASE 
+          WHEN DATEDIFF(CURDATE(), f.fecha_ingreso) = 0 THEN 1551.72
+          ELSE (DATEDIFF(CURDATE(), f.fecha_ingreso) * 1551.72)
+        END 
+        END AS subtotal_sin_iva , 5 AS tipo, 'URGENCIAS' AS nombre_tipo
+      FROM folios f
+     WHERE f.id = $P{idFolio} 
+        AND f.id_estatus_folio = 2 
+        AND f.id_estatus_hospitalizacion = 1 
+        AND f.urgencias = 1
+) AS subqueryHurgencias
+
+  UNION ALL 
+
+SELECT id_insumo, tipo_insumo, (consumido - IFNULL(incluido_en_paquete, 0)), consumido, IFNULL(incluido_en_paquete, 0) AS incluido_en_paquete,
+       excedente, devolucion, ROUND(precio_venta_unitaria, 2) AS precio_venta_unitaria_sin_iva,
+       CASE
+         WHEN IFNULL(incluido_en_paquete, 0) = consumido THEN 0
+         ELSE IFNULL((consumido - IFNULL(incluido_en_paquete, 0)) * precio_venta_unitaria, 0)
+       END AS subtotal_sin_iva, 7 AS tipo, 'ESTUDIOS MEDICOS' AS nombre_tipo
+FROM(
+    SELECT c.id_producto_venta AS id_insumo, i.nombre AS tipo_insumo, 
+           0 AS incluido_en_paquete,
+           SUM(c.cantidad) AS cantidad_entregada, SUM(c.cantidad) AS consumido,
+           0 AS excedente,
+           0 AS devolucion,
+           ROUND(cos.precio_venta_unitaria, 5) AS precio_venta_unitaria
+    FROM consumos c
+    INNER JOIN insumos i ON c.id_producto_venta = i.id
+    INNER JOIN folios f ON c.id_folio = f.id
+    INNER JOIN costos cos ON cos.id_insumo = i.id
+    WHERE c.id_estatus_consumo = 1 AND c.id_folio = $P{idFolio}  AND c.id_tipo_de_consumo <>4 AND i.clave LIKE '%VP-EST-%'
+    GROUP BY c.id_producto_venta, i.nombre
+  ) AS subquery WHERE (consumido - COALESCE(incluido_en_paquete, 0)) >= 0]]>
+	</queryString>
+	<field name="id_insumo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_insumo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad_entregada" class="java.lang.Double"/>
+	<field name="consumido" class="java.math.BigDecimal"/>
+	<field name="incluido_en_paquete" class="java.lang.Double"/>
+	<field name="excedente" class="java.lang.Double"/>
+	<field name="devolucion" class="java.lang.Double"/>
+	<field name="precio_venta_unitaria_sin_iva" class="java.lang.Double"/>
+	<field name="subtotal_sin_iva" class="java.lang.Double"/>
+	<field name="tipo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_tipo" class="java.lang.String"/>
+	<variable name="subtotal_sin_iva_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{subtotal_sin_iva}]]></variableExpression>
+	</variable>
+	<variable name="TotalIva" class="java.lang.String"/>
+	<variable name="TotalcIva" class="java.lang.String"/>
+	<variable name="subtotal_sin_iva_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{subtotal_sin_iva}]]></variableExpression>
+	</variable>
+	<group name="gruposReporte">
+		<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField>
+					<reportElement x="0" y="0" width="542" height="15" uuid="87868a47-2b15-428a-a42d-e41fe4ae545c"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre_tipo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="265" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="27" y="245" width="136" height="18" forecolor="#000000" backcolor="#CCCCFF" uuid="4dc3dcc1-9309-46f4-a0b8-9dfd053e80d6"/>
+				<box leftPadding="2">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ADEUDO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="49" width="219" height="20" forecolor="#666666" uuid="aa337be5-5979-4517-a32a-a2cb7b00c3bb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CORTE DETALLADO DE CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="126" width="136" height="18" uuid="6755445a-bcdc-49b1-b9b9-c95a813dafd6"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPAÑIA DE SEGUROS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="89" width="81" height="20" uuid="b9ea52ae-5493-4eb8-810e-2c8c6535041e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FACTURA: N/A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="89" width="91" height="20" uuid="e6eaef0f-7464-4fbd-93c8-0a5c07e76f7b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA INGRESO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="89" width="60" height="20" uuid="dcbe5e66-08d9-41be-a11c-de0875940f44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="89" width="94" height="20" uuid="8f384e2e-f8bc-4071-87de-0f82cbd8d113"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORA INGRESO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="163" y="109" width="233" height="17" uuid="8943fe5a-5861-4f54-a68c-a7b959d41988"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="160" width="233" height="18" uuid="a839bd22-2e90-4eed-b50f-5ad9f9bc97ab"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="177" width="233" height="18" uuid="bb175e52-3636-4de1-be67-0daa9e3cba3b"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cuenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="163" y="212" width="233" height="18" uuid="71b14a05-1c9c-4589-bd18-b5d254e984b8"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{deposito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="163" y="126" width="233" height="19" uuid="6a4890dd-3b9e-474c-91fa-2ace9939220a"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N/A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="144" width="233" height="17" uuid="769da123-0809-4817-b04d-60ceadcd89f5"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N/A]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="89" width="81" height="20" uuid="8f34217c-0f84-412f-ad22-ca9b34015790"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{folio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="90" width="63" height="19" uuid="5cf59e30-86d0-43a7-ab40-e2a8c4060d94"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="194" width="233" height="19" uuid="8c8f0035-d80e-42ec-a411-d953f31ca09c"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="89" width="63" height="20" uuid="603d4f31-22c9-4522-b9ee-722f0ebbf73e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="143" width="136" height="17" uuid="ccc53e87-1d8e-4264-aba1-685d1218d50c"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POLIZA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="159" width="136" height="18" uuid="b682b540-a759-4fe2-91bf-a4768cd6c75f"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCTOR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="176" width="136" height="18" uuid="2a7a9305-5aa8-4855-ae81-677d6f0dd047"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUENTA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="193" width="136" height="19" uuid="95cdcb8f-fd0d-4940-8638-5964b3f4b5ca"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="211" width="136" height="19" uuid="ba908031-87a2-4bea-b47b-5b0adad238ee"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE ABONOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="229" width="136" height="16" uuid="e4f09b69-2453-4582-a0e5-15d994647fb9"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="109" width="136" height="18" uuid="0bb4f4ac-e070-44fd-81fb-746acbc96805"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PACIENTE:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="¤ #,##0.00">
+				<reportElement x="163" y="230" width="233" height="15" uuid="49d5f676-d6f5-4a55-8f70-8f6fc93de5e2"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{subtotal_sin_iva_2}*1.16]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="555" height="91" uuid="0c8012b7-ed8c-448f-bdbf-43ae397df2e2"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="163" y="245" width="233" height="18" uuid="d9e1267b-1f4b-4f93-92af-581d4836a21b"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{saldoACubrir}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="542" height="20" uuid="fe6ff300-0d33-4b94-a436-ca99dd7fad81"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="398" y="2" width="58" height="20" uuid="53ebb9f9-ad6d-4c41-a32b-9205ba4a16cc"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRECIO U.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="2" width="86" height="20" uuid="72cbeb8f-5618-4b0d-a676-0d8be7dd56b4"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUB TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="2" width="299" height="20" uuid="af76a85d-bc08-4b85-94ec-6d96853e0973"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONCEPTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="2" width="42" height="20" uuid="e7fa5263-d1f5-4da0-a16d-78886f1d476a"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="57" height="20" uuid="688a5e72-f690-4d15-a16a-c01c3832990f"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="56" y="0" width="43" height="10" uuid="5d9ec0eb-0e24-4a10-9c0f-cb3b44188a01"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_insumo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="398" y="0" width="58" height="10" uuid="6665f690-4f81-47ea-a6a4-c47277ce75df"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio_venta_unitaria_sin_iva}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="456" y="0" width="86" height="10" uuid="613d2e5c-7ca0-4f53-8368-aff311fa97ae"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal_sin_iva}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="57" height="10" uuid="de010fb2-ea9c-4fac-be7d-d817f377ac87"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad_entregada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="0" width="299" height="10" uuid="e2b434a5-8443-4b96-8525-7e4ace0c2523"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_insumo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="10" width="542" height="1" uuid="21f22e98-7a9a-438d-9e9e-054f0933b626"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="48" splitType="Stretch">
+			<textField>
+				<reportElement x="402" y="27" width="80" height="20" uuid="3c9166ad-da5a-4e7e-a5de-47567b42b350"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="482" y="27" width="40" height="20" uuid="5a5a04d3-25f9-46dc-b77d-1f9984c1a6bb"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="15" y="26" width="100" height="20" uuid="a1d000e8-2a61-44b3-a3fa-2659026e3469"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band/>
+	</lastPageFooter>
+	<summary>
+		<band height="186" splitType="Stretch">
+			<staticText>
+				<reportElement x="373" y="55" width="69" height="20" uuid="3ef9ba73-8d7f-4ea6-a8a3-e8241004a813"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="35" width="69" height="20" uuid="df98f361-f03e-4076-9a74-6270236b6924"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="15" width="69" height="20" uuid="d35aff6d-2b73-424a-87f0-be1ac53a6591"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUB TOTAL:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="447" y="14" width="100" height="20" uuid="6a1aafde-6479-42b1-a063-bc3a4260dcc2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{subtotal_sin_iva_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="447" y="34" width="100" height="20" uuid="a7350d90-00f4-4d68-b945-8f011c26ece6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{subtotal_sin_iva_1}*0.16]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="447" y="54" width="100" height="20" uuid="af178abc-1cdf-4ece-9422-94235409676a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{subtotal_sin_iva_1}*1.16]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="228" y="108" width="137" height="20" uuid="36cae2ef-b018-4e13-8dc9-064b3f98659f"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V P  MEDICA CAJA DE COBRO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="107" width="159" height="1" uuid="eca6454a-9497-4c61-a119-42f50b563d12"/>
+			</line>
+			<staticText>
+				<reportElement x="14" y="108" width="137" height="20" uuid="6cc48849-2672-4f56-83f3-28deb0e5ea1f"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y FIRMA RESPONSABLE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="218" y="106" width="159" height="1" uuid="839be741-0984-4e20-a8c8-dfd4d9bb2cf6"/>
+			</line>
+			<line>
+				<reportElement x="3" y="13" width="544" height="1" uuid="b37a45e3-1f84-43f3-9b1f-c1e7de55a307"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="20" width="74" height="12" uuid="fb2f132f-9338-4125-9002-978ffc1960a6"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[IMPORTE EN LETRA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="35" width="351" height="19" uuid="92d14e2a-7736-4281-b149-aefe8f22dcfd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numeroLetra}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="137" width="191" height="12" uuid="33aa2ad4-7139-432d-9c18-87ffe80fd051"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[- TODOS NUESTROS PAQUETES INCLUYEN I.V.A.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="159" width="449" height="22" uuid="2d40771e-dc0d-4c93-ac61-332b349bc62a"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[-  LAS CANCELACIONES DEBERAN SER CON ANTICIPACION MINIMA DE 48 HORAS PREVIAS AL PROCEDIMIENTO PARA SER REEMBOLSADOS SIN LA PENALIZACION  DE $2,000.00(DOS MIL PESOSO 00/100 M.N)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="148" width="297" height="12" uuid="dd7f79b6-b82b-405f-a348-8dce9b6e8cff"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[- CUALQUIER CAMBIO DE FECHA ESTARA SUJETO A DISPONIBILIDAD.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

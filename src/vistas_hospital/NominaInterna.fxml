@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.NominaInternaController">
+    <children>
+        <BorderPane layoutX="200.0" layoutY="85.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="112.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXButton fx:id="lblaux" layoutY="22.0" text="NOMINA INTERNA" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </JFXButton>
+                    </children>
+                </AnchorPane>
+            </top>
+            <bottom>
+                <AnchorPane prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label layoutX="292.0" layoutY="59.0" text="TOTAL NOMINA I. :" AnchorPane.rightAnchor="222.0">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblTotal" layoutX="629.0" layoutY="59.0" text="0.00" AnchorPane.rightAnchor="14.0">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                  <Label layoutX="291.0" layoutY="32.0" text="TOTAL TARJETA :" AnchorPane.rightAnchor="222.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTarjeta" layoutX="628.0" layoutY="32.0" text="0.00" AnchorPane.rightAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="291.0" layoutY="5.0" text="TOTAL EFECTIVO :" AnchorPane.rightAnchor="222.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblEfectivo" layoutX="628.0" layoutY="5.0" text="0.00" AnchorPane.rightAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                    </children>
+                </AnchorPane>
+            </bottom>
+            <center>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <GridPane layoutY="14.0" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                    <children>
+                                        <DatePicker fx:id="fechaFechaPago" layoutX="111.0" layoutY="9.0" prefHeight="25.0" prefWidth="106.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="9.0" />
+                                        <Label layoutX="10.0" layoutY="13.0" text="FECHA PAGO" AnchorPane.topAnchor="12.0" />
+                                        <Label layoutX="10.0" layoutY="43.0" text="CLAVE NOMINA" />
+                                        <Label fx:id="lblClaveNomina" layoutX="111.0" layoutY="43.0" prefHeight="17.0" prefWidth="76.0" text="XXXXXXXX">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                    <children>
+                                        <Label layoutX="4.0" layoutY="17.0" text="FECHA INICIO" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="12.0" />
+                                        <Label layoutX="4.0" layoutY="42.0" text="FECHA FIN" />
+                                        <Label fx:id="fechaFechaInicio" layoutX="104.0" layoutY="12.0" text="00/00/0000" />
+                                        <Label fx:id="fechaFechaFin" layoutX="104.0" layoutY="42.0" text="00/00/0000" />
+                                        <Button fx:id="btnCalcular" layoutX="228.0" layoutY="18.0" mnemonicParsing="false" onAction="#accionCalcualar" prefHeight="33.0" prefWidth="97.0" text="CALCULAR" AnchorPane.rightAnchor="14.0" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </GridPane>
+                        <TableView fx:id="tabla" editable="true" layoutX="240.0" layoutY="60.0" prefHeight="219.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                            <columns>
+                                <TableColumn fx:id="colNombre" maxWidth="8000.0" prefWidth="75.0" text="NOMBRE" />
+                                <TableColumn fx:id="colSueldo" maxWidth="3000.0" prefWidth="75.0" text="SUELDO SEMANAL" />
+                        <TableColumn fx:id="colPagoConTarjeta" maxWidth="3000.0" prefWidth="75.0" text="PAGO CON TARJETA" />
+                                <TableColumn fx:id="colPagoxHoraExtra" maxWidth="3000.0" prefWidth="75.0" text="PAGO X HORA EXTRA" />
+                                <TableColumn fx:id="colHorasExtra" maxWidth="1500.0" prefWidth="75.0" text="HORAS&#10;EXTRAS" />
+                                <TableColumn fx:id="colImporteHoraextra" maxWidth="3000.0" prefWidth="75.0" text="  IMPORTE &#10;HORA EXTRA" />
+                                <TableColumn fx:id="colBono" maxWidth="3000.0" prefWidth="75.0" text="BONO" />
+                                <TableColumn fx:id="colFaltas" maxWidth="1500.0" prefWidth="75.0" text="FALTAS" />
+                                <TableColumn fx:id="colImportancia" maxWidth="3000.0" prefWidth="75.0" text="IMPORTE X FALTAS" />
+                                <TableColumn fx:id="colAguinaldo" maxWidth="3000.0" prefWidth="75.0" text="AGUINALDO" />
+                                <TableColumn fx:id="colFiniquiito" maxWidth="3000.0" prefWidth="75.0" text="FINIQUITO" />
+                                <TableColumn fx:id="colPagoNeto" maxWidth="3000.0" prefWidth="75.0" text="NETO PAGAR" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

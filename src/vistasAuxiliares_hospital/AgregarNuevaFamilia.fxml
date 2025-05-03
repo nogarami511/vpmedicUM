@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="338.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.AgregarNuevaFamiliaController">
+   <children>
+      <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="112.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="6.0" layoutY="6.0" prefHeight="200.0" prefWidth="115.0" style="-fx-background-color: #F4F4F4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="8.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Label alignment="CENTER" layoutX="236.0" layoutY="30.0" text="NUEVA FAMILIA" textFill="#fcfcfc" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutX="218.0" layoutY="40.0" style="-fx-background-color: #0c569f;" text="NOMBRE" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txfNombre" layoutX="226.0" layoutY="102.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnAceptar" layoutX="370.0" layoutY="10.0" mnemonicParsing="false" onAction="#accionAceptar" prefHeight="40.0" prefWidth="100.0" text="ACEPTAR" AnchorPane.rightAnchor="130.0" />
+                  <Button fx:id="btnCancelar" layoutX="486.0" layoutY="10.0" mnemonicParsing="false" onAction="#accionCancelar" prefHeight="40.0" prefWidth="100.0" text="CANCELAR" AnchorPane.rightAnchor="14.0" />
+                  <Button fx:id="btnEditar" layoutX="370.0" layoutY="10.0" mnemonicParsing="false" onAction="#accionEditar" prefHeight="40.0" prefWidth="100.0" text="EDITAR" visible="false" />
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

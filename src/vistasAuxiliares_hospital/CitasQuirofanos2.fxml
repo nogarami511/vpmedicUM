@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="439.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.CitasQuirofanosNuevoController2">
+   <children>
+      <BorderPane prefHeight="447.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="112.0" prefWidth="544.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="114.0" prefWidth="150.0" style="-fx-background-color: #E5E8E8;">
+                     <children>
+                        <ImageView fitHeight="110.0" fitWidth="140.0" layoutX="5.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
+                  <JFXButton layoutX="151.0" layoutY="23.0" prefHeight="69.0" prefWidth="377.0" text="AGENDA QUIRÓFANO" textFill="#fcfcfc" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="272.0" prefWidth="150.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnAgregar" layoutX="27.0" layoutY="87.0" mnemonicParsing="false" onAction="#agregar" prefHeight="33.0" prefWidth="97.0" text="Agregar" />
+                  <Button fx:id="btnSalir" layoutX="27.0" layoutY="213.0" mnemonicParsing="false" onAction="#salir" prefHeight="33.0" prefWidth="97.0" text="Salir" />
+                  <Button fx:id="btnEditar" layoutX="27.0" layoutY="87.0" mnemonicParsing="false" onAction="#editar" prefHeight="33.0" prefWidth="97.0" text="EDITAR" visible="false" />
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="538.0" prefWidth="529.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PACIENTE" AnchorPane.leftAnchor="14.0" />
+                  <TextField fx:id="pacienteCitasQ" layoutX="73.0" layoutY="10.0" prefHeight="25.0" prefWidth="563.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" />
+                  <Text layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TELÉFONO" AnchorPane.leftAnchor="14.0" />
+                  <TextField fx:id="contactoCitasQ" layoutX="74.0" layoutY="41.0" prefHeight="25.0" prefWidth="182.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="273.0" />
+                  <Text layoutX="273.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA" AnchorPane.rightAnchor="225.42578125" />
+                  <DatePicker fx:id="fechaCitasQ" layoutX="327.0" layoutY="41.0" prefHeight="25.0" prefWidth="195.0" AnchorPane.rightAnchor="14.0" />
+                  <ComboBox fx:id="cbmHoraInicio" layoutX="108.0" layoutY="90.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="90.0" />
+                  <ComboBox fx:id="cbmMinutosInicio" layoutX="334.0" layoutY="90.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="334.0" AnchorPane.topAnchor="90.0" />
+                  <ComboBox fx:id="cbmHoraFin" layoutX="108.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="120.0" />
+                  <ComboBox fx:id="cbmMinutosFin" layoutX="334.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="334.0" AnchorPane.topAnchor="120.0" />
+                  <Text layoutX="14.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORA FIN" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="125.1298828125">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORA INICIO" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="571.095703125" AnchorPane.topAnchor="95.1298828125">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MÉDICO" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="223.0" />
+                  <Text layoutX="14.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CUENTA" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="189.0" />
+                  <TextField fx:id="cirugiaCitasQ" disable="true" layoutX="73.0" layoutY="141.0" prefHeight="25.0" prefWidth="564.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="185.0" />
+                  <TextField fx:id="medicoCitasQ" disable="true" layoutX="73.0" layoutY="175.0" prefHeight="25.0" prefWidth="565.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="219.0" />
+                  <ComboBox fx:id="quirofanoCitasQ" layoutX="95.0" layoutY="269.0" prefWidth="150.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="262.0" AnchorPane.topAnchor="269.0" />
+                  <Text layoutX="14.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUIRÓFANO" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="273.0" />
+                  <Text layoutX="226.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duracion:" AnchorPane.leftAnchor="226.0" AnchorPane.rightAnchor="348.466796875" AnchorPane.topAnchor="152.576171875">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Text>
+                  <Text layoutX="204.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORAS" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="410.37890625" AnchorPane.topAnchor="71.1298828125">
+                     <font>
+                        <Font size="11.0" />
+                     </font></Text>
+                  <Text layoutX="392.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MINUTOS" AnchorPane.leftAnchor="392.0" AnchorPane.rightAnchor="209.509765625" AnchorPane.topAnchor="71.1298828125">
+                     <font>
+                        <Font size="11.0" />
+                     </font></Text>
+                  <TextField fx:id="serviciosCitaQ" disable="true" layoutX="413.0" layoutY="269.0" prefHeight="25.0" prefWidth="187.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="269.0" />
+                  <Text disable="true" layoutX="438.71875" layoutY="263.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SERVICIOS ADICIONALES" AnchorPane.rightAnchor="77.8515625" AnchorPane.topAnchor="250.05078125" />
+                  <Text fx:id="lblDuracionHoras" layoutX="313.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="370.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HRS">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="lblDuracionMinutos" layoutX="340.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="btnServiciosAdicionales" disable="true" layoutX="606.0" layoutY="269.0" mnemonicParsing="false" onAction="#serviciosAdicionales" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="269.0">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icons/icons8-insertar-mesa-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Text layoutX="334.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

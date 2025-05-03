@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" style="-fx-border-color: #0c569f;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.ImprimirOrdenDeCompraController">
+   <children>
+      <BorderPane layoutX="200.0" layoutY="19.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutY="13.0" text="IMPRIMIR" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="60.0" prefWidth="200.0" style="-fx-border-color: #0c569f; -fx-border-width: .5; -fx-background-color: #E5E8E8;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnImprimir" layoutX="284.0" layoutY="15.0" mnemonicParsing="false" onAction="#accionImprimir" prefHeight="30.0" prefWidth="100.0" text="IMPRIMIR" />
+               </children></AnchorPane>
+         </bottom>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ComboBox fx:id="cmbOrdenes" layoutX="24.0" layoutY="27.0" prefHeight="25.0" prefWidth="336.0" />
+               </children></AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares_hospital.ValidarHojaConsumoController">
+   <children>
+      <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="115.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnSallir" layoutX="8.0" layoutY="253.0" maxHeight="40.0" maxWidth="100.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#accionSalir" prefHeight="40.0" prefWidth="100.0" text="SALIR" />
+               </children>
+            </AnchorPane>
+         </left>
+         <top>
+            <AnchorPane prefHeight="112.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="-17.0" layoutY="-44.0" prefHeight="200.0" prefWidth="115.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="112.0" layoutX="2.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="1.0">
+                           <image>
+                              <Image url="@../img/vp_hospital.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="lblNombre" alignment="CENTER" layoutX="115.0" layoutY="19.0" text="LABEL" textFill="WHITE" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCacbecera" alignment="CENTER" layoutX="115.0" layoutY="66.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutX="469.0" layoutY="14.0" text="INGRESAR VALORES" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tablaMezclas" layoutX="14.0" layoutY="41.0" prefHeight="222.0" prefWidth="937.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                    <columns>
+                      <TableColumn fx:id="colInsumosMezclas" prefWidth="75.0" text="INSUMO" />
+                        <TableColumn fx:id="colLoteMezclas" maxWidth="2500.0" prefWidth="75.0" text="LOTE" />
+                      <TableColumn fx:id="colCantidadEntregadaMezclas" maxWidth="2000.0" prefWidth="75.0" text=" CANTIDAD&#10;ENTREGADA" />
+                        <TableColumn fx:id="colCantidadConsumidaMezclas" maxWidth="2000.0" prefWidth="75.0" text=" CANTIDAD&#10;CONSUMIDA" />
+                        <TableColumn fx:id="colCantidadDevolucionMezclas" maxWidth="2000.0" prefWidth="75.0" text=" CANTIDAD&#10;DEVOLUCION" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Label alignment="CENTER" layoutX="396.0" layoutY="283.0" text="CHECK ENFERMERIA" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tablaEnfermeria" layoutX="24.0" layoutY="51.0" prefHeight="222.0" prefWidth="937.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                     <columns>
+                        <TableColumn fx:id="colInsumosEnfermeria" maxWidth="7500.0" prefWidth="75.0" text="INSUMO" />
+                        <TableColumn fx:id="colCantidadEntregadaEnfermeria" maxWidth="2000.0" prefWidth="75.0" text=" CANTIDAD&#10;ENTREGADA" />
+                        <TableColumn fx:id="colCantidadConsumidaEnfermeria" maxWidth="2000.0" prefWidth="75.0" text=" CANTIDAD&#10;CONSUMIDA" />
+                        <TableColumn fx:id="colCantidadDevolucion" maxWidth="2000.0" prefWidth="75.0" text=" CANTIDAD&#10;DEVOLUCION" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Separator layoutX="14.0" layoutY="274.0" prefWidth="200.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="62.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutY="-69.0" prefHeight="200.0" prefWidth="115.0" style="-fx-background-color: #0c569f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="btnValidar" disable="true" layoutX="966.0" layoutY="11.0" maxHeight="40.0" maxWidth="100.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#accionValidar" prefHeight="40.0" prefWidth="100.0" text="VALIDAR" AnchorPane.rightAnchor="14.0" />
+                  <Label fx:id="lblValores" layoutX="661.0" layoutY="23.0" text="LOS VALORES DEBEN DE COINCIDIR PARA CONTINUAR" textFill="RED" visible="false" />
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

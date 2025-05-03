@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7b1f0a7a-dd01-46a0-b690-dfc6bbecd6f9">
+	<property name="ireport.zoom" value="1.4641000000000035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="5"/>
+	<parameter name="idConfirmacionAutorizacion" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalenletras" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT ci.id_compras_internasp,c.id_confirmacionAutorizacion, fp.tipo, ci.fecha_solocitud, c.montoTotalAAutorizar, ci.folioPedido,
+ p.razonSocial, 
+  CASE 
+    WHEN ci.monto_autorizado > 0 THEN ci.monto_autorizado
+    ELSE ci.total
+  END AS total, 
+  r.nombre AS rubro, (c.id_confirmacionAutorizacion - 2) AS idComprasmenosuno
+  FROM compras_internasp ci 
+  LEFT JOIN compras_internas_detalle cid ON cid.id_compras_internasp = ci.id_compras_internasp
+  LEFT JOIN confirmacionautorizacion c ON c.id_confirmacionAutorizacion = ci.id_confirmacion_autorizacion
+  INNER JOIN rubros r ON ci.rubro = r.id
+  INNER JOIN forma_pagos fp ON fp.id = c.id_formaPago
+  INNER JOIN proveedores p ON p.id = ci.id_proveedor
+  WHERE ci.id_confirmacion_autorizacion = $P{idConfirmacionAutorizacion}]]>
+	</queryString>
+	<field name="id_compras_internasp" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_confirmacionAutorizacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_solocitud" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoTotalAAutorizar" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folioPedido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rubro" class="java.lang.String"/>
+	<field name="idComprasmenosuno" class="java.lang.Long"/>
+	<variable name="total_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="148" y="68" width="268" height="26" forecolor="#000000" uuid="a82d33af-a1f7-4ef2-a479-bf1a7f8bf4bb"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FRACC. ARBOLEDAS 29030 TUXTLA  GUTIERREZ, CHIAPAS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="10" width="266" height="101" uuid="97274f17-b714-4607-99c2-e459eb0fa1ac"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\reportes\\vp_oficial_mosss.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="163" y="56" width="224" height="20" forecolor="#000000" uuid="19bd9846-b6b8-418f-90d0-2c421656a6d5"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BLVD. BELISARIO DOMINGUEZ #2116]]></text>
+			</staticText>
+			<image>
+				<reportElement x="421" y="11" width="119" height="101" uuid="d69d8ee3-77db-419e-a3a0-5e604aa4c42b"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\reportes\\vp_hospital.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="190" y="29" width="177" height="38" uuid="f701a4e6-20f2-464d-a474-c27fae18250f"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VP MEDICA PLAZA S.A. DE C.V. GHR151204GV6 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="91" width="144" height="20" uuid="eeeb21d8-ea33-4b9c-b3a1-de4c1ff427da"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTORIZACION DE PAGOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="26" width="100" height="20" uuid="9d3d9c05-b72a-481d-be05-cc31477f64a3"/>
+				<text><![CDATA[FORMA DE PAGO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="129" y="26" width="124" height="20" uuid="a4b539ec-a62b-436d-84a2-15777e0b9284"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="5" width="105" height="21" uuid="ec54e245-bfb8-415d-9826-7a6e7c771c75"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[AUTORIZACION No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="25" width="95" height="20" uuid="4bd9eef4-743f-45ad-bfdb-dead72545bf5"/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="367" y="25" width="100" height="20" uuid="a6afac7f-8ccc-422b-a5a8-9e870793013c"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{fecha_solocitud}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="44" width="95" height="20" uuid="73d5f556-d145-4011-84ae-6e6e64971935"/>
+				<text><![CDATA[MONTO:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="367" y="44" width="100" height="20" uuid="fbbba13e-ee87-4aaa-9540-28de0d6a8f02"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{montoTotalAAutorizar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="6" width="100" height="20" uuid="b0830c18-4398-41bd-afbe-25629ea87d95"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idComprasmenosuno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="13" width="69" height="20" uuid="89b32bd8-2f13-4f36-89dc-5c1aa6f7a278"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[No. COMPRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="13" width="100" height="20" uuid="174c8da9-0d51-4b91-af3e-d33f000f3d07"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[RUBRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="13" width="68" height="20" uuid="33908a01-37c3-4f6f-8c17-3359ccfbc3f1"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="13" width="100" height="20" uuid="7d2a73ed-06bf-4842-afe9-2c804e621dea"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[SALDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="13" width="212" height="20" uuid="95e75973-4206-4dc1-8951-3599bf92b44a"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[RAZON SOCIAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="4" y="3" width="69" height="20" uuid="003b2311-2dd1-4c63-8682-13f1219b9c1c"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_compras_internasp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="3" width="99" height="20" uuid="82f3439e-45bd-4b43-b791-a2aca4009270"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rubro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="383" y="3" width="68" height="20" uuid="540af228-02bc-4cdb-b58d-ce885cbc0060"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="451" y="3" width="100" height="20" uuid="51763e12-f8ea-4a55-9ae4-d2eb020e19d4"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montoTotalAAutorizar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="3" width="212" height="20" uuid="c290b607-9192-4e73-b6de-9efd5b819fc0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="383" y="26" width="171" height="1" uuid="35274700-fd31-4e28-8333-823ea5902a1c"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="155" splitType="Stretch">
+			<image>
+				<reportElement x="-21" y="0" width="575" height="154" uuid="292982a9-dab3-46aa-94eb-ae46737e960e"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\PiePagina_MembreteV2.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="126" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="387" y="16" width="63" height="20" uuid="ac12fa64-1112-4c29-b149-b7b6c005428c"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="287" y="16" width="100" height="20" uuid="10d4ab46-e094-47cc-9768-6ab4cd044c40"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAL AUTORIZAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="63" width="100" height="20" uuid="36e33df3-7050-4fa8-93db-1ff4dc95fcce"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAL EN LETRAS: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="107" y="63" width="443" height="20" uuid="8bdc4f93-0694-400e-a21d-bdc429e9655c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{totalenletras}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

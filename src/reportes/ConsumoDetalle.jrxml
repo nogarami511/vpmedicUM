@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8bc0993-fc9b-4609-b452-2965f97efde0">
+	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT c.*,
+    COALESCE((
+        SELECT SUM(p.total_pago)
+        FROM pagos p
+        WHERE p.folio_paciente = c.folio
+    ), 'N/A') AS total_pagos,
+    p.nombre,
+    COALESCE(i.presentacion, 'N/A') AS presentacion,
+    COALESCE(i.calve_sat, 'N/A') AS clave_sat,
+    COALESCE(i.iva, 'N/A') AS iva
+FROM consumos c
+INNER JOIN pacientes p ON p.id = c.id_pasiente
+LEFT JOIN insumos i ON i.nombre = c.tipo
+WHERE c.folio = 220230511072354]]>
+	</queryString>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_abono" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_pagos" class="java.lang.Object"/>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="presentacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clave_sat" class="java.lang.String"/>
+	<field name="iva" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="165" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="102" width="42" height="15" uuid="f443c805-5c11-4c6d-b744-b44a198b869a"/>
+				<text><![CDATA[FOLIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="83" width="100" height="20" uuid="4f91b5eb-e76b-4ca4-b50f-051d572b9602"/>
+				<text><![CDATA[NOMBRE CLIENTE]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="112" y="83" width="238" height="15" uuid="30cecbca-d7a4-4786-af3f-7fc180afa103"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="54" y="103" width="146" height="15" uuid="ec0b8a5a-715a-4b7a-948b-edee010f59a0"/>
+				<textFieldExpression><![CDATA[$F{folio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="0" width="288" height="23" uuid="a5d923a7-7a81-4eab-b6d9-9517f6d43f96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[HOSPITAL PRIVADO VP MÉDICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="37" width="249" height="23" uuid="1784984c-a0e9-4e07-a254-cb02782c814a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[BLV. BELISARIO DOMINGUEZ #2116 FRAC. ARBOLADAS 29030 TGZ CHIS. 961-6174830]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="24" width="104" height="13" uuid="906cda48-6da8-452f-b9f4-aef602e742c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[RFC: GHR151204GV6]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="73" height="53" uuid="92301756-52eb-4d58-8ad2-4a5dff43bffc"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\vp_oficial_mosss.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="482" y="0" width="73" height="53" uuid="a6e95cc0-6d89-42cb-ad0a-54ce7b9aa83e"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\vp_hospital.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="98f1975f-4949-4e0a-bd59-60eeb4c98b5c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="123" height="15" uuid="6de11330-80f7-40d7-9915-4fdde4d3e5e8"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="123" y="19" width="77" height="15" uuid="11787a95-f4e8-4af1-97e7-711677db2517"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="200" y="19" width="70" height="15" uuid="cce51164-e0d0-41ed-9138-9fc712fc5aaa"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="270" y="19" width="64" height="15" uuid="e2ab33d3-1d31-481a-a8f0-8a4bfeb8b2dd"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="336" y="19" width="97" height="15" uuid="39af7a99-5a66-49a0-a9ab-1387e74b17ba"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PRESENTACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="433" y="19" width="67" height="15" uuid="accaffc3-e96a-4f1d-b4cd-7dd00a5cfd4c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CLAVE SAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="500" y="19" width="50" height="15" uuid="9ff3c09a-4f7f-403e-8cf7-544664701927"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[IVA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="d2696544-0d23-438b-a489-191c46acf1cf"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="123" height="15" uuid="d0436b64-75f6-43d1-9bc5-303fd6466ba6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="123" y="0" width="77" height="15" uuid="2038da48-7d6a-4c65-8088-6f94fb15a12d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement style="Detail" x="200" y="0" width="70" height="15" uuid="124afc4e-71fa-4b83-8de8-76be4f5bf062"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="270" y="0" width="64" height="15" uuid="fe426f18-e691-4b80-a195-337afec6a860"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="336" y="0" width="97" height="15" uuid="9c5476d4-ac34-452e-8334-ebdd3331ea27"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{presentacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="0" width="67" height="15" uuid="798c0276-ff63-4acf-8e85-95e1a4299bca"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{clave_sat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="500" y="0" width="50" height="15" uuid="42d18ebd-673f-4d72-8585-dcf16222712d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement x="329" y="11" width="125" height="1" uuid="e857034e-ed6c-4b68-8e9b-c03b2cdfd851"/>
+			</line>
+			<staticText>
+				<reportElement x="329" y="12" width="125" height="20" uuid="50c824a9-dddb-4dc9-b524-6af4a3c468ed"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma de caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="11" width="125" height="20" uuid="9467df82-e80c-4661-b624-8b752ef27c22"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma de conformidad]]></text>
+			</staticText>
+			<line>
+				<reportElement x="112" y="10" width="125" height="1" uuid="5dd4e32d-636e-407a-8ac8-babbf7a0a30f"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="22" width="80" height="20" uuid="d9f4444e-a7e2-4c89-bec8-705d757d1406"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="22" width="40" height="20" uuid="ce546673-ed36-47e2-996f-d5a3d531143e"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="22" width="197" height="20" uuid="dbbb4d40-0f49-4b6d-b910-c44c8a52f9aa"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="250" y="36" width="113" height="15" uuid="5728d1af-70d8-4616-adde-72a47a1f0c26"/>
+				<text><![CDATA[total_pagos]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="363" y="51" width="104" height="15" uuid="9b5406f4-9551-47bc-819a-da0c9b5b2f34"/>
+				<textFieldExpression><![CDATA[$F{total_abono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="250" y="51" width="50" height="15" uuid="4d6f4b43-5d9b-48c8-8630-95c8d10b730d"/>
+				<text><![CDATA[TOTAL ABONADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="363" y="36" width="100" height="20" uuid="83239ecc-adcf-4e09-8c3b-325aeaedd722"/>
+				<textFieldExpression><![CDATA[$F{total_pagos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

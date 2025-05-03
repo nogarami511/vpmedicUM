@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.AereopuertoQuirofanoController">
+    <children>
+        <BorderPane layoutX="200.0" layoutY="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane layoutY="-2.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E5E8E8;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fitHeight="200.0" fitWidth="200.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../img/vp_hospital.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                        <JFXButton fx:id="btnFecha" layoutX="200.0" layoutY="49.0" text="Button" textFill="WHITE" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0">
+                            <font>
+                                <Font name="System Bold" size="48.0" />
+                            </font>
+                        </JFXButton>
+                    </children>
+                </AnchorPane>
+            </top>
+            <center>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TableView fx:id="tabla" layoutX="-366.0" layoutY="-95.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                            <columns>
+                                <TableColumn fx:id="colQuirofano" maxWidth="8000.0" prefWidth="75.0" text="QUIROFANO" />
+                                <TableColumn fx:id="colCirugia" maxWidth="12000.0" prefWidth="75.0" text="CIRUGIA" />
+                                <TableColumn fx:id="colDoctor" maxWidth="10000.0" prefWidth="75.0" text="DOCTOR" />
+                                <TableColumn fx:id="colInicio" prefWidth="75.0" text="INICIO" />
+                                <TableColumn fx:id="colDuracion" prefWidth="75.0" text="DURACIÓN" />
+                                <TableColumn fx:id="colHoraExtra" prefWidth="75.0" text="HORAS&#10; EXTRA" />
+                                <TableColumn fx:id="colSalida" minWidth="5.0" prefWidth="5.0" text="SALIDA" />
+                                <TableColumn fx:id="colEstado" prefWidth="5.0" text="ESTADO" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </center>
+            <bottom>
+                <AnchorPane prefHeight="62.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label alignment="CENTER" layoutX="26.0" layoutY="11.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #2ECC71;" text="A TIEMPO" textFill="#f8f8f8">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="226.0" layoutY="11.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FF5733;" text="RETRASADO" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="126.0" layoutY="11.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #F1C40F;" text="EN CIRUGIA" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="326.0" layoutY="11.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #E60026;" text="TARDE" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

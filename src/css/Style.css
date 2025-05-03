@@ -1,0 +1,23 @@
+.table-view{
+ -fx-font-size: 10pt;
+}
+.table-view .column-header-background .label {
+ -fx-font-size: 9pt;
+}
+
+/*.table-row-cell:filled:selected {
+    
+    -fx-text-background-color: #FF00FF;
+}
+.table-view:row-selection .table-row-cell:filled:hover { 
+    -fx-background-color: rgba(28, 183, 236, 0.25);
+}
+
+
+.table-view:row-selection .table-row-cell:filled:selected:hover { 
+    -fx-background-color: rgba(228, 183, 236, 0.90);
+}
+
+.table-view:row-selection .table-row-cell:filled:selected { 
+    -fx-background-color: rgba(28, 183, 236, 0.65);
+}*/

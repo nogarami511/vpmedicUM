@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores_hospital.FarmaciaVentasController">
+    <children>
+        <BorderPane layoutX="493.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="112.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXButton layoutX="171.0" layoutY="22.0" prefHeight="69.0" prefWidth="338.0" text="PUNTO DE VENTA" textFill="WHITE" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="170.0">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </JFXButton>
+                    </children>
+                </AnchorPane>
+            </top>
+            <center>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Text layoutX="20.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="txtUsuario" layoutX="94.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="350.13671875" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="20.0">
+                            <font>
+                                <Font name="Arial Black" size="12.0" />
+                            </font>
+                        </Text>
+                        <Text layoutX="20.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CLIENTE:" AnchorPane.leftAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <TextField fx:id="txfNombreCliente" disable="true" layoutX="94.0" layoutY="42.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.leftAnchor="94.0" AnchorPane.rightAnchor="395.0" AnchorPane.topAnchor="42.0" />
+                        <TextField fx:id="txfBuscador" disable="true" layoutX="14.0" layoutY="94.0" prefHeight="40.0" prefWidth="146.0" promptText="BUSCAR MEDICAMENTO" style="-fx-border-radius: 05;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="94.0" />
+                        <TableView fx:id="tabla" layoutX="14.0" layoutY="142.0" prefHeight="166.0" prefWidth="316.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="142.0">
+                            <columns>
+                                <TableColumn fx:id="clmArticulo" prefWidth="140.0" text="ARTICULO" />
+                                <TableColumn fx:id="clmPiezas" minWidth="0.0" prefWidth="59.0" text="PIEZAS" />
+                                <TableColumn fx:id="clmCosto" prefWidth="116.0" text="COSTO" />
+                                <TableColumn fx:id="clmCancelar" prefWidth="116.0" text="CANCELAR" visible="false" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                        <Text layoutX="366.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL $" AnchorPane.bottomAnchor="152.712890625" AnchorPane.rightAnchor="171.3203125">
+                            <font>
+                                <Font name="Arial Black" size="30.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="txtTotalPago" layoutX="516.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="138.03125" AnchorPane.bottomAnchor="153.09375" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="Arial Black" size="32.0" />
+                            </font>
+                        </Text>
+                        <Text layoutX="342.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MONTO RECIBIDO $" AnchorPane.bottomAnchor="119.0" AnchorPane.rightAnchor="172.84228515625">
+                            <font>
+                                <Font name="Arial Black" size="15.0" />
+                            </font>
+                        </Text>
+                        <TextField fx:id="txfMontoRecibido" disable="true" layoutX="528.0" layoutY="197.0" prefHeight="25.0" prefWidth="128.0" AnchorPane.bottomAnchor="118.0" AnchorPane.rightAnchor="20.0" />
+                        <ChoiceBox fx:id="choiseBoxMetodoDePago" disable="true" layoutX="525.0" layoutY="256.0" prefHeight="25.0" prefWidth="128.0" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="20.0" />
+                        <Text layoutX="340.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="METODO DE PAGO" AnchorPane.bottomAnchor="61.3564453125" AnchorPane.rightAnchor="186.5244140625">
+                            <font>
+                                <Font name="Arial Black" size="15.0" />
+                            </font>
+                        </Text>
+                        <Text layoutX="342.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAMBIO                 $" wrappingWidth="167.49267578125" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="170.0">
+                            <font>
+                                <Font name="Arial Black" size="15.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="txtCambio" layoutX="529.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="124.40625" AnchorPane.bottomAnchor="91.0" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="Arial Black" size="12.0" />
+                            </font>
+                        </Text>
+                        <Text layoutX="548.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA" visible="false" AnchorPane.rightAnchor="95.380859375" AnchorPane.topAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="txtFecha" layoutX="529.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00/00/000" visible="false" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <Button fx:id="btnPagar" disable="true" layoutX="556.0" layoutY="289.0" mnemonicParsing="false" onAction="#actionBtnPagar" prefHeight="33.0" prefWidth="97.0" text="PAGAR" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                        <Text layoutX="20.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL DE ARTICULOS" visible="false" AnchorPane.bottomAnchor="10.98828125" AnchorPane.leftAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="txtTotalArticulos" layoutX="172.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" visible="false" wrappingWidth="35.13671875" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="172.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <TextField fx:id="txfNumeroDePiezas" alignment="CENTER" disable="true" layoutX="232.0" layoutY="94.0" prefHeight="40.0" prefWidth="52.0" promptText="PIEZAS" AnchorPane.rightAnchor="395.0" AnchorPane.topAnchor="94.0" />
+                        <Button fx:id="btnAgregarArticulo" disable="true" layoutX="281.0" layoutY="94.0" mnemonicParsing="false" onAction="#actionBtnAgregarArticulo" prefHeight="40.0" prefWidth="42.0" text="↵" AnchorPane.rightAnchor="348.0" AnchorPane.topAnchor="94.0" />
+                        <TextField fx:id="txfNumeroDeCajas" alignment="CENTER" disable="true" layoutX="164.0" layoutY="94.0" prefHeight="40.0" prefWidth="64.0" promptText="CAJAS" text="CAJAS" AnchorPane.rightAnchor="451.0" AnchorPane.topAnchor="94.0" />
+                        <JFXComboBox fx:id="choiseBoxModoDeVenta" layoutX="586.0" layoutY="16.0" prefHeight="25.0" prefWidth="107.0" promptText="MODO" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <TextField fx:id="txfBuscadorAlimento" disable="true" layoutX="14.0" layoutY="94.0" prefHeight="40.0" prefWidth="146.0" promptText="BUSCAR ALIMENTO" style="-fx-border-radius: 05;" visible="false" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="94.0" />
+                        <Button fx:id="btnBuscarPaciente" disable="true" layoutX="289.0" layoutY="42.0" mnemonicParsing="false" onAction="#actionBtnBuscarPaciente" prefHeight="25.0" prefWidth="42.0" text="↵" AnchorPane.rightAnchor="348.0" AnchorPane.topAnchor="42.0" />
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

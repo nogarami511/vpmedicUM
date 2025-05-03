@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c16965d-71a4-4755-8579-5d50689b7e0c">
+	<property name="ireport.zoom" value="1.2396694214876032"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\vpmedica\\src\\reportes\\reporteestadodecuenta\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM(
+-- Encabezado fijo
+ SELECT c.id_cierresmesefectivo AS id, CONCAT('CIERRE DE ', c.mes_cierremes) AS nombre_paciente, 1 AS id_tipo_pago, 'EFECTIVO' AS tipo, c.monto_efectivo_cierremes AS total_pago, CONCAT('01-', DATE_FORMAT(NOW(), '%m-%Y')) AS fecha_pago, CONCAT('CIERRE',c.mes_cierremes) AS folio
+ FROM cierresmesefectivo c
+ WHERE c.fehca_cerremes >= $P{inicio} AND c.fehca_cerremes <= $P{fin}
+ UNION ALL
+ 
+ SELECT i.id_ingresoefectivo AS id, i.concepto_ingresoefectivo AS nombre_paciente, i.forma_pago_ingresoefectivo AS id_tipo_pago, 'EFECTIVO' AS tipo, i.importe_ingresoefectivo AS total_pago, i.fecha_ingresoefectivo AS fecha_pago, i.folio_ingresoefectivo AS folio 
+ FROM ingresosefectivo i 
+ WHERE i.fecha_ingresoefectivo >= $P{inicio} AND i.fecha_ingresoefectivo <= $P{fin}
+
+ UNION ALL
+
+SELECT 
+  CASE 
+    WHEN p.facturacion = 1 AND P.forma_pago = 'EFECTIVO' THEN CONCAT('B-', p.id)
+    WHEN p.facturacion = 0  and p.forma_pago = 'EFECTIVO' THEN CONCAT('E-', p.id)
+     ELSE CONCAT('B-', p.id )
+    
+  END AS id,
+  p1.nombre_paciente AS nombre_paciente, 
+  fp.id AS id_tipo_pago,
+  fp.tipo AS tipo, 
+  p.total_pago, 
+  p.fecha_pago, 
+  f.folio
+FROM pagos p 
+INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+INNER JOIN forma_pagos fp ON fp.id = p.id_tipo_pago
+INNER JOIN folios f ON p.id_folio = f.id
+WHERE p.fecha_pago >= $P{inicio} AND p.fecha_pago <= $P{fin}
+-- WHERE p.fecha_pago >=  LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 1 MONTH)) -- el ultimo dia del mes anteior
+  UNION ALL
+
+  SELECT f.id_fondoEfectivo AS id,
+    f.concepto AS nombre_paciente,
+    1 AS id_tipo_pago,
+    'EFECTIVO' AS tipo,
+    f.saldo AS total_pago
+    , f.fecha AS fecha_pago, 
+    f.concepto  AS folio 
+    FROM fondoefectivo f WHERE f.tipoOperacion = 'ENTRADA FONDO EFECTIVO' AND  f.fecha >= $P{inicio} AND f.fecha <= $P{fin} 
+  UNION ALL
+
+  SELECT de.id_dep_efe AS id, p1.nombre_paciente, 5 AS id_tipo_pago, 'DEPOSITO EFECTIVO' AS tipo, de.cantidad_depositada AS total_pago, de.fecha_modificacion AS fecha_pago, CONCAT('B- ', p.id) AS folio 
+  FROM deposito_efectivo de 
+  INNER JOIN pagos p ON de.id_pago = p.id
+  INNER JOIN pacientes p1 ON p.id_paciente = p1.id_paciente
+  WHERE de.fecha_modificacion >= $P{inicio} AND de.fecha_modificacion <= $P{fin} 
+  
+  UNION ALL 
+SELECT cm.id_cierremesbanco AS id, CONCAT('ARRASTRE', cm.mes_cierremesbanco) AS nombre_paciente, 23 AS id_tipo_pago, 'ARRASTRE BANCO' AS tipo, cm.monto_cierremesbanco AS total_pago, cm.fecha_cierremesbanco AS fecha_pago, CONCAT('B- ', cm.id_cierremesbanco) AS folio  FROM cierremesbanco cm WHERE date(cm.fecha_cierremesbanco) >= date($P{inicio}) AND (cm.fecha_cierremesbanco) <= date($P{fin})
+
+) consulta
+  ORDER BY id_tipo_pago, fecha_pago ASC]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="nombre_paciente" class="java.lang.String"/>
+	<field name="id_tipo_pago" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="total_pago" class="java.lang.Double"/>
+	<field name="fecha_pago" class="java.sql.Timestamp"/>
+	<field name="folio" class="java.lang.String"/>
+	<variable name="total_pago_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pago}]]></variableExpression>
+	</variable>
+	<variable name="total_pago_2" class="java.lang.Double" resetType="Group" resetGroup="Tipo_pago_id" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pago}]]></variableExpression>
+	</variable>
+	<group name="Tipo_pago_id">
+		<groupExpression><![CDATA[$F{id_tipo_pago}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<textField>
+					<reportElement x="0" y="0" width="555" height="18" uuid="605d3c69-2583-4322-b7e8-9f10e1e0df62"/>
+					<box leftPadding="2" rightPadding="2">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="455" y="0" width="100" height="20" uuid="ef80696b-3b71-498d-b406-cd756cd2607a"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total_pago_2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="224" y="0" width="231" height="20" uuid="39bbd0a4-ed29-4173-8aa3-4226b1281698"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL " + $F{tipo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="224" height="20" uuid="e01da7e5-9ad0-4296-b1c1-9072a1261f83"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="107" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="92" uuid="2f022480-0933-4592-87c0-c450c027ee23"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="439" y="51" width="100" height="13" forecolor="#666666" uuid="a9e268fb-3a5d-4a15-9e12-34926bc64406"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INGRESO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="395" y="72" width="52" height="20" uuid="925f1428-248c-47f5-b192-af8096d1303c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="72" width="100" height="20" uuid="5066193b-660e-401e-91f4-eb2bca4be968"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="447" y="72" width="16" height="20" uuid="6a42e194-9b40-4c2e-88ae-49ec377a3048"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="36" y="0" width="188" height="20" uuid="a6d53246-1147-4e03-b3f3-643d0232bd41"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE PACIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="36" height="20" uuid="ebc6e5b1-862f-4a07-837e-e049a9636e52"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROG.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="0" width="76" height="20" uuid="7fac96f0-8db4-443c-82a8-f9aa0b0ded6c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="68" height="20" uuid="1b4f35d6-6289-403e-8901-c81460fdd274"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="92" height="20" uuid="52de1141-8f84-4cf0-943d-9ba904a4aaa5"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="0" width="95" height="20" uuid="fbb417ea-7737-4017-8019-a65edc14916b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMA PAGO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="36" y="0" width="188" height="10" uuid="049aeb1c-cb44-4f45-9156-cbf2c8bc4f2a"/>
+				<box leftPadding="2" rightPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="36" height="10" uuid="4e46abcb-294d-4374-9075-e462f87fd769"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="0" width="76" height="10" uuid="498e23ba-7c64-437c-b279-35f5f3885501"/>
+				<box leftPadding="2" rightPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{folio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="68" height="10" uuid="112836d5-baea-4459-b04e-5f5421e8aa5f"/>
+				<box leftPadding="2" rightPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="463" y="0" width="92" height="10" uuid="72d58252-b1af-4df7-a928-95684577a14c"/>
+				<box leftPadding="2" rightPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="0" width="95" height="10" uuid="2f0c3c00-435e-4994-b282-87c04f2b392c"/>
+				<box leftPadding="2" rightPadding="2">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21">
+			<textField>
+				<reportElement x="421" y="0" width="80" height="20" uuid="3586f005-52a4-451e-b6c9-fe739e7e4108"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="501" y="0" width="40" height="20" uuid="66bd01d3-1c1f-4e61-8724-3738c689159d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="41f4f768-1d6c-42dd-9ce1-e0c65c801325"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="226" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="455" y="0" width="100" height="20" uuid="f96c34dc-822c-42c8-a0e1-3b9575f82104"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_pago_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="363" y="0" width="92" height="20" uuid="51219dcb-3a16-47fe-82fe-b6b7eab7bcd6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="20" width="555" height="206" uuid="1cc9349e-db21-4897-9446-ef38e31dfd61"/>
+				<subreportParameter name="inicio">
+					<subreportParameterExpression><![CDATA[$P{inicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fin">
+					<subreportParameterExpression><![CDATA[$P{fin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subreporteestadodecuenta.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

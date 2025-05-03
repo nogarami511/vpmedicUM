@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares.ReIngresoController">
+   <left>
+      <AnchorPane prefHeight="272.0" prefWidth="150.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnIngresar" layoutX="27.0" layoutY="162.0" mnemonicParsing="false" onAction="#ingresar2" prefHeight="33.0" prefWidth="97.0" text="REINGRESO" />
+            <Button fx:id="btnSalir" layoutX="27.0" layoutY="288.0" mnemonicParsing="false" onAction="#salir" prefHeight="33.0" prefWidth="97.0" text="SALIR" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="483.0" prefWidth="638.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="20.0" layoutY="6.0" text="NOMBRE" AnchorPane.topAnchor="6.0" />
+            <TextField fx:id="txfnombreIngresado" layoutX="440.0" layoutY="27.0" onKeyReleased="#txtnombre" prefHeight="25.0" prefWidth="651.0" promptText="NOMBRE/S" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="27.0" />
+            <ComboBox fx:id="cmbMedico" layoutX="77.0" layoutY="66.0" prefHeight="25.0" prefWidth="251.0" promptText="MÉDICO" AnchorPane.leftAnchor="77.0" AnchorPane.topAnchor="66.0" />
+            <Text layoutX="16.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MÉDICO" wrappingWidth="47.45703125" AnchorPane.bottomAnchor="396.98828125" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="70.05078125" />
+            <Separator layoutX="16.0" layoutY="368.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Label layoutX="15.0" layoutY="387.0" text="SELECCIONAR CUENTA" />
+            <RadioButton fx:id="rdbPaquete" layoutX="21.0" layoutY="420.0" mnemonicParsing="false" onAction="#accionPaquete" text="PAQUETE" AnchorPane.leftAnchor="21.0" />
+            <TextField fx:id="txfPaquete" disable="true" layoutX="101.0" layoutY="416.0" promptText="SELECCIONAR PAQUTE" AnchorPane.leftAnchor="101.0" />
+            <RadioButton fx:id="rdbAbierta" layoutX="262.0" layoutY="420.0" mnemonicParsing="false" onAction="#accionCuentaAbierta" text="ABIERTA" AnchorPane.leftAnchor="262.0" />
+            <Separator layoutX="347.0" layoutY="419.0" orientation="VERTICAL" prefHeight="19.0" prefWidth="2.0" />
+            <Separator layoutX="14.0" layoutY="106.0" prefWidth="200.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="6.0" />
+            <RadioButton fx:id="rdbHospital" disable="true" layoutX="384.0" layoutY="420.0" mnemonicParsing="false" onAction="#accionHospital" text="HOSPITAL" AnchorPane.rightAnchor="240.0" />
+            <RadioButton fx:id="rdbUrgenciasentrada" disable="true" layoutX="481.0" layoutY="420.0" mnemonicParsing="false" onAction="#accionUrgenciasEntrada" text="URGENCIAS" AnchorPane.rightAnchor="133.0" />
+            <RadioButton fx:id="rdbConsulta" disable="true" layoutX="591.0" layoutY="420.0" mnemonicParsing="false" onAction="#accionConsulta" text="CONSULTA" AnchorPane.rightAnchor="27.0" />
+            <TableView fx:id="tabla" layoutX="12.0" layoutY="121.0" prefHeight="234.0" prefWidth="666.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="21.0">
+               <columns>
+                  <TableColumn fx:id="nomnrePacienteTabla" prefWidth="665.0" text="NOMBRES DE PACIENTES REGISTRADOS" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="112.0" prefWidth="200.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="114.0" prefWidth="150.0" style="-fx-background-color: #E5E8E8;">
+               <children>
+                  <ImageView fitHeight="110.0" fitWidth="140.0" layoutX="5.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/vp_hospital.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <JFXButton disable="true" layoutX="253.0" layoutY="24.0" opacity="0.99" prefHeight="69.0" prefWidth="441.0" text="REINGRESO" textFill="#fffdfd" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="155.0">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

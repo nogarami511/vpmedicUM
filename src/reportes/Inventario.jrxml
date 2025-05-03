@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="00829167-feea-4e5b-92c0-1ce24ab5ddc7">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="_ruta_absoluta_parametro" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT iv.id_insumo, i.nombre AS DESCRIPCIOPN, i.presentacion AS PRESENTACION, i.lote AS LOTE, i.caducidad AS CADUCIDAD, i.cantidad_caja AS CAJAS ,iv.total_existencia  AS  EXISTENCIA_UNIDAD FROM inventarios iv
+    INNER JOIN insumos i ON iv.id_insumo = i.id
+    WHERE iv.total_existencia > 0]]>
+	</queryString>
+	<field name="id_insumo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DESCRIPCIOPN" class="java.lang.String"/>
+	<field name="PRESENTACION" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LOTE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CADUCIDAD" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CAJAS" class="java.lang.Integer"/>
+	<field name="EXISTENCIA_UNIDAD" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="98">
+			<image>
+				<reportElement x="0" y="8" width="100" height="90" uuid="e12566f8-fd8a-4f64-a972-d4ce392168a3"/>
+				<imageExpression><![CDATA[$P{_ruta_absoluta_parametro} + "vp_hospital.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="455" y="1" width="98" height="90" uuid="2d21b0a3-b063-4c6c-b37f-1921ebe0991e"/>
+				<imageExpression><![CDATA[$P{_ruta_absoluta_parametro} + "vp_torre.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="164" y="5" width="245" height="82" uuid="0dfd7c39-44cf-4eeb-bcf5-c1f5741c5189"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVENTARIO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="b69a027a-e761-436a-82b8-f52a403ad9e3"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="146" height="20" forecolor="#FFFFFF" backcolor="#0C569F" uuid="167313ad-f4a8-47f1-8c31-8b0d1ae6be9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DESCRIPCIOPN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="146" y="1" width="100" height="20" forecolor="#FFFFFF" backcolor="#0C569F" uuid="ca60cfcf-2079-4599-b766-0ba0a54572df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[PRESENTACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="246" y="1" width="100" height="20" forecolor="#FFFFFF" backcolor="#0C569F" uuid="128d26e6-ffac-4759-a9e2-d7106d378252"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CADUCIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="346" y="1" width="100" height="20" forecolor="#FFFFFF" backcolor="#0C569F" uuid="e30ab62c-3f7d-4179-9da2-12f653a5bf3d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CAJAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="446" y="1" width="109" height="20" forecolor="#FFFFFF" backcolor="#0C569F" uuid="237e6b8f-e325-459d-b8b3-481aff3eb1ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[EXISTENCIA UNIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="33" width="555" height="1" uuid="2a835abe-47b8-4da4-acc2-878afa2567bf"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="5" width="146" height="20" uuid="657e0d97-6b51-488e-b5dd-351ade422c0e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCIOPN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="5" width="100" height="20" uuid="f791ee65-6b65-4ac6-969c-2030be2e4300"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRESENTACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="5" width="100" height="20" uuid="93ab3d9c-b7dc-4d31-a7fd-11c9c3f87083"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CADUCIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="5" width="100" height="20" uuid="d87ed0b9-f99b-47ce-9e37-5c730056acb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAJAS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="5" width="109" height="20" uuid="4ab350ad-9823-4bbb-b649-a0f573900c06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EXISTENCIA_UNIDAD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="505" y="4" width="50" height="13" forecolor="#FFFFFF" backcolor="#0C569F" uuid="5b146e55-2c12-4a18-9b5e-a6ae825720a3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" forecolor="#FFFFFF" uuid="20002a66-3b64-481a-b201-8e5d03611052"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="505" height="13" forecolor="#FFFFFF" backcolor="#0C569F" uuid="17bfa8b6-4bb9-4e99-97e8-91ad445280a4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="790" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9cd64a67-e722-446c-ae3c-a23c15b76295">
+	<property name="ireport.zoom" value="2.4793388429752063"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="432"/>
+	<parameter name="cantidad_letra" class="java.lang.String"/>
+	<parameter name="id_paciente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_pagos" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+CASE 
+      WHEN p.id_tipo_pago = 1 THEN CONCAT('E-',(SELECT ep.id_efectivo_pago FROM efectivo_pagos ep WHERE ep.id_pago = p.id))
+      ELSE CONCAT('B-',(SELECT bp.id_banco_pago FROM banco_pagos bp WHERE bp.id_pagos = p.id))
+  END AS id,
+f.folio,
+   ptes.nombre_paciente AS Paciente,
+  f.montohastaelmomento,f.totaldeabono,
+  CASE
+    WHEN f.saldoacubrir < 0 THEN 0
+    ELSE f.saldoacubrir
+  END AS saldoacubrir,f.id_paquete,f.id_habitacion,
+  COALESCE(pm.nombre,'CUENTA ABIERTA'),
+DATE(f.fecha_ingreso) AS fecha,TIME(f.fecha_ingreso) AS Hora,
+  hab.numero_habitacion,p.num_pago, tp.nombre AS ConceptoPago,
+ m.nombre AS Medico,
+  p.id AS idPagos,
+  p.id_paciente,
+  p.folio_paciente,
+  p.id_tipo_pago,
+  p.descripcion_pago,
+  p.cantidad_pago,
+  p.precio_unitario_pago,
+  p.descuento_pago,
+  p.sub_total_pago,
+  p.iva_pago,
+  (p.total_pago)AS total_pago,
+  ((p.total_pago)/1.16)*1.00 as Subtotal_unitario, 
+  (CASE 
+  WHEN p.forma_pago = 'TRANSITO TARJETA DEBITO'THEN 'TARJETA DEBITO'
+  WHEN p.forma_pago = 'TRANSITO TARJETA CREDITO' THEN 'TARJETA CREDITO'
+  ELSE p.forma_pago
+  END ) AS forma_pago,
+  p.fecha_pago,
+  p.usuario_cobro,
+  CONCAT(tp.nombre, " fito") AS nombretipopago,
+  hab.tipo
+ 
+FROM pagos p 
+INNER JOIN tipo_pago tp ON p.pago_tipo = tp.id 
+INNER JOIN pacientes ptes ON p.id_paciente = ptes.id_paciente
+INNER JOIN folios f ON p.id_folio=f.id
+LEFT JOIN paquetesmedicos pm ON f.id_paquete = pm.id
+INNER JOIN (
+  SELECT 
+      COALESCE(h.numero_habitacion, 0) AS numero_habitacion,
+      COALESCE(Th.tipo, 'POR ASIGNAR') AS tipo
+  FROM folios f
+  LEFT JOIN habitacion h ON h.numero_habitacion = f.numero_habitacion 
+  LEFT JOIN tipoHabitacion Th ON h.id_tipo = Th.id_tipo
+  WHERE f.id_paciente = $P{id_paciente}
+  ) AS hab
+
+INNER JOIN medicos m ON ptes.id_medico=m.id_medico
+WHERE p.id_paciente = $P{id_paciente} AND p.id= $P{id_pagos} LIMIT 1]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Paciente" class="java.lang.String"/>
+	<field name="montohastaelmomento" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totaldeabono" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saldoacubrir" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_paquete" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_habitacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Hora" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero_habitacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="num_pago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ConceptoPago" class="java.lang.String"/>
+	<field name="Medico" class="java.lang.String"/>
+	<field name="id_paciente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folio_paciente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_tipo_pago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion_pago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad_pago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_unitario_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuento_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sub_total_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="iva_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Subtotal_unitario" class="java.lang.Double"/>
+	<field name="forma_pago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_pago" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usuario_cobro" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombretipopago" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="SubTotalSI" class="java.lang.String"/>
+	<variable name="TotalIVA" class="java.lang.String"/>
+	<variable name="PrecioUnitario" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="91" uuid="0f190b40-a732-49f0-b2df-86a84385d033"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\MEMBRETE_ENCABEZA_V2.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="0" width="60" height="15" uuid="3a7cf13d-0d3e-43ff-b108-e1c16a7a9a68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="0" width="60" height="15" uuid="57ee5090-1ec2-4db3-9007-5df9453b8911"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FACTURA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="0" width="46" height="15" uuid="38b45c51-2f15-4b95-ac15-2ac7a1980a54"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="441" y="0" width="112" height="16" uuid="442e4507-2b62-426f-b26e-14b9b50fd99e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="402" y="1" width="39" height="15" uuid="472d9b49-25ab-4994-9f5d-c43a4fb105fd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="177" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="32" width="142" height="14" uuid="ee0a49b0-1660-445f-904e-1c9a032dbbbb"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[POLIZA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="5" width="142" height="13" uuid="fc352735-45c2-421d-9a6e-766a9f0bb317"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PACIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="18" width="142" height="14" uuid="ed54ce87-747e-45de-b0b7-e13c1910d385"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[COMPAÑIA DE SEGUROS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="46" width="142" height="14" uuid="3e2190ad-4ec5-489b-b4a1-d17c9e890e71"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DOCTOR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="60" width="142" height="14" uuid="a0c4d13a-e0a3-4011-baa6-f34a623b43a9"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[HABITACION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="86" width="142" height="13" uuid="03fe2932-bb1d-40bd-ba2a-8e3e12b80f36"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CONCEPTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="99" width="142" height="13" uuid="782fd6c8-ccde-49e4-bd2d-4692acc59d6b"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="112" width="142" height="13" uuid="3b6e1a52-f448-4203-bdcb-1a402ec929de"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[# PAGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="125" width="142" height="13" uuid="ed8ad37e-209b-4a55-8b8a-b95ec6abdb65"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DEPOSITO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="155" y="5" width="286" height="13" uuid="b5331d82-9315-4121-b789-02936ef40740"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="46" width="286" height="14" uuid="15012360-cdcb-4a3f-83bd-0c338359e937"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Medico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="60" width="286" height="14" uuid="9e185e8b-e40b-4b05-aeb0-f9f0a59276e8"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_habitacion}+" "+$F{tipo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="74" width="142" height="12" uuid="510d9c37-a2b2-4934-a2aa-3a3f520ccfa7"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FORMA DE PAGO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="155" y="74" width="286" height="12" uuid="f056fb11-771b-478c-b943-553e154f235c"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{forma_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="86" width="286" height="13" uuid="cd61afd1-aeae-4b24-97c1-81a130735fbf"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ConceptoPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="99" width="286" height="13" uuid="a8caefaf-ca1d-42c2-9487-c41d5a8e49c7"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="112" width="286" height="13" uuid="50beb2e7-be42-4b99-8683-8f3f51292dad"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{num_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="155" y="125" width="286" height="13" uuid="4ac42647-6f62-4907-9efc-9367f02e265d"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_pago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="13" y="157" width="47" height="20" backcolor="#CCCCFF" uuid="404c0b50-8ac3-4169-be3d-3e2539752989"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[# ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="157" width="271" height="20" backcolor="#CCCCFF" uuid="d17e945e-c7ac-4094-9c70-d462d11b2c3d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CONCEPTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="441" y="157" width="82" height="20" backcolor="#CCCCFF" uuid="7f276531-b731-4972-834f-be3e21203f00"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUB TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="331" y="157" width="110" height="20" backcolor="#CCCCFF" uuid="78540690-8342-4c2c-8550-a3478dceb033"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRECIO UNITARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="18" width="286" height="14" uuid="49b100fe-5962-4ead-a91e-1a6a16534de1"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="32" width="286" height="14" uuid="c91f30c6-daed-4544-b3e1-6950a54769ad"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="63" splitType="Stretch">
+			<rectangle>
+				<reportElement x="13" y="1" width="47" height="57" uuid="dfefa78e-4d2f-4ae9-a81e-0f9eb7e9ed6c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="441" y="1" width="82" height="57" uuid="431d4676-fa92-4406-83b3-1cac2765742a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="331" y="1" width="110" height="57" uuid="22e5e7e8-b36b-4015-934b-d675dd1310c4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="60" y="1" width="271" height="57" uuid="00a160f4-a08b-4810-bd14-1b5472e04e0c"/>
+			</rectangle>
+			<textField>
+				<reportElement x="70" y="5" width="245" height="20" uuid="82427622-b1b5-4e36-b9e8-258fbb001623"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ConceptoPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="5" width="50" height="20" uuid="0354b3c3-d7e1-4c13-b59e-f2e9e40bcb00"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{num_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="25" width="245" height="30" uuid="4038214f-a86a-496f-8adf-bb58865121f9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="354" y="5" width="71" height="20" uuid="d169065c-649e-4e9c-bab9-887a415275e9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{total_pago}/1.16]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="447" y="5" width="71" height="20" uuid="7f46ad31-433e-4f2b-b3c2-8a0b877d7449"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{Subtotal_unitario}*1.00]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="85" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="82" uuid="7f3a910e-087d-4513-8bd7-7f17724c9190"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\PiePagina_MembreteV2.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="173" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="331" y="8" width="110" height="20" backcolor="#CCCCFF" uuid="60a17cb0-ee48-4e8d-b24b-d4b4a81f6336"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUB TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="331" y="52" width="110" height="20" backcolor="#CCCCFF" uuid="2acad036-aded-4ec8-9f24-2c67dc29d776"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="331" y="30" width="110" height="20" backcolor="#CCCCFF" uuid="5bf55b22-d2cd-495c-995a-2156a20d5dae"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="443" y="8" width="80" height="20" backcolor="#CCCCCC" uuid="b16f223c-07f3-401e-ad9a-a4bd3bc6eb19"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{total_pago}/1.16)]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="443" y="30" width="80" height="20" backcolor="#CCCCCC" uuid="0cc168f8-18fa-4427-a9e5-e2d4684d7502"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{total_pago}/1.16)*0.16]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="443" y="52" width="80" height="20" backcolor="#CCCCCC" uuid="9d142f91-97b1-444a-acbc-df3d0604a2ab"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_pago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="193" y="101" width="137" height="20" uuid="6c736e4a-d874-4b70-a0f3-0451c947f79e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V P  MEDICA CAJA DE COBRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="101" width="137" height="20" uuid="9c8db913-fe94-4866-ae21-ae2adb94006e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y FIRMA RESPONSABLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="14" width="137" height="20" uuid="08b4e3ba-d3bf-4849-ad24-cd747e14ef65"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IMPORTE EN LETRAS:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="5" width="511" height="1" uuid="02f93794-35c3-4632-a6d4-bc0ae3e68e54"/>
+			</line>
+			<line>
+				<reportElement x="14" y="97" width="132" height="1" uuid="c5a737c0-c547-4454-878f-07159c347ac3"/>
+			</line>
+			<line>
+				<reportElement x="196" y="96" width="132" height="1" uuid="c7b64b95-063b-465d-a998-cd2211054b9b"/>
+			</line>
+			<textField>
+				<reportElement x="44" y="34" width="271" height="20" uuid="97b13740-2948-4eed-802a-f4769f3e45ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{cantidad_letra}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="127" width="191" height="12" uuid="0fd67c89-53c0-4395-a056-39855dd24cea"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[- TODOS NUESTROS PAQUETES INCLUYEN I.V.A.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="138" width="297" height="12" uuid="3b37dc89-194e-4aa8-8b5d-d914288293ff"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[- CUALQUIER CAMBIO DE FECHA ESTARA SUJETO A DISPONIBILIDAD.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="149" width="449" height="22" uuid="d9962763-eb64-4369-be11-1327678d6a70"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[-  LAS CANCELACIONES DEBERAN SER CON ANTICIPACION MINIMA DE 48 HORAS PREVIAS AL PROCEDIMIENTO PARA SER REEMBOLSADOS SIN LA PENALIZACION  DE $2,000.00(DOS MIL PESOS 00/100 M.N)]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

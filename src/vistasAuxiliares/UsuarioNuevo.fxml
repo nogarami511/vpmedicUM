@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="345.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistasAuxiliares.UsuarioNuevoController">
+   <children>
+      <BorderPane prefHeight="333.0" prefWidth="601.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="77.0" prefWidth="601.0" style="-fx-background-color: #0C569F; -fx-border-color: black;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton layoutX="158.0" layoutY="14.0" text="USUARIO DE SISTEMA" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="280.0" prefWidth="599.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="txfUsuarioNombre" layoutX="189.0" layoutY="56.0" prefHeight="25.0" prefWidth="327.0" AnchorPane.leftAnchor="189.0" />
+                  <Text layoutX="68.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOMBRE USUARIO:" AnchorPane.leftAnchor="68.0" />
+                  <PasswordField fx:id="txfPassword" layoutX="189.0" layoutY="100.0" prefHeight="25.0" prefWidth="327.0" AnchorPane.leftAnchor="189.0" />
+                  <Text layoutX="68.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRASEÑA:" AnchorPane.leftAnchor="68.0" />
+                  <ChoiceBox fx:id="cbxPerfil" layoutX="189.0" layoutY="145.0" prefHeight="25.0" prefWidth="188.0" AnchorPane.leftAnchor="189.0" />
+                  <Text layoutX="68.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERFIL:" AnchorPane.leftAnchor="68.0" />
+                  <Button fx:id="btnAgregar" layoutX="388.0" layoutY="193.0" mnemonicParsing="false" onAction="#agregar" prefHeight="32.0" prefWidth="92.0" text="AGREGAR" AnchorPane.rightAnchor="119.0" />
+                  <Button fx:id="btnEditar" layoutX="388.0" layoutY="193.0" mnemonicParsing="false" onAction="#editar" prefHeight="32.0" prefWidth="92.0" text="EDITAR" visible="false" AnchorPane.rightAnchor="119.0" />
+                  <Button fx:id="btnSalir" layoutX="493.0" layoutY="193.0" mnemonicParsing="false" onAction="#salir" prefHeight="32.0" prefWidth="92.0" text="SALIR" AnchorPane.rightAnchor="14.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a8431c2-55d8-4330-b494-5d2fda5ffd14">
+	<property name="ireport.zoom" value="2.000000000000001"/>
+	<property name="ireport.x" value="59"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_folio_param" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_indicasp_param" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\vpmedica\\src\\reportes\\reporteIndicaEtrega\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+  isp.id_indica_detalle,
+  i.nombre,
+  indet.cantidad_entregada,
+  CASE
+    WHEN COUNT(CASE WHEN isp.suministro = 1 THEN 1 END) > 0 THEN COUNT(CASE WHEN isp.suministro = 1 THEN 1 END)
+    ELSE 0
+  END AS suministro,
+  CASE
+    WHEN COUNT(CASE WHEN isp.devolucion = 1 THEN 1 END) > 0 THEN COUNT(CASE WHEN isp.devolucion = 1 THEN 1 END)
+    ELSE 0
+  END AS devolucion
+
+FROM indicas_suministro_pacientes isp 
+INNER JOIN indicas_detalles indet ON isp.id_indica_detalle = indet.id_indica_detalle
+INNER JOIN insumos i ON isp.id_insimo = i.id
+WHERE indet.id_indicasp = $P{id_indicasp_param} 
+GROUP BY isp.id_indica_detalle;]]>
+	</queryString>
+	<field name="id_indica_detalle" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad_entregada" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="suministro" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="devolucion" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="573" height="110" uuid="c43a24f0-80ee-4f08-8b67-39a9ce13e81f"/>
+				<imageExpression><![CDATA["C:\\vpmedica\\src\\img\\Cabecera_MembreteMod1.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="207" y="59" width="326" height="20" uuid="ddc13859-ec50-49ea-a324-56aa1d20e5eb"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEVOLUCION DE MATERIALES O MEDICAMENTO ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="101" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="1" width="555" height="100" uuid="9a1551ce-01a5-44b6-8160-49dc63823943"/>
+				<subreportParameter name="id_folio_param">
+					<subreportParameterExpression><![CDATA[$P{id_folio_param}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_indicasp_param">
+					<subreportParameterExpression><![CDATA[$P{id_indicasp_param}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subReporteSolicitudMedicamentos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="326" height="20" uuid="957b95a9-7211-4c67-8209-ef6e4d6b1ce1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSUMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="0" width="76" height="20" uuid="30cd700e-2d16-40e7-80f7-f4c55a2e5268"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTREGADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="76" height="20" uuid="79d8087c-0ef0-413e-9f58-4033c3f73c11"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONSUMIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="478" y="0" width="77" height="20" uuid="dc84ca33-897c-48e8-900b-511b58a4d93f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEVOLUCION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="326" height="11" uuid="54b8ef7d-e296-4661-a263-7f4d52ce78db"/>
+				<box leftPadding="2">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="0" width="76" height="11" uuid="55cf068f-ac49-4304-af97-8bcc2d759cf7"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad_entregada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="76" height="11" uuid="f029742a-cbe2-4fc0-aeea-85d053270bbb"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{suministro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="478" y="0" width="77" height="11" uuid="f7b3b230-6042-4c6d-9db1-30de27187968"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{devolucion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="107" splitType="Stretch">
+			<staticText>
+				<reportElement x="54" y="77" width="163" height="20" uuid="45815f8a-f380-4fa5-9da1-2c9dd69b48af"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTREGÓ NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="77" width="163" height="20" uuid="c39f1a74-d4e6-41c7-a77d-12cce284db1e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBIÓ NOMBRE]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

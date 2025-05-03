@@ -1,0 +1,34 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17/05/2024, 08:06:26 PM
+    Author     : alfar
+*/
+
+.table-view .column-header-background {
+    -fx-font-size: 10;
+    -fx-size: 10;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: blue; /* Color de fondo de la fila seleccionada */
+    -fx-text-fill: white; /* Color del texto de la fila seleccionada */
+}
+
+.table-row-cell:focused:selected {
+    -fx-background-color: blue; /* Color de fondo cuando la fila está seleccionada y enfocada */
+    -fx-text-fill: white; /* Color del texto cuando la fila está seleccionada y enfocada */
+}
+
+.table-row-cell .table-cell:selected {
+    -fx-background-color: blue; /* Color de fondo de la celda seleccionada */
+    -fx-text-fill: white; /* Color del texto de la celda seleccionada */
+}
+
+.table-row-cell .table-cell:focused:selected {
+    -fx-background-color: blue; /* Color de fondo cuando la celda está seleccionada y enfocada */
+    -fx-text-fill: white; /* Color del texto cuando la celda está seleccionada y enfocada */
+}

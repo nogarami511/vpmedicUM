@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="java" pageWidth="297" pageHeight="842" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c16965d-71a4-4755-8579-5d50689b7e0c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT *
+ FROM (  
+  SELECT a.id AS id_pagos_cuentas_por_pagar, a.id AS id_compras_internasp, a.fechapago AS fecha_pago, CONCAT('PAGO NOMINA ', a.clavenomina) AS rubro, 'NOMINA INTERNA' AS razonSocial, a.total AS monto_pagado, 'EFECTIVO' AS tipo, 1 AS id_forma_pago 
+  FROM autorizarypagosnominas a 
+  WHERE YEAR(a.fechapago)=YEAR(NOW()) AND MONTH(a.fechapago)= MONTH(NOW()) 
+
+  UNION ALL
+
+  SELECT pcpp.id_pagos_cuentas_por_pagar, pcpp.id_compras_internasp, pcpp.fecha_pago, r.nombre AS rubro , p.razonSocial, ci.monto_pagado, fp.tipo , fp.id AS id_forma_pago 
+  FROM pagos_cuentas_por_pagar pcpp
+  INNER JOIN compras_internasp ci ON pcpp.id_compras_internasp = ci.id_compras_internasp
+  INNER JOIN rubros r ON r.id = ci.rubro
+  INNER JOIN proveedores p ON p.id = ci.id_proveedor
+  INNER JOIN forma_pagos fp ON fp.id = pcpp.id_forma_pago
+  WHERE MONTH(pcpp.fecha_pago)= MONTH(NOW()) AND YEAR(pcpp.fecha_pago) = YEAR(NOW()) 
+  
+  UNION 
+
+  SELECT
+        p.id AS id_pagos_cuentas_por_pagar,
+        p.id_paciente AS id_compras_internasp,
+        P.fecha_pago AS fecha_pago,
+        "COMISIONES BANC." AS rubro,
+        p1.nombre_paciente AS razonSocial,
+        ROUND(
+              IFNULL((CASE
+              WHEN p.id_tipo_pago = 3 THEN (((p.total_pago * 2.02) / 100) * 1.16)
+              WHEN p.id_tipo_pago = 4 THEN (((p.total_pago * 1.58) / 100) * 1.16)
+              ELSE 0
+              END),0),2) AS monto_pagado,
+       
+            CASE 
+        WHEN fp.tipo = "TARJETA DE CREDITO" THEN 'COMISIONES BANCARIAS CREDITO'
+        WHEN fp.tipo = "TARJETA DE DEBITO" THEN 'COMISIONES BANCARIAS DEBITO'
+    END AS tipo
+
+       , fp.id AS id_forma_pago 
+              FROM
+                pagos p
+                INNER JOIN pacientes p1 ON p1.id_paciente = p.id_paciente
+                INNER JOIN forma_pagos fp ON p.id_tipo_pago = fp.id
+                WHERE
+                YEAR(p.fecha_pago)= YEAR(NOW()) AND MONTH(p.fecha_pago)=MONTH(NOW()) AND p.id_tipo_pago IN (3,4)
+  ORDER BY tipo, fecha_pago
+ ) AS subquery]]>
+	</queryString>
+	<field name="id_pagos_cuentas_por_pagar" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_compras_internasp" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_pago" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rubro" class="java.lang.String"/>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto_pagado" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_forma_pago" class="java.lang.Integer"/>
+	<variable name="monto_pagado_1" class="java.lang.Double" resetType="Group" resetGroup="Tipo_id_formapago" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto_pagado}]]></variableExpression>
+	</variable>
+	<variable name="monto_pagado_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto_pagado}]]></variableExpression>
+	</variable>
+	<group name="Tipo_id_formapago">
+		<groupExpression><![CDATA[$F{id_forma_pago}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="138" y="0" width="119" height="15" uuid="6d5c25fb-8fce-4aee-b863-4edbc2df7efb"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{monto_pagado_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="138" height="15" uuid="e8aa2b42-4123-43b4-aaad-0074c910cd01"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL "+$F{tipo}+" "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="138" height="15" uuid="bc0eea09-99fe-47e6-960f-40d63c51349e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL GENERAL EGRESOS]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="138" y="30" width="119" height="15" uuid="cf838e86-459b-4941-ae58-4b3a5f3082da"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{monto_pagado_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="138" height="15" uuid="a836bad2-3b59-46c3-97be-d2517c4497a7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="0" width="119" height="15" uuid="5943c766-2a2e-4884-a488-dd4a8d406ace"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="138" height="15" uuid="3f311283-449b-4cc6-afd2-a483a32bc01e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="15" width="119" height="15" uuid="8e9bed49-fce4-44b0-a755-5a0f9f69e57e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
