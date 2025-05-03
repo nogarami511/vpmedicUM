@@ -52,10 +52,7 @@
          <bottom>
             <AnchorPane prefHeight="55.0" prefWidth="698.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="360.0" layoutY="8.0" mnemonicParsing="false" onAction="#agregarPacienteNuevo" prefHeight="40.0" prefWidth="101.0" text="NUEVO" AnchorPane.rightAnchor="237.0" />
-                  <Button layoutX="471.0" layoutY="8.0" mnemonicParsing="false" onAction="#editarPaciente" prefHeight="40.0" prefWidth="101.0" text="EDITAR" AnchorPane.rightAnchor="126.0" />
-                  <Button layoutX="583.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="40.0" prefWidth="101.0" text="CANCELAR" AnchorPane.rightAnchor="14.0" />
-                  <Button layoutX="248.0" layoutY="8.0" mnemonicParsing="false" onAction="#reingreso" prefHeight="40.0" prefWidth="101.0" text="REINGRESO" AnchorPane.rightAnchor="348.0" />
+                  <Button layoutX="575.0" layoutY="8.0" mnemonicParsing="false" onAction="#agregarPacienteNuevo" prefHeight="40.0" prefWidth="101.0" text="NUEVO" AnchorPane.rightAnchor="21.799999999999955" />
                </children>
             </AnchorPane>
          </bottom>
