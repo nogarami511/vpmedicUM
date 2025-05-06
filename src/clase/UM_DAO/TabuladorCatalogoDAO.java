@@ -9,6 +9,7 @@ import clase.Conexion;
 import java.sql.Connection;
 import clase.UM.Tabulacion;
 import clase.UM.TipoTabulacion;
+import clases_hospital.TipoHabitacion;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,6 +46,7 @@ public class TabuladorCatalogoDAO {
             ResultSet rs = stmt.getResultSet();
             while(rs.next()){
                 Tabulacion tab = new Tabulacion();
+                    tab.setTipoTabulacion(new TipoTabulacion());
                     tab.setId(rs.getInt("idTabulador"));
                     tab.setNombre(rs.getString("nombre"));
                     System.out.println(""+tab.getNombre());
@@ -79,7 +81,7 @@ public class TabuladorCatalogoDAO {
     tab.setTipoTabulacion(tipo);
 
     // Llamar al procedimiento almacenado
-    //List<Tabulacion> resultado = ejecutarProcedimiento("agregar", tab);
+    List<Tabulacion> resultado = ejecutarProcedimiento("agregar", tab);
 }
 
     

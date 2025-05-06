@@ -70,7 +70,7 @@ public class TabuladorCatalogoController implements Initializable {
     
     public void loadPageIngresarTabulacion() throws IOException{
         
-        System.out.println("loadPAGE INICIADO");
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas_UM/IngresarTabulador.fxml"));
         Parent root = loader.load();
 
@@ -89,6 +89,7 @@ public class TabuladorCatalogoController implements Initializable {
     @FXML
     private void btnIngresarTabulacion(ActionEvent event) throws IOException {
         loadPageIngresarTabulacion();
+        llenarTabla();
     }
 
 

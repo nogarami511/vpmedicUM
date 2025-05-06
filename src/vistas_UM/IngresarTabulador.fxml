@@ -29,7 +29,7 @@
                   <TextArea fx:id="txtAreaNota" layoutX="56.0" layoutY="170.0" prefHeight="195.0" prefWidth="377.0" />
                   <TextField fx:id="txtID" disable="true" layoutX="43.0" layoutY="41.0" prefHeight="25.0" prefWidth="44.0" />
                   <Text layoutX="27.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo: " />
-                  <ComboBox fx:id="cmbTipo" layoutX="56.0" layoutY="112.0" prefHeight="25.0" prefWidth="184.0" />
+                  <ComboBox fx:id="cmbTipoTabulacion" layoutX="56.0" layoutY="112.0" prefHeight="25.0" prefWidth="184.0" promptText="SELECCIONAR TIPO" />
                </children>
             </AnchorPane>
          </center>

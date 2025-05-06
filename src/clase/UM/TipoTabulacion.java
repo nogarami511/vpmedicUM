@@ -50,7 +50,7 @@ public class TipoTabulacion {
 
     @Override
     public String toString() {
-        return "TipoTabulacion{" + "idTipoTabulacion=" + idTipoTabulacion + ", tipo=" + tipo + ", estatus=" + estatus + '}';
+        return this.tipo;
     }
     
     
