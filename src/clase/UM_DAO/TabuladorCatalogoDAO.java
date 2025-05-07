@@ -49,10 +49,10 @@ public class TabuladorCatalogoDAO {
                     tab.setTipoTabulacion(new TipoTabulacion());
                     tab.setId(rs.getInt("idTabulador"));
                     tab.setNombre(rs.getString("nombre"));
-                    System.out.println(""+tab.getNombre());
                     tab.setNota(rs.getString("nota"));
                     tab.setEstatus(rs.getBoolean("estatus"));
                     tab.getTipoTabulacion().setTipo(rs.getString("tipo"));
+                    tab.getTipoTabulacion().setIdTipoTabulacion(rs.getInt("idTipoTabulacion"));
                     tabulaciones.add(tab);
             }
             
@@ -65,24 +65,21 @@ public class TabuladorCatalogoDAO {
     }
     
     // Agregar Tabulacion 
-    public void agregarTabulacion(int id,String nombre, String nota, int tipoTabulacion) {
-    
-
+    public void agregarTabulacion(int id, String nombre, String nota, int tipoTabulacion) {
     // Crear y llenar el objeto Tabulacion
     Tabulacion tab = new Tabulacion();
     tab.setId(id);
     tab.setNombre(nombre);
     tab.setNota(nota);
     tab.setEstatus(true);
-
     // Configurar tipo de tabulación (esto depende de cómo lo selecciones en tu UI)
     TipoTabulacion tipo = new TipoTabulacion();
     tipo.setIdTipoTabulacion(tipoTabulacion); // Ajusta esto según corresponda
     tab.setTipoTabulacion(tipo);
-
     // Llamar al procedimiento almacenado
     List<Tabulacion> resultado = ejecutarProcedimiento("agregar", tab);
 }
-
+    
+    
     
 }

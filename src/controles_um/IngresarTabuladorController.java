@@ -5,6 +5,7 @@
  */
 package controles_um;
 
+import clase.UM.Tabulacion;
 import clase.UM.TipoTabulacion;
 import clase.UM_DAO.TabuladorCatalogoDAO;
 import clase.UM_DAO.TipoTabulacionDAO;
@@ -42,6 +43,7 @@ public class IngresarTabuladorController implements Initializable {
     
     private final TipoTabulacionDAO tipoTabDAO = new TipoTabulacionDAO();
     private final TabuladorCatalogoDAO tabuladorDAO = new TabuladorCatalogoDAO();
+    Tabulacion tab = new Tabulacion();
     
     /**
      * Initializes the controller class.
@@ -49,16 +51,25 @@ public class IngresarTabuladorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        cargarTipo();
+        System.out.println("2");
+        cargarTipo();       
+    }
+    
+    public void recibirDatos(Tabulacion tabulacion){
+        
+           txtNombre.setText(tabulacion.getNombre());
+           txtAreaNota.setText(tabulacion.getNota());
+           cmbTipoTabulacion.setValue(tabulacion.getTipoTabulacion());
+           System.out.println("" + tabulacion.getTipoTabulacion());
+           txtID.setText(tabulacion.getId() + " ");
+           System.out.println("" + tabulacion.getTipoTabulacion().getIdTipoTabulacion());
+           cmbTipoTabulacion.selectionModelProperty().equals(tab.getTipoTabulacion());
+           this.tab = tabulacion;
     }
 
     public void cargarTipo (){
         try {
-            TipoTabulacion tipoTab = new TipoTabulacion();
-            tipoTab.setIdTipoTabulacion(0);
-            tipoTab.setTipo(null);
-            tipoTab.setEstatus(true);
-
+            TipoTabulacion tipoTab = new TipoTabulacion();            
             List<TipoTabulacion> listaTipos = tipoTabDAO.ejecutarProcedimiento("listar", tipoTab);
             cmbTipoTabulacion.setItems(FXCollections.observableArrayList(listaTipos));
         } catch (SQLException e) {
@@ -67,12 +78,10 @@ public class IngresarTabuladorController implements Initializable {
     }
 
     public void guardarDatos(){
-        String nombre = txtNombre.getText();
-        String nota = txtAreaNota.getText();
-        TipoTabulacion seleccionado = cmbTipoTabulacion.getSelectionModel().getSelectedItem();
+        
         
         //Validación
-        if (nombre.isEmpty() || nota.isEmpty() || seleccionado == null){
+        if (txtNombre.getText().isEmpty() || txtAreaNota.getText().isEmpty() || cmbTipoTabulacion.getSelectionModel() == null){
             Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setTitle("¡CAMPOS INCOMPLETOS!");
             alerta.setHeaderText(null);
@@ -82,10 +91,18 @@ public class IngresarTabuladorController implements Initializable {
             return;
         }
         
-        int idTipoTabulacion = seleccionado.getIdTipoTabulacion();
+        
+        tab.setNombre(txtNombre.getText());
+        tab.setNota(txtAreaNota.getText());
+        tab.setTipoTabulacion(cmbTipoTabulacion.getSelectionModel().getSelectedItem());
         
         try {
-            tabuladorDAO.agregarTabulacion(idTipoTabulacion, nombre, nota, idTipoTabulacion);
+            if (tab.getId() != 0) {
+                tabuladorDAO.ejecutarProcedimiento("editar", tab);
+                System.out.println(tab.getTipoTabulacion());
+            } else{
+                tabuladorDAO.ejecutarProcedimiento("agregar", tab);
+            }
             Alert alertaExito = new Alert(Alert.AlertType.INFORMATION);
             alertaExito.setTitle("Éxito");
             alertaExito.setHeaderText(null);
@@ -104,9 +121,7 @@ public class IngresarTabuladorController implements Initializable {
             alertaError.setHeaderText("No se pudo guarda");
             alertaError.setContentText("Ocurrio un error al guardar la tabulación.");
             alertaError.showAndWait();
-        }
-        
-        
+        }        
     }
 
     @FXML
