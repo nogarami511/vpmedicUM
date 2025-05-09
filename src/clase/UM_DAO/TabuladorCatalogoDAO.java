@@ -54,8 +54,7 @@ public class TabuladorCatalogoDAO {
                     tab.getTipoTabulacion().setTipo(rs.getString("tipo"));
                     tab.getTipoTabulacion().setIdTipoTabulacion(rs.getInt("idTipoTabulacion"));
                     tabulaciones.add(tab);
-            }
-            
+            }            
         }
                        
         catch (SQLException e){

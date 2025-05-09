@@ -49,11 +49,13 @@ public class TabuladorCatalogoController implements Initializable {
     @FXML
     private TableColumn<?, ?> colArmado;
     @FXML
-    private TableColumn<?, ?> colEliminar;
+    private TableColumn<Tabulacion, String> colEliminar;
     @FXML
     private TableColumn<Tabulacion, String> ColEditar;
 
     ObservableList<Tabulacion> obListTabuladores = FXCollections.observableArrayList();
+    
+     TabuladorCatalogoDAO tabuladorDAO;
 
     Alert alertaError = new Alert(Alert.AlertType.ERROR);
     Alert alertaInfo = new Alert(Alert.AlertType.INFORMATION);
@@ -68,16 +70,17 @@ public class TabuladorCatalogoController implements Initializable {
         // TODO
         llenarTabla();
     }
-
+    
     public void llenarTabla() {
-        TabuladorCatalogoDAO tabuladorDAO = new TabuladorCatalogoDAO();
+        tabuladorDAO = new TabuladorCatalogoDAO();
         Tabulacion tabulador = new Tabulacion();
         tablaTabulacion.getItems().clear();
         obListTabuladores.clear();
         nombreTabulacion.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         notaTabulacion.setCellValueFactory(new PropertyValueFactory<>("nota"));
 
-        generarBotones();
+        generarBotonEditar();
+        generarBotonEliminar();
         obListTabuladores.addAll(tabuladorDAO.ejecutarProcedimiento("listar", tabulador));
         tablaTabulacion.setItems(obListTabuladores);
 
@@ -116,7 +119,6 @@ public class TabuladorCatalogoController implements Initializable {
         } catch (IOException e) {
             System.out.println(e);
         }
-
     }
 
     @FXML
@@ -125,7 +127,7 @@ public class TabuladorCatalogoController implements Initializable {
         llenarTabla();
     }
 
-    private void generarBotones() {        
+    private void generarBotonEditar() {        
         Callback<TableColumn<Tabulacion, String>, TableCell<Tabulacion, String>> Editar = (TableColumn<Tabulacion, String> param) -> {
             final TableCell<Tabulacion, String> cell = new TableCell<Tabulacion, String>() {
                 @Override
@@ -165,5 +167,48 @@ public class TabuladorCatalogoController implements Initializable {
         };
         ColEditar.setCellFactory(Editar);
     }
+    
+    private void generarBotonEliminar() {        
+        Callback<TableColumn<Tabulacion, String>, TableCell<Tabulacion, String>> Eliminar = (TableColumn<Tabulacion, String> param) -> {
+            final TableCell<Tabulacion, String> cell = new TableCell<Tabulacion, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final Button btnVer = new Button("");
+                        Tabulacion tabulador = getTableView().getItems().get(getIndex());
+                        ImageView imgVer = new ImageView("/img/icons/icons8-eliminar-30.png");
+                        imgVer.setFitHeight(20);
+                        imgVer.setFitWidth(20);
+
+                        btnVer.setOnAction(event -> {
+                            //AQUI VA LO NECESARIO PARA MANDAR A TRAER LA SIGUIENTE VISTA
+                            alertaConfirmacion.setHeaderText(null);
+                            alertaConfirmacion.setTitle("Eliminar a: " + tabulador.getNombre());
+                            alertaConfirmacion.setContentText("¿Estás seguro de eliminar a: " + tabulador.getNombre() + " ?");
+                            Optional<ButtonType> action = alertaConfirmacion.showAndWait();
+                            if (action.get() == ButtonType.OK) {
+                                System.out.println("Aqui tamos <3 " + tabulador.getNombre());
+                                tabulador.setEstatus(false);
+                                 tabuladorDAO = new TabuladorCatalogoDAO();
+                                 tabuladorDAO.ejecutarProcedimiento("editar", tabulador);
+                                 llenarTabla();
+                                
+                            }
+                        });
+
+                        setGraphic(btnVer);
+                        setText(null);
+                        btnVer.setGraphic(imgVer);
+                    }
+                }
+            };
+            return cell;
+        };
+        colEliminar.setCellFactory(Eliminar);
+    }
+    
 
 }

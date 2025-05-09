@@ -51,7 +51,7 @@ public class IngresarTabuladorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        System.out.println("2");
+        
         cargarTipo();       
     }
     
@@ -77,9 +77,7 @@ public class IngresarTabuladorController implements Initializable {
         }
     }
 
-    public void guardarDatos(){
-        
-        
+    public void guardarDatos(){       
         //Validación
         if (txtNombre.getText().isEmpty() || txtAreaNota.getText().isEmpty() || cmbTipoTabulacion.getSelectionModel() == null){
             Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -89,9 +87,7 @@ public class IngresarTabuladorController implements Initializable {
             alerta.initModality(Modality.APPLICATION_MODAL);
             alerta.showAndWait();
             return;
-        }
-        
-        
+        }        
         tab.setNombre(txtNombre.getText());
         tab.setNota(txtAreaNota.getText());
         tab.setTipoTabulacion(cmbTipoTabulacion.getSelectionModel().getSelectedItem());
@@ -114,8 +110,7 @@ public class IngresarTabuladorController implements Initializable {
             cmbTipoTabulacion.getSelectionModel().clearSelection();
             
         } catch (Exception e) {
-            e.printStackTrace();
-            
+            e.printStackTrace();            
             Alert alertaError = new Alert(Alert.AlertType.ERROR);
             alertaError.setTitle("Error");
             alertaError.setHeaderText("No se pudo guarda");
