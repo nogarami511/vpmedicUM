@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -30,8 +29,6 @@
                            </font>
                         </TextField>
                         <Label layoutX="23.0" layoutY="22.0" text="BUSCAR:" AnchorPane.leftAnchor="23.0" />
-                        <ComboBox fx:id="cbxfiltro" layoutX="534.0" layoutY="18.0" onAction="#filtrar" prefWidth="150.0" promptText="SELECCIONAR" />
-                        <Label layoutX="452.0" layoutY="22.0" text="FILTRAR:" />
                      </children>
                   </AnchorPane>
                </children>
@@ -41,12 +38,12 @@
             <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="nombrePaciente" minWidth="150.0" prefWidth="150.0" text="NOMBRE" />
-                <TableColumn fx:id="telefonoPaciente" minWidth="90.0" prefWidth="90.0" text="TELÉFONO" />
+                <TableColumn fx:id="tabulacionPaciente" minWidth="90.0" prefWidth="90.0" text="TABULACION" />
                   <TableColumn fx:id="telefonoPaciente1" minWidth="90.0" prefWidth="90.0" text="Acciones">
                      <columns>
-                        <TableColumn fx:id="telefonoPaciente11" minWidth="90.0" prefWidth="90.0" text="FOLIOS" />
-                        <TableColumn fx:id="telefonoPaciente111" minWidth="90.0" prefWidth="90.0" text="EDITAR" />
-                        <TableColumn fx:id="telefonoPaciente112" minWidth="90.0" prefWidth="90.0" text="ELIMINAR" />
+                        <TableColumn fx:id="fioliosPaciente" minWidth="90.0" prefWidth="90.0" text="FOLIOS" />
+                        <TableColumn fx:id="editarPaciente" minWidth="90.0" prefWidth="90.0" text="EDITAR" />
+                        <TableColumn fx:id="eliminarPaciente" minWidth="90.0" prefWidth="90.0" text="ELIMINAR" />
                      </columns>
                   </TableColumn>
               </columns>
