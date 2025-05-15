@@ -5,46 +5,19 @@
  */
 package controladores;
 
-import clase.Conexion;
 import clase.Paciente;
-import clase.TipoVistaPago;
 import clase.UM.PacienteUM;
-import clases_hospital.AsignacionHabitacion;
-import clases_hospital.CitaQuirofano;
-import clases_hospital.Consumo;
-import clases_hospital.ConsumoHabitacion;
-import clases_hospital.CostoHabitacion;
-import clases_hospital.CostoHabitacionDAO;
-import clases_hospital.Folio;
-import clases_hospital.Habitacion;
-import clases_hospital.NumerosALetras;
-import clases_hospital.ReporteCierre;
-import clases_hospital_DAO.ActualizacionFolioDAO;
-import clases_hospital_DAO.AsignacionHabitacionDAO;
-import clases_hospital_DAO.CitaQuirofanoDAO;
-import clases_hospital_DAO.ConsumoHabitacionDAO;
-import clases_hospital_DAO.ConsumoPacienteMezclasDAO;
-import clases_hospital_DAO.ConsumosDAO;
-import clases_hospital_DAO.FoliosDAO;
-import clases_hospital_DAO.HabitacionDAO;
-import clases_hospital_DAO.IndicaspDAO;
-import clases_hospital_DAO.PacientesDAO;
-import clases_hospital_DAO.PagosDAO;
-import clases_hospital_DAO.PaqueteMedicoDAO;
-import clases_hospital_DAO.PaquetesMedicosDAO;
+import clase.UM.Tabulacion;
+import clase.UM_DAO.PacienteUmDAO;
+import controles_um.TabuladorCatalogoController;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,24 +29,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import reportes.ReporteC;
 import vistasAuxiliares.PacienteNuevo2Controller;
-import vistasAuxiliares_hospital.HorasMedicasHabitacionEnfermeriaController;
-import vistasAuxiliares_hospital.ModuloPagosFXMLController;
-import vpmedicaplaza.VPMedicaPlaza;
-
 /**
  * FXML Controller class
  *
@@ -89,15 +54,24 @@ public class Pacientes2Controller implements Initializable {
     @FXML
     private TextField txfBuscarPaciente;
     @FXML
-    private ComboBox<?> cbxfiltro;
-    @FXML
     private TableView<PacienteUM> tabla;
     @FXML
-    private TableColumn<?, ?> nombrePaciente;
+    TableColumn<PacienteUM, String> nombrePaciente = new TableColumn<>("Paciente");
     @FXML
-    private TableColumn<?, ?> telefonoPaciente;
+    private TableColumn<?, ?> telefonoPaciente1;
     @FXML
-    private TableColumn<?, ?> nombreMedico;
+    private TableColumn<?, ?> fioliosPaciente;
+    @FXML
+    private TableColumn<PacienteUM, String> editarPaciente;
+    @FXML
+    private TableColumn<?, ?> eliminarPaciente;
+    
+    private ObservableList<PacienteUM> pacientes = FXCollections.observableArrayList();
+    
+    PacienteUmDAO dao ;
+    PacienteUM paciente;
+    @FXML
+    private TableColumn<?, ?> tabulacionPaciente;
 
    
     /**
@@ -105,15 +79,109 @@ public class Pacientes2Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+        try {
+            llenarTala();
+        } catch (SQLException ex) {
+            Logger.getLogger(Pacientes2Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void llenarTala() throws SQLException{
+        dao = new PacienteUmDAO();
+        paciente = new PacienteUM();
+        pacientes.clear();
+        tabla.getItems().clear();
+        pacientes.addAll(dao.ejecutarProcedimientoPaciente("listar", paciente));
+        
+        nombrePaciente.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().toString()));
+        tabulacionPaciente.setCellValueFactory(new PropertyValueFactory("tipoTab"));
+        
+        tabla.setItems(pacientes);
+        
+    }
+    
+    private void generarBotones() {        
+        Callback<TableColumn<PacienteUM, String>, TableCell<PacienteUM, String>> Editar = (TableColumn<PacienteUM, String> param) -> {
+            final TableCell<PacienteUM, String> cell = new TableCell<PacienteUM, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final Button btnVer = new Button("");
+                        PacienteUM paciente = getTableView().getItems().get(getIndex());
+                        ImageView imgVer = new ImageView("/img/icons/icons8-lápiz-30.png");
+                        imgVer.setFitHeight(20);
+                        imgVer.setFitWidth(20);
+
+                        btnVer.setOnAction(event -> {
+                            //AQUI VA LO NECESARIO PARA MANDAR A TRAER LA SIGUIENTE VISTA
+                            alertaConfirmacion.setHeaderText(null);
+                            alertaConfirmacion.setTitle("Confirmación de editar");
+                            alertaConfirmacion.setContentText("¿Estas seguro de editar a: " + paciente.getNombrePaciente()+ " ?");
+                            Optional<ButtonType> action = alertaConfirmacion.showAndWait();
+                            if (action.get() == ButtonType.OK) {
+                                try {
+                                    EditarPaciente(paciente);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(TabuladorCatalogoController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(Pacientes2Controller.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        });
+
+                        setGraphic(btnVer);
+                        setText(null);
+                        btnVer.setGraphic(imgVer);
+                    }
+                }
+            };
+            return cell;
+        };
+        editarPaciente.setCellFactory(Editar);
+    }
+    
+        private void EditarPaciente(PacienteUM paciente) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistasAuxiliares/PacienteNuevo2.fxml"));
+        Parent root = loader.load();
+        PacienteNuevo2Controller destinoController = loader.getController();
+
+        // Pasar el objeto a la vista de destino
+        destinoController.setObjeto(paciente);
+
+        // Crear un nuevo Stage para la vista de destino
+        Stage destinoStage = new Stage();
+        destinoStage.setTitle("PACIENTE NUEVO");
+        destinoStage.setScene(new Scene(root));
+        destinoStage.initModality(Modality.APPLICATION_MODAL);
+        destinoStage.setResizable(false);
+
+        // Mostrar el nuevo Stage de forma modal
+        destinoStage.showAndWait();
+
+        llenarTala();
     }
 
-    @FXML
-    private void filtrar(ActionEvent event) {
-    }
+
+    
 
     @FXML
-    private void agregarPacienteNuevo(ActionEvent event) {
+    private void agregarPacienteNuevo(ActionEvent event) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistasAuxiliares/PacienteNuevo2.fxml"));
+        Parent root = loader.load();
+        // Crear un nuevo Stage para la vista de destino
+        Stage destinoStage = new Stage();
+        destinoStage.setTitle("PACIENTE NUEVO");
+        destinoStage.setScene(new Scene(root));
+        destinoStage.initModality(Modality.APPLICATION_MODAL);
+        destinoStage.setResizable(false);
+
+        // Mostrar el nuevo Stage de forma modal
+        destinoStage.showAndWait();
+
+        llenarTala();
     }
 
  
