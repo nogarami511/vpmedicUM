@@ -122,7 +122,7 @@ public class IngresarTabuladorController implements Initializable {
     @FXML
     private void ingresarTabulacion(ActionEvent event) {
         guardarDatos();
-         Node source = (Node) event.getSource();
+        Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }

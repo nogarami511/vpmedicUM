@@ -14,7 +14,7 @@
          <left>
             <AnchorPane prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="16.0" layoutY="138.0" mnemonicParsing="false" onAction="#ingresarTabulacion" prefHeight="42.0" prefWidth="119.0" text="INGRESAR" />
+                  <Button layoutX="16.0" layoutY="138.0" mnemonicParsing="false" onAction="#ingresarTabulacion" prefHeight="42.0" prefWidth="119.0" text="GUARDAR" />
                   <Button layoutX="42.0" layoutY="316.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
                </children>
             </AnchorPane>

@@ -37,7 +37,7 @@ public class ServicioDAO {
                 stmt.setDouble("precioUnitario_", servicio.getPrecioUnitario());
                 stmt.setDouble("total_", servicio.getTotal());
                 stmt.setBoolean("estatus", servicio.getEstatus());
-                stmt.setInt("idUnidadVenta", servicio.getNidad().getIdUnidadVenta());
+                stmt.setInt("idUnidadVenta", servicio.getUnidadServicio().getIdUnidadVenta());
                 stmt.setInt("idTabServ_", servicio.getIdTabServ());
                 stmt.execute();
                 
@@ -52,7 +52,7 @@ public class ServicioDAO {
                         serv.setPrecioUnitario(rs.getDouble("precioU"));
                         serv.setTotal(rs.getDouble("total"));
                         serv.setEstatus(rs.getBoolean("estatus"));
-                        serv.getNidad().setIdUnidadVenta(rs.getInt("idUnidadVenta"));
+                        serv.getUnidadServicio().setIdUnidadVenta(rs.getInt("idUnidadVenta"));
                         serv.getTabulador().setId(rs.getInt("idTabulador"));
                         servicios.add(serv);                        
                 }           

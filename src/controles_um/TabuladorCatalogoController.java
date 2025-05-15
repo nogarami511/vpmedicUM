@@ -47,14 +47,13 @@ public class TabuladorCatalogoController implements Initializable {
     @FXML
     private TableColumn<?, ?> notaTabulacion;
     @FXML
-    private TableColumn<?, ?> colArmado;
+    private TableColumn<Tabulacion, String> colArmado;
     @FXML
     private TableColumn<Tabulacion, String> colEliminar;
     @FXML
     private TableColumn<Tabulacion, String> ColEditar;
 
-    ObservableList<Tabulacion> obListTabuladores = FXCollections.observableArrayList();
-    
+    ObservableList<Tabulacion> obListTabuladores = FXCollections.observableArrayList();    
      TabuladorCatalogoDAO tabuladorDAO;
 
     Alert alertaError = new Alert(Alert.AlertType.ERROR);
@@ -72,15 +71,15 @@ public class TabuladorCatalogoController implements Initializable {
     }
     
     public void llenarTabla() {
+        generarBotonArmado();
+        generarBotonEditar();
+        generarBotonEliminar();
         tabuladorDAO = new TabuladorCatalogoDAO();
         Tabulacion tabulador = new Tabulacion();
         tablaTabulacion.getItems().clear();
         obListTabuladores.clear();
         nombreTabulacion.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         notaTabulacion.setCellValueFactory(new PropertyValueFactory<>("nota"));
-
-        generarBotonEditar();
-        generarBotonEliminar();
         obListTabuladores.addAll(tabuladorDAO.ejecutarProcedimiento("listar", tabulador));
         tablaTabulacion.setItems(obListTabuladores);
 
@@ -90,13 +89,11 @@ public class TabuladorCatalogoController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas_UM/IngresarTabulador.fxml"));
         Parent root = loader.load();
-
         Stage nuevoStage = new Stage();
         nuevoStage.setTitle("INGRESAR NUEVA TABULACIÓN");  // Usa el título correcto
         nuevoStage.setScene(new Scene(root));
         nuevoStage.initModality(Modality.APPLICATION_MODAL);
-        nuevoStage.setResizable(false);
-
+        nuevoStage.setResizable(false);                                                                 
         // Mostrar de forma modal (bloquea la ventana anterior hasta que se cierre esta)
         nuevoStage.showAndWait();
 
@@ -109,10 +106,31 @@ public class TabuladorCatalogoController implements Initializable {
             IngresarTabuladorController ingresartabcontroller = loader.getController();
             ingresartabcontroller.recibirDatos(tabulador);
             Stage nuevoStage = new Stage();
-            nuevoStage.setTitle("INGRESAR NUEVA TABULACIÓN");  // Usa el título correcto
+            nuevoStage.setTitle("EDITAR TABULACIÓN");  // Usa el título correcto
             nuevoStage.setScene(new Scene(root));
             nuevoStage.initModality(Modality.APPLICATION_MODAL);
             nuevoStage.setResizable(false);
+            // Mostrar de forma modal (bloquea la ventana anterior hasta que se cierre esta)
+            nuevoStage.showAndWait();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void loadPageArmardo(Tabulacion tabulador) {
+         try {
+            System.out.println("-> Entro a 'loadPage Armado' <-");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas_UM/ServicioCatalogo.fxml"));
+            Parent root = loader.load();
+            //Agregar recibirDatos en controller
+            ServicioCatalogoController servicioController = loader.getController();
+            servicioController.recibirDatos(tabulador);
+            Stage nuevoStage = new Stage();
+            nuevoStage.setTitle("SERVICIOS");  // Usa el título correcto
+            nuevoStage.setScene(new Scene(root));
+            nuevoStage.initModality(Modality.APPLICATION_MODAL);
+            nuevoStage.setResizable(false); System.out.println("Debio crear la vista armado");
             // Mostrar de forma modal (bloquea la ventana anterior hasta que se cierre esta)
             nuevoStage.showAndWait();
 
@@ -125,6 +143,45 @@ public class TabuladorCatalogoController implements Initializable {
     private void btnIngresarTabulacion(ActionEvent event) throws IOException {
         loadPageIngresarTabulacion();
         llenarTabla();
+    }
+    
+    private void generarBotonArmado() {
+        Callback<TableColumn<Tabulacion, String>, TableCell<Tabulacion, String>> Armado = (TableColumn<Tabulacion, String> param) -> {
+            final TableCell<Tabulacion, String> cell = new TableCell<Tabulacion, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final Button btnVer = new Button("");
+                        Tabulacion tabulador = getTableView().getItems().get(getIndex());
+                        ImageView imgVer = new ImageView("/img/icons/icons8-caja-llena-50.png");
+                        imgVer.setFitHeight(20);
+                        imgVer.setFitWidth(20);
+
+                        btnVer.setOnAction(event -> {
+                            //AQUI VA LO NECESARIO PARA MANDAR A TRAER LA SIGUIENTE VISTA
+                            alertaConfirmacion.setHeaderText(null);
+                            alertaConfirmacion.setTitle("Confirmación de armar");
+                            alertaConfirmacion.setContentText("¿Estas seguro de armar a: " + tabulador.getNombre() + " ?");
+                            Optional<ButtonType> action = alertaConfirmacion.showAndWait();
+                            if (action.get() == ButtonType.OK) {
+                                System.out.println("ENTRO AL IF DEL GENERARBOTON");
+                                loadPageArmardo(tabulador);
+                            }                       
+                        }
+                            );
+
+                        setGraphic(btnVer);
+                        setText(null);
+                        btnVer.setGraphic(imgVer);
+                    }
+                }
+            };
+            return cell;
+        };
+        colArmado.setCellFactory(Armado);
     }
 
     private void generarBotonEditar() {        
@@ -190,7 +247,7 @@ public class TabuladorCatalogoController implements Initializable {
                             alertaConfirmacion.setContentText("¿Estás seguro de eliminar a: " + tabulador.getNombre() + " ?");
                             Optional<ButtonType> action = alertaConfirmacion.showAndWait();
                             if (action.get() == ButtonType.OK) {
-                                System.out.println("Aqui tamos <3 " + tabulador.getNombre());
+                                System.out.println("Se desactivo: " + tabulador.getNombre());
                                 tabulador.setEstatus(false);
                                  tabuladorDAO = new TabuladorCatalogoDAO();
                                  tabuladorDAO.ejecutarProcedimiento("editar", tabulador);
