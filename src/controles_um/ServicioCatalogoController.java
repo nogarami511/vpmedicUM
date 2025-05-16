@@ -13,6 +13,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,8 +102,8 @@ public class ServicioCatalogoController implements Initializable {
     }
     
     private void generarBotonEliminar(){
-        Callback<TableColumn<Tabulacion, String>, TableCell<Tabulacion, String>> Eliminar = (TableColumn<Tabulacion, String> param) -> {
-            final TableCell<Tabulacion, String> cell = new TableCell<Tabulacion, String>() {
+        Callback<TableColumn<Servicio, String>, TableCell<Servicio, String>> Eliminar = (TableColumn<Servicio, String> param) -> {
+            final TableCell<Servicio, String> cell = new TableCell<Servicio, String>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     if (empty) {
@@ -109,7 +111,7 @@ public class ServicioCatalogoController implements Initializable {
                         setText(null);
                     } else {
                         final Button btnVer = new Button("");
-                        Tabulacion tabulador = getTableView().getItems().get(getIndex());
+                        Servicio serv = getTableView().getItems().get(getIndex());
                         ImageView imgVer = new ImageView("/img/icons/icons8-eliminar-30.png");
                         imgVer.setFitHeight(20);
                         imgVer.setFitWidth(20);
@@ -117,15 +119,23 @@ public class ServicioCatalogoController implements Initializable {
                         btnVer.setOnAction(event -> {
                             //AQUI VA LO NECESARIO PARA MANDAR A TRAER LA SIGUIENTE VISTA
                             alertaConfirmacion.setHeaderText(null);
-                            alertaConfirmacion.setTitle("Eliminar a: " + tabulador.getNombre());
-                            alertaConfirmacion.setContentText("¿Estás seguro de eliminar a: " + tabulador.getNombre() + " ?");
+                            alertaConfirmacion.setTitle("Eliminar a: " + serv.getDescripcion());
+                            alertaConfirmacion.setContentText("¿Estás seguro de eliminar a: " + serv.getDescripcion() + " ?");
                             Optional<ButtonType> action = alertaConfirmacion.showAndWait();
                             if (action.get() == ButtonType.OK) {
-                                System.out.println("Se desactivo: " + tabulador.getNombre());
-                                tabulador.setEstatus(false);
-                                 tabuladorDAO = new TabuladorCatalogoDAO();
-                                 tabuladorDAO.ejecutarProcedimiento("editar", tabulador);
-                                 llenarTabla();
+                                System.out.println("Se desactivo: " +serv.getDescripcion());
+                                serv.setEstatus(false);
+                                servicioDAO  = new ServicioDAO();
+                                try {
+                                    servicioDAO.ejecutarProcedimiento("editar", serv);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(ServicioCatalogoController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try {
+                                    llenarTabla();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(ServicioCatalogoController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 
                             }
                         });
