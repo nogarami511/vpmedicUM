@@ -55,6 +55,8 @@ public class ServicioCatalogoController implements Initializable {
 
     ObservableList<Servicio> obListServicios = FXCollections.observableArrayList();
     ServicioDAO servicioDAO;
+    
+    Servicio servicio;
    
     Alert alertaError = new Alert(Alert.AlertType.ERROR);
     Alert alertaInfo = new Alert(Alert.AlertType.INFORMATION);
@@ -76,23 +78,32 @@ public class ServicioCatalogoController implements Initializable {
 
     
     public void recibirDatos(Tabulacion tab) {
-        nombreTab = tab.getNombre();        
+        nombreTab = tab.getNombre(); 
+        servicio = new  Servicio();
+         servicio.setTabulador(tab);
+         try {
+           llenarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioCatalogoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void llenarTabla() throws SQLException{
+    private void llenarTabla() throws SQLException{
         generarBotonActualizar();
         generarBotonEliminar();
         
         servicioDAO = new ServicioDAO();
-        Servicio servicio = new Servicio();
+        
+        
         tablaServicios.getItems().clear();
         obListServicios.clear();
+        obListServicios.addAll(servicioDAO.ejecutarProcedimiento("listar", servicio));
         colID.setCellValueFactory(new PropertyValueFactory<>("idTabServ"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         colLote.setCellValueFactory(new PropertyValueFactory<>("lote"));
         colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        obListServicios.addAll(servicioDAO.ejecutarProcedimiento("listar", servicio));
+        
         tablaServicios.setItems(obListServicios);
     }
     
