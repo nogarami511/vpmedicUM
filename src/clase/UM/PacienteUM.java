@@ -5,6 +5,7 @@
  */
 package clase.UM;
 
+import controles_um.TipoSexo;
 import java.sql.Date;
 
 /**
@@ -12,14 +13,14 @@ import java.sql.Date;
  * @author olver
  */
 public class PacienteUM {
-    
+
     private int idPaciente;
-    private TipoTabulacion  tipoTab = new TipoTabulacion();
+    private TipoTabulacion tipoTab = new TipoTabulacion();
     private String curp;
     private String nombrePaciente;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private String sexoPaciente;
+    private TipoSexo tipoSexo = new TipoSexo();
     private java.sql.Date fechaNacimientoPaciente;
     private int edad;
     private UsuarioUm usuarioCreacion = new UsuarioUm();
@@ -28,19 +29,6 @@ public class PacienteUM {
     public PacienteUM() {
     }
 
-    public PacienteUM(int idPaciente, String curp, String nombrePaciente, String apellidoPaterno, String apellidoMaterno, String sexoPaciente, Date fechaNacimientoPaciente, int edad, boolean estatus) {
-        this.idPaciente = idPaciente;
-        this.curp = curp;
-        this.nombrePaciente = nombrePaciente;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.sexoPaciente = sexoPaciente;
-        this.fechaNacimientoPaciente = fechaNacimientoPaciente;
-        this.edad = edad;
-        this.estatus = estatus;
-    }
-
-   
     public int getIdPaciente() {
         return idPaciente;
     }
@@ -89,12 +77,12 @@ public class PacienteUM {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getSexoPaciente() {
-        return sexoPaciente;
+    public TipoSexo getTipoSexo() {
+        return tipoSexo;
     }
 
-    public void setSexoPaciente(String sexoPaciente) {
-        this.sexoPaciente = sexoPaciente;
+    public void setTipoSexo(TipoSexo tipoSexo) {
+        this.tipoSexo = tipoSexo;
     }
 
     public Date getFechaNacimientoPaciente() {
@@ -113,8 +101,6 @@ public class PacienteUM {
         this.edad = edad;
     }
 
-  
-
     public UsuarioUm getUsuarioCreacion() {
         return usuarioCreacion;
     }
@@ -131,18 +117,9 @@ public class PacienteUM {
         this.estatus = estatus;
     }
 
-    
     @Override
     public String toString() {
-        return nombrePaciente + " " + apellidoPaterno + " " + apellidoMaterno ;
+        return nombrePaciente + " " + apellidoPaterno + " " + apellidoMaterno;
     }
 
-  
-    
-    
-    
-    
-    
-    
-    
 }

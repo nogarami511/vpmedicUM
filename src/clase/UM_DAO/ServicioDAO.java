@@ -56,7 +56,6 @@ public class ServicioDAO {
                         serv.setEstatus(rs.getBoolean("estatus"));
                         serv.getUnidadServicio().setIdUnidadVenta(rs.getInt("idUnidadVenta"));
                         serv.getTabulador().setId(rs.getInt("idTabulador"));
-                        System.out.println("" + serv );
                         servicios.add(serv);                        
                 }           
             }
