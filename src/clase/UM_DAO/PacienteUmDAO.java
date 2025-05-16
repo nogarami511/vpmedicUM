@@ -40,7 +40,7 @@ public class PacienteUmDAO {
                 stm.setString("nombre_paciente_", paciente.getNombrePaciente());
                 stm.setString("apellido_paterno_", paciente.getApellidoPaterno());
                 stm.setString("apellido_materno_", paciente.getApellidoMaterno());
-                stm.setString("sexo", paciente.getSexoPaciente());
+                stm.setInt("id_tsexo", paciente.getTipoSexo().getIdTipoSexo());
                 stm.setDate("fecha_nacimiento_", paciente.getFechaNacimientoPaciente());
                 stm.setInt("edad_", paciente.getEdad());
                 stm.setInt("id_usuario_", paciente.getUsuarioCreacion().getIdUsuario());
@@ -56,7 +56,8 @@ public class PacienteUmDAO {
                     pac.setNombrePaciente(rs.getString("nombre_paciente"));
                     pac.setApellidoPaterno(rs.getString("apellido_paterno"));
                     pac.setApellidoMaterno(rs.getString("apellido_materno"));
-                    pac.setSexoPaciente(rs.getString("sexo_paciente"));
+                    pac.getTipoSexo().setTipo(rs.getString("sexo"));
+                    pac.getTipoSexo().setIdTipoSexo(rs.getInt("id_tipo_sexo"));
                     pac.setFechaNacimientoPaciente(rs.getDate("fecha_nacimiento_paciente"));
                     pac.setEdad(rs.getInt("edad"));
                     pac.getUsuarioCreacion().setIdUsuario(rs.getInt("id_usuario"));

@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="VPMedicaPlazaUM.jar" size="8842240" download="eager" />
+=======
+    <jar href="VPMedicaPlazaUM.jar" size="8845448" download="eager" />
+>>>>>>> 3d307f0e0a2a08bd746d8ea52ef93c44c20ee453
     <jar href="lib\commons-beanutils-1.8.2.jar" size="231891" download="eager" />
     <jar href="lib\commons-codec-1.11.jar" size="335042" download="eager" />
     <jar href="lib\commons-collections-3.2.1.jar" size="575389" download="eager" />
