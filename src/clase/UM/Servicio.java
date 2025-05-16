@@ -11,15 +11,18 @@ package clase.UM;
  */
 public class Servicio {
     
-   private int idTabServ;   
+   private int idTabServ;
+   private String nombre;
+   private String tipo;
    private String lote;
+   private Unidad unidadServicio = new Unidad();
    private int cantidad;
    private String descripcion;
    private String marca;
    private double precioUnitario;   
    private double total;
    private boolean estatus;
-   private Unidad unidadServicio = new Unidad();
+   
    private Tabulacion tabulador = new Tabulacion();
 
     public Servicio() {
@@ -27,8 +30,10 @@ public class Servicio {
     
     
     
-    public Servicio(int idTabServ, String lote, int cantidad, String descripcion, String marca, double precioUnitario, double total, boolean estatus, Unidad unidadServicio, Tabulacion tabulador) {
+    public Servicio(int idTabServ, String nombre, String tipo,String lote, int cantidad, String descripcion, String marca, double precioUnitario, double total, boolean estatus, Unidad unidadServicio, Tabulacion tabulador) {
         this.idTabServ = idTabServ;
+        this.nombre = nombre;
+        this.tipo = tipo;
         this.lote = lote;
         this.cantidad = cantidad;
         this.descripcion = descripcion;
@@ -88,6 +93,23 @@ public class Servicio {
     public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
     /*
     public int getUnidad() {
         return unidad;
@@ -132,8 +154,6 @@ public class Servicio {
     @Override
     public String toString() {
         return "Servicio{" + "idTabServ=" + idTabServ + ", lote=" + lote + ", cantidad=" + cantidad + ", descripcion=" + descripcion + ", marca=" + marca + ", precioUnitario=" + precioUnitario + /*", unidad=" + unidad + */" total=" + total + ", estatus=" + estatus + ", unidadServicio=" + unidadServicio + '}';
-    }
-    
-         
+    }        
     
 }
