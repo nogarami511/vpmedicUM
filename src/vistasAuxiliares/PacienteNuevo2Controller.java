@@ -8,7 +8,9 @@ package vistasAuxiliares;
 import clase.UM.PacienteUM;
 import clase.UM.TipoTabulacion;
 import clase.UM_DAO.PacienteUmDAO;
+import clase.UM_DAO.TipoSexoDAO;
 import clase.UM_DAO.TipoTabulacionDAO;
+import controles_um.TipoSexo;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -40,11 +42,13 @@ public class PacienteNuevo2Controller implements Initializable {
     Alert alertaSuccess = new Alert(Alert.AlertType.INFORMATION);
     Alert alertaError = new Alert(Alert.AlertType.ERROR);
     ObservableList<TipoTabulacion> tipos = FXCollections.observableArrayList();
+    ObservableList<TipoSexo> tiposexo = FXCollections.observableArrayList();
 
     PacienteUM paciente;
 
     PacienteUmDAO daoPaciente;
     TipoTabulacionDAO daoTipo;
+    TipoSexoDAO daoTS;
 
     @FXML
     private Button btnIngresar;
@@ -61,8 +65,6 @@ public class PacienteNuevo2Controller implements Initializable {
     @FXML
     private TextField txtEdad;
     @FXML
-    private TextField txtSexo;
-    @FXML
     private TextField txtApellidoMaterno;
     @FXML
     private TextField txtApellidoPaterno;
@@ -70,6 +72,8 @@ public class PacienteNuevo2Controller implements Initializable {
     private TextField txtId;
     @FXML
     private ComboBox<TipoTabulacion> cmbTipoTab;
+    @FXML
+    private ComboBox<TipoSexo> cmbTipoSexo;
 
     /**
      * Initializes the controller class.
@@ -93,7 +97,8 @@ public class PacienteNuevo2Controller implements Initializable {
         // asignar tipo here
         cmbTipoTab.setValue(paciente.getTipoTab());
         cmbTipoTab.selectionModelProperty().equals(paciente.getTipoTab());
-        txtSexo.setText(paciente.getSexoPaciente());
+        cmbTipoSexo.setValue(paciente.getTipoSexo());
+        cmbTipoSexo.selectionModelProperty().equals(paciente.getTipoSexo());
         txtEdad.setText("" + paciente.getEdad());
         java.sql.Date fechaSql = paciente.getFechaNacimientoPaciente();
         LocalDate fechaLocal = fechaSql.toLocalDate();
@@ -106,8 +111,11 @@ public class PacienteNuevo2Controller implements Initializable {
     private void llenarCbx() throws SQLException {
         daoTipo = new TipoTabulacionDAO();
         tipos.addAll(daoTipo.ejecutarProcedimiento("listar", new TipoTabulacion()));
-
         cmbTipoTab.setItems(tipos);
+        
+        daoTS = new TipoSexoDAO();
+        tiposexo.addAll(daoTS.ejecutarProcedimientoPaciente());
+        cmbTipoSexo.setItems(tiposexo);
     }
     
     private void recopilarDatos(){
@@ -118,7 +126,7 @@ public class PacienteNuevo2Controller implements Initializable {
         paciente.setNombrePaciente(txtNombre.getText());
         paciente.setApellidoPaterno(txtApellidoPaterno.getText());
         paciente.setApellidoMaterno(txtApellidoMaterno.getText());
-        paciente.setSexoPaciente(txtSexo.getText());
+        paciente.setTipoSexo(cmbTipoSexo.getSelectionModel().getSelectedItem());
         paciente.setFechaNacimientoPaciente(java.sql.Date.valueOf(dtpFechaNacimiento.getValue()));
         LocalDate fechaNac = paciente.getFechaNacimientoPaciente().toLocalDate(); // si es java.sql.Date
         int edadCalculada = calcularEdad(fechaNac);
