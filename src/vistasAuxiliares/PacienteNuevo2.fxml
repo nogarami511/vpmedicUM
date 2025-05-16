@@ -36,6 +36,7 @@
             <TextField fx:id="txtEdad" disable="true" layoutX="521.0" layoutY="246.0" prefHeight="25.0" prefWidth="63.0" promptText="EDAD" AnchorPane.leftAnchor="521.0" AnchorPane.rightAnchor="111.0" />
             <Text layoutX="302.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURP" AnchorPane.leftAnchor="302.0" AnchorPane.topAnchor="20.0" />
             <Text layoutX="15.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA DE&#10;NACIMIENTO" textAlignment="CENTER" AnchorPane.leftAnchor="15.0" />
+            <Text layoutX="317.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEXO" AnchorPane.leftAnchor="317.0" AnchorPane.rightAnchor="353.62968750000005" />
             <Text layoutX="378.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEXO" AnchorPane.leftAnchor="378.0" AnchorPane.rightAnchor="292.62968750000005" />
             <Text layoutX="467.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDAD" AnchorPane.rightAnchor="201.56132812500005" />
             <Label layoutX="15.0" layoutY="66.0" text="NOMBRE" AnchorPane.leftAnchor="15.0" />
