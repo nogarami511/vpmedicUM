@@ -18,8 +18,8 @@
       <AnchorPane prefHeight="272.0" prefWidth="150.0" style="-fx-background-color: #0c569f;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnIngresar" layoutX="26.0" layoutY="52.0" mnemonicParsing="false" onAction="#agregar" prefHeight="33.0" prefWidth="97.0" text="AGREGAR" />
-            <Button fx:id="btnSalir" layoutX="26.0" layoutY="162.0" mnemonicParsing="false" onAction="#salir" prefHeight="33.0" prefWidth="97.0" text="SALIR" />
-            <Button fx:id="btnEditar" layoutX="27.0" layoutY="162.0" mnemonicParsing="false" onAction="#actionEditar" prefHeight="33.0" prefWidth="97.0" text="EDITAR" visible="false" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+            <Button fx:id="btnSalir" layoutX="27.0" layoutY="162.0" mnemonicParsing="false" onAction="#salir" prefHeight="33.0" prefWidth="97.0" text="SALIR" />
+            <Button fx:id="btnEditar" layoutX="27.0" layoutY="52.0" mnemonicParsing="false" onAction="#actionEditar" prefHeight="34.0" prefWidth="96.0" text="EDITAR" visible="false" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0" />
          </children>
       </AnchorPane>
    </left>

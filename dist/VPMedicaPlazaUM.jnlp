@@ -8,11 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< Updated upstream
-    <jar href="VPMedicaPlazaUM.jar" size="8831023" download="eager" />
-=======
-    <jar href="VPMedicaPlazaUM.jar" size="8814097" download="eager" />
->>>>>>> Stashed changes
+    <jar href="VPMedicaPlazaUM.jar" size="8841931" download="eager" />
     <jar href="lib\commons-beanutils-1.8.2.jar" size="231891" download="eager" />
     <jar href="lib\commons-codec-1.11.jar" size="335042" download="eager" />
     <jar href="lib\commons-collections-3.2.1.jar" size="575389" download="eager" />

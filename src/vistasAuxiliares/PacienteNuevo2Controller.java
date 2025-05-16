@@ -77,14 +77,29 @@ public class PacienteNuevo2Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            paciente = new PacienteUM();
             llenarCbx();
         } catch (SQLException ex) {
             Logger.getLogger(PacienteNuevo2Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void setObjeto(PacienteUM pacente) {
+    public void setObjeto(PacienteUM paciente) {
+        this.paciente = paciente;
+        txtId.setText("" + paciente.getIdPaciente());
+        txtCurp.setText(paciente.getCurp());
+        txtNombre.setText(paciente.getNombrePaciente());
+        txtApellidoPaterno.setText(paciente.getApellidoPaterno());
+        txtApellidoMaterno.setText(paciente.getApellidoMaterno());
+        // asignar tipo here
+        cmbTipoTab.setValue(paciente.getTipoTab());
+        cmbTipoTab.selectionModelProperty().equals(paciente.getTipoTab());
+        txtSexo.setText(paciente.getSexoPaciente());
+        txtEdad.setText("" + paciente.getEdad());
+        java.sql.Date fechaSql = paciente.getFechaNacimientoPaciente();
+        LocalDate fechaLocal = fechaSql.toLocalDate();
+        dtpFechaNacimiento.setValue(fechaLocal);
+        btnIngresar.setVisible(false);
+        btnEditar.setVisible(true);
 
     }
 
@@ -94,12 +109,10 @@ public class PacienteNuevo2Controller implements Initializable {
 
         cmbTipoTab.setItems(tipos);
     }
-
-    @FXML
-    private void agregar(ActionEvent event) throws SQLException {
-        paciente = new PacienteUM();
+    
+    private void recopilarDatos(){
         daoPaciente = new PacienteUmDAO();
-        
+
         paciente.getTipoTab().setIdTipoTabulacion(cmbTipoTab.getSelectionModel().getSelectedItem().getIdTipoTabulacion());
         paciente.setCurp(txtCurp.getText());
         paciente.setNombrePaciente(txtNombre.getText());
@@ -112,10 +125,15 @@ public class PacienteNuevo2Controller implements Initializable {
         paciente.setEdad(edadCalculada);
 
         paciente.getUsuarioCreacion().setIdUsuario(VPMedicaPlaza.userSystem);
+    }
+
+    @FXML
+    private void agregar(ActionEvent event) throws SQLException {
+        paciente = new PacienteUM();
         
-        
+        recopilarDatos();
         daoPaciente.ejecutarProcedimientoPaciente("agregar", paciente);
-        
+
         alertaSuccess.setTitle("PACIENTE INGRESADO");
         alertaSuccess.setHeaderText("PACIENTE INGRESADO CORRECTAMENTE");
         alertaSuccess.setContentText("EL PACIENTE SE AGREGO A LA BASE DE DATOS");
@@ -123,8 +141,9 @@ public class PacienteNuevo2Controller implements Initializable {
         btnIngresar.setDisable(true);
         Stage stage = (Stage) btnIngresar.getScene().getWindow();
         stage.close();
-        
+
     }
+    
 
     public int calcularEdad(LocalDate fechaNacimiento) {
         LocalDate hoy = LocalDate.now();
@@ -139,12 +158,21 @@ public class PacienteNuevo2Controller implements Initializable {
 
     @FXML
     private void actionEditar(ActionEvent event) throws SQLException {
-        
+         recopilarDatos();
+        daoPaciente.ejecutarProcedimientoPaciente("editar", paciente);
+
+        alertaSuccess.setTitle("PACIENTE EDITADO");
+        alertaSuccess.setHeaderText("PACIENTE EDITADO CORRECTAMENTE");
+        alertaSuccess.setContentText("EL PACIENTE SE EDITO EN LA BASE DE DATOS");
+        alertaSuccess.showAndWait();
+        btnIngresar.setDisable(true);
+        Stage stage = (Stage) btnIngresar.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     private void dtpFechNacEdad(ActionEvent event) {
-        LocalDate fechaNac = dtpFechaNacimiento.getValue(); 
+        LocalDate fechaNac = dtpFechaNacimiento.getValue();
         txtEdad.setText("" + calcularEdad(fechaNac));
     }
 

@@ -64,7 +64,7 @@ public class Pacientes2Controller implements Initializable {
     @FXML
     private TableColumn<PacienteUM, String> editarPaciente;
     @FXML
-    private TableColumn<?, ?> eliminarPaciente;
+    private TableColumn<PacienteUM, String> eliminarPaciente;
     
     private ObservableList<PacienteUM> pacientes = FXCollections.observableArrayList();
     
@@ -95,6 +95,7 @@ public class Pacientes2Controller implements Initializable {
         
         nombrePaciente.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().toString()));
         tabulacionPaciente.setCellValueFactory(new PropertyValueFactory("tipoTab"));
+        generarBotones();
         
         tabla.setItems(pacientes);
         
@@ -141,6 +142,48 @@ public class Pacientes2Controller implements Initializable {
             return cell;
         };
         editarPaciente.setCellFactory(Editar);
+        
+        
+        Callback<TableColumn<PacienteUM, String>, TableCell<PacienteUM, String>> eliminar = (TableColumn<PacienteUM, String> param) -> {
+            final TableCell<PacienteUM, String> cell = new TableCell<PacienteUM, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final Button btnVer = new Button("");
+                        PacienteUM paciente = getTableView().getItems().get(getIndex());
+                        ImageView imgVer = new ImageView("/img/icons/icons8-eliminar-30.png");
+                        imgVer.setFitHeight(20);
+                        imgVer.setFitWidth(20);
+
+                        btnVer.setOnAction(event -> {
+                            //AQUI VA LO NECESARIO PARA MANDAR A TRAER LA SIGUIENTE VISTA
+                            alertaConfirmacion.setHeaderText(null);
+                            alertaConfirmacion.setTitle("Confirmación de eliminacion");
+                            alertaConfirmacion.setContentText("¿Estas seguro de eliminar a: " + paciente.getNombrePaciente()+ " ?");
+                            Optional<ButtonType> action = alertaConfirmacion.showAndWait();
+                            if (action.get() == ButtonType.OK) {
+                                try {
+                                    paciente.setEstatus(false);
+                                    llenarTala();
+                                    dao.ejecutarProcedimientoPaciente("editar", paciente);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(Pacientes2Controller.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        });
+
+                        setGraphic(btnVer);
+                        setText(null);
+                        btnVer.setGraphic(imgVer);
+                    }
+                }
+            };
+            return cell;
+        };
+        eliminarPaciente.setCellFactory(eliminar);
     }
     
         private void EditarPaciente(PacienteUM paciente) throws IOException, SQLException {

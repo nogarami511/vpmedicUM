@@ -28,8 +28,10 @@ public class ServicioDAO {
             String callProcedure = "{Call Proc_ServiciosTabuladores(?,?,?,?,?,?,?,?,?,?,?)}";
             
             try(CallableStatement stmt = con.prepareCall(callProcedure)){
-                stmt.setString("", opcion);
-                stmt.setInt("idTabulacion_",servicio.getIdTabServ());
+                System.out.println(opcion + " "+
+                        servicio.getTabulador().getId());
+                stmt.setString("opcion", opcion);
+                stmt.setInt("idTabulacion_",servicio.getTabulador().getId());
                 stmt.setString("lote_", servicio.getLote());
                 stmt.setInt("cantidad_", servicio.getCantidad());
                 stmt.setString("descripcion_", servicio.getDescripcion());
@@ -54,6 +56,7 @@ public class ServicioDAO {
                         serv.setEstatus(rs.getBoolean("estatus"));
                         serv.getUnidadServicio().setIdUnidadVenta(rs.getInt("idUnidadVenta"));
                         serv.getTabulador().setId(rs.getInt("idTabulador"));
+                        System.out.println("" + serv );
                         servicios.add(serv);                        
                 }           
             }

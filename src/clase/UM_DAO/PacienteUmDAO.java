@@ -32,7 +32,7 @@ public class PacienteUmDAO {
             List<PacienteUM> pacientes = new ArrayList<>();
             PacienteUM pac;
                
-            try(CallableStatement stm = con.prepareCall("{call Proc_PacienteUm(?,?,?,?,?,?,?,?,?,?,?)}")){
+            try(CallableStatement stm = con.prepareCall("{call Proc_PacienteUm(?,?,?,?,?,?,?,?,?,?,?,?)}")){
                 stm.setString("opcion", opcion);
                 stm.setInt("id_paciente_", paciente.getIdPaciente());
                 stm.setInt("tipo_tab_", paciente.getTipoTab().getIdTipoTabulacion());
@@ -44,6 +44,7 @@ public class PacienteUmDAO {
                 stm.setDate("fecha_nacimiento_", paciente.getFechaNacimientoPaciente());
                 stm.setInt("edad_", paciente.getEdad());
                 stm.setInt("id_usuario_", paciente.getUsuarioCreacion().getIdUsuario());
+                stm.setBoolean("estatus_", paciente.getEstatus());
                 stm.execute();
                 
                 ResultSet rs = stm.getResultSet();
@@ -63,6 +64,7 @@ public class PacienteUmDAO {
                     pac.getUsuarioCreacion().setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                     pac.getTipoTab().setIdTipoTabulacion(rs.getInt("tipo_tabulacion"));
                     pac.getTipoTab().setTipo(rs.getString("tipo"));
+                    pac.setEstatus(rs.getBoolean("estatus"));
                     
                     pacientes.add(pac);
                     

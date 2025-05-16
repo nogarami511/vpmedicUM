@@ -23,13 +23,13 @@ public class PacienteUM {
     private java.sql.Date fechaNacimientoPaciente;
     private int edad;
     private UsuarioUm usuarioCreacion = new UsuarioUm();
+    private boolean estatus;
 
     public PacienteUM() {
     }
 
-    public PacienteUM(int idPaciente, TipoTabulacion tipoTab, String curp, String nombrePaciente, String apellidoPaterno, String apellidoMaterno, String sexoPaciente, Date fechaNacimientoPaciente, int edad, String telefono, UsuarioUm usuarioCreacion) {
+    public PacienteUM(int idPaciente, String curp, String nombrePaciente, String apellidoPaterno, String apellidoMaterno, String sexoPaciente, Date fechaNacimientoPaciente, int edad, boolean estatus) {
         this.idPaciente = idPaciente;
-        this.tipoTab = tipoTab;
         this.curp = curp;
         this.nombrePaciente = nombrePaciente;
         this.apellidoPaterno = apellidoPaterno;
@@ -37,9 +37,10 @@ public class PacienteUM {
         this.sexoPaciente = sexoPaciente;
         this.fechaNacimientoPaciente = fechaNacimientoPaciente;
         this.edad = edad;
-        this.usuarioCreacion = usuarioCreacion;
+        this.estatus = estatus;
     }
 
+   
     public int getIdPaciente() {
         return idPaciente;
     }
@@ -122,9 +123,18 @@ public class PacienteUM {
         this.usuarioCreacion = usuarioCreacion;
     }
 
+    public boolean getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(boolean estatus) {
+        this.estatus = estatus;
+    }
+
+    
     @Override
     public String toString() {
-        return nombrePaciente + " " + apellidoPaterno + " " + apellidoMaterno + '}';
+        return nombrePaciente + " " + apellidoPaterno + " " + apellidoMaterno ;
     }
 
   
